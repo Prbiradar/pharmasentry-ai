@@ -1073,23 +1073,99 @@ elif page == "Research Dashboard":
         )
     else:
         st.warning("Drug database is not available.")
-
 elif page == "About":
+    st.title("🛡️ About PharmaSentry AI")
 
+    st.markdown("""
+    ### Intelligent Pharmacovigilance & Medication Safety Assistant
 
+    **PharmaSentry AI** is an educational pharmacovigilance
+    and medication-safety application developed to support
+    learning, drug safety awareness, and preliminary ADR screening.
 
+    ### 🎯 Purpose of the Application
 
-    st.header("About PharmaSentry AI")
+    The application aims to make pharmacovigilance concepts
+    easier to understand and provide an accessible platform
+    for exploring medicine safety information.
 
-    st.write(
-        "PharmaSentry AI is an academic prototype designed "
-        "to support pharmacovigilance education and medication safety awareness."
-    )
+    ### 📱 Application Uses
 
-    st.write("Developer: Pharmacy Research and Academic Project")
+    1. **Drug Safety Information**
+       - Explore drug classes and therapeutic indications.
+       - Review common and serious adverse drug reactions.
+       - Understand warnings, contraindications and monitoring.
 
-    st.warning(
-        "The current prototype uses a local CSV database. "
-        "It does not yet contain an integrated AI model or independently "
-        "verified clinical decision-support functionality."
-    )
+    2. **Drug–ADR Safety Screening**
+       - Enter a medicine name and suspected adverse reaction.
+       - Identify possible keyword matches in the available database.
+       - Review preliminary safety information.
+
+    3. **ADR Case Completeness Checker**
+       - Learn the essential information required in an ADR report.
+       - Identify missing information in a sample case.
+       - Understand the importance of complete safety documentation.
+
+    4. **Pharmacovigilance Learning Centre**
+       - Learn the fundamentals of pharmacovigilance.
+       - Understand ADR classification and ICSR.
+       - Explore signal detection, PvPI and CDSCO.
+       - Practise through interactive MCQ quizzes.
+
+    5. **Research and Education**
+       - Explore the drug safety database.
+       - Support pharmacy students and educators in learning.
+       - Understand basic pharmacovigilance workflows.
+
+    ### ⚙️ How PharmaSentry AI Works
+
+    - Uses a structured medicine safety database.
+    - Retrieves available drug information from stored records.
+    - Applies preliminary rule-based keyword matching for ADR screening.
+    - Provides educational explanations and learning resources.
+
+    **Current development status:** This is an early educational
+    prototype. It does not currently use an integrated AI model.
+    Its screening functions are rule-based and require further
+    validation.
+
+    ### 👨‍⚕️ About the Author
+
+    **Dr. Praveen R Biradar**
+
+    Pharm.D | Assistant Professor | Pharmacy Educator
+    | Pharmacovigilance and Medication Safety Researcher
+
+    The application is developed as an academic and educational
+    initiative to promote awareness of pharmacovigilance,
+    adverse drug reaction reporting, rational medicine use,
+    and patient safety.
+
+    The author aims to encourage pharmacy students, educators,
+    researchers and healthcare professionals to explore
+    pharmacovigilance through accessible digital learning tools.
+
+    ### 🌟 Vision
+
+    To contribute towards a safer medication-use environment
+    through pharmacovigilance education, drug safety awareness,
+    research and responsible digital innovation.
+
+    ### ⚠️ Important Disclaimer
+
+    PharmaSentry AI is an educational and research prototype.
+    It is not a substitute for professional medical advice,
+    diagnosis, treatment or clinical judgement.
+
+    Preliminary keyword matches do not establish causality.
+    A missing match does not exclude a possible adverse reaction.
+    The application does not independently diagnose conditions,
+    recommend prescriptions or submit ADR reports to PvPI.
+
+    Drug information should be verified against current
+    authoritative sources and applicable Indian product
+    information before professional use.
+    """)
+
+    st.divider()
+    st.caption("PharmaSentry AI | Developed by Dr. Praveen R Biradar")
