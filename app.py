@@ -109,14 +109,11 @@ elif page == "Drug Safety Assistant":
             "against authoritative product labels and expert review."
         )
 
+
 elif page == "Drug-ADR Safety Screening":
 
     st.header("Drug-ADR Safety Screening")
-
-    st.write(
-        "Compare a reported adverse reaction with the "
-        "preliminary drug safety database."
-    )
+    st.write("Compare a reported reaction with the drug database.")
 
     if drugs.empty:
         st.error("Drug database is not available.")
@@ -130,107 +127,78 @@ elif page == "Drug-ADR Safety Screening":
 
         reaction = st.text_input(
             "Enter reported adverse reaction",
-            placeholder="Example: Skin rash"
+            placeholder="Example: Liver damage"
         )
 
         if st.button("Screen Drug-ADR Record"):
-
-            selected_record = drugs[
-                drugs["Drug_Name"].astype(str) == selected_drug
-            ].iloc[0]
-
-            common_adr = str(
-                selected_record.get("Common_ADR", "")
-            ).lower()
-
-            serious_adr = str(
-                selected_record.get("Serious_ADR", "")
-            ).lower()
 
             if not reaction.strip():
                 st.warning("Please enter an adverse reaction.")
 
             else:
-                terms = [
-                    term.strip()
-                    for term in reaction.lower().split(",")
+                selected_record = drugs[
+                    drugs["Drug_Name"].astype(str) == selected_drug
+                ].iloc[0]
+
+                common_adr = str(
+                    selected_record.get("Common_ADR", "")
+                ).lower()
+
+                serious_adr = str(
+                    selected_record.get("Serious_ADR", "")
+                ).lower()
+
+                aliases = {
+                    "liver damage": ["liver injury", "hepatotoxicity"],
+                    "hepatotoxicity": ["liver injury", "liver damage"],
+                    "liver injury": ["liver damage", "hepatotoxicity"],
+                    "diarrhea": ["diarrhoea"],
+                    "diarrhoea": ["diarrhea"],
+                    "skin rash": ["rash"],
+                    "rash": ["skin rash"]
+                }
+
+                entered_terms = [
+                    term.strip().lower()
+                    for term in reaction.split(",")
                     if term.strip()
                 ]
-              
-aliases = {
-    "liver damage": [
-        "liver injury",
-        "hepatotoxicity",
-        "hepatic injury",
-        "hepatic damage"
-    ],
-    "hepatotoxicity": [
-        "liver injury",
-        "liver damage",
-        "hepatic injury"
-    ],
-    "liver injury": [
-        "liver damage",
-        "hepatotoxicity",
-        "hepatic injury"
-    ],
-    "diarrhea": ["diarrhoea"],
-    "diarrhoea": ["diarrhea"],
-    "skin rash": ["rash"],
-    "rash": ["skin rash"]
-}
 
-expanded_terms = set(terms)
+                expanded_terms = set(entered_terms)
 
-for term in terms:
-    expanded_terms.update(aliases.get(term, []))
+                for term in entered_terms:
+                    expanded_terms.update(aliases.get(term, []))
 
-common_match = any(
-    term in common_adr for term in expanded_terms
-)
+                common_match = any(
+                    term in common_adr
+                    for term in expanded_terms
+                )
 
-serious_match = any(
-    term in serious_adr for term in expanded_terms
-)
+                serious_match = any(
+                    term in serious_adr
+                    for term in expanded_terms
+                )
 
                 st.subheader("Screening Result")
 
                 if serious_match:
-                    st.error(
-                        "Potential match with a serious ADR "
-                        "listed in the database."
-                    )
+                    st.error("Potential match with a serious ADR.")
 
                 elif common_match:
-                    st.success(
-                        "Potential match with a common ADR "
-                        "listed in the database."
-                    )
+                    st.success("Potential match with a common ADR.")
 
                 else:
-                    st.warning(
-                        "No direct text match found in the "
-                        "current database."
-                    )
+                    st.warning("No direct database match found.")
 
-                st.write("**Medicine:**", selected_drug)
-                st.write("**Reported reaction:**", reaction)
-
-                st.write(
-                    "**Database common ADRs:**",
-                    selected_record.get("Common_ADR", "")
-                )
-
-                st.write(
-                    "**Database serious ADRs:**",
-                    selected_record.get("Serious_ADR", "")
-                )
+                st.write("Medicine:", selected_drug)
+                st.write("Reported reaction:", reaction)
+                st.write("Common ADRs:", common_adr)
+                st.write("Serious ADRs:", serious_adr)
 
                 st.info(
-                    "This is a preliminary text-matching screen. "
-                    "A match does not establish causality. "
-                    "A non-match does not rule out an ADR. "
-                    "Clinical review is required."
+                    "This is preliminary text matching, not a "
+                    "validated causality assessment. A match does "
+                    "not prove that the medicine caused the reaction."
                 )
 
 elif page == "ADR Completeness Checker":
