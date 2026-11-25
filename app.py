@@ -148,7 +148,35 @@ elif page == "Drug-ADR Safety Screening":
                     selected_record.get("Serious_ADR", "")
                 ).lower()
 
-                aliases = {
+                
+aliases = {
+    # Liver-related terminology
+    "liver damage": ["liver injury", "severe liver injury"],
+    "hepatotoxicity": ["liver injury", "severe liver injury"],
+    "hepatic injury": ["liver injury", "severe liver injury"],
+    "hepatic damage": ["liver injury", "severe liver injury"],
+    "liver toxicity": ["liver injury", "severe liver injury"],
+    "hepatic toxicity": ["liver injury", "severe liver injury"],
+
+    # Diarrhoea terminology
+    "diarrhea": ["diarrhoea"],
+    "loose stools": ["diarrhoea"],
+    "frequent loose stools": ["diarrhoea"],
+
+    # Nausea terminology
+    "feeling sick": ["nausea"],
+    "queasiness": ["nausea"],
+
+    # Vomiting terminology
+    "emesis": ["vomiting"],
+    "throwing up": ["vomiting"],
+    "being sick": ["vomiting"],
+
+    # Rash terminology
+    "skin rash": ["rash"],
+    "cutaneous rash": ["rash"]
+}
+
                     "liver damage": ["liver injury", "hepatotoxicity"],
                     "hepatotoxicity": ["liver injury", "liver damage"],
                     "liver injury": ["liver damage", "hepatotoxicity"],
