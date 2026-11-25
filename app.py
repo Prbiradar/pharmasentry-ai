@@ -109,7 +109,6 @@ elif page == "Drug Safety Assistant":
             "against authoritative product labels and expert review."
         )
 
-
 elif page == "Drug-ADR Safety Screening":
 
     st.header("Drug-ADR Safety Screening")
@@ -148,7 +147,7 @@ elif page == "Drug-ADR Safety Screening":
                     selected_record.get("Serious_ADR", "")
                 ).lower()
 
-                       aliases = {
+                aliases = {
                     "liver damage": ["liver injury", "hepatotoxicity"],
                     "hepatotoxicity": ["liver injury", "severe liver injury"],
                     "hepatic injury": ["liver injury", "severe liver injury"],
@@ -165,7 +164,7 @@ elif page == "Drug-ADR Safety Screening":
                     "being sick": ["vomiting"],
                     "skin rash": ["rash"],
                     "cutaneous rash": ["rash"]
-                       }         
+                }
 
                 entered_terms = [
                     term.strip().lower()
