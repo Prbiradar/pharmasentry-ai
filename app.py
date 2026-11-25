@@ -203,14 +203,21 @@ for term in entered_terms:
     results.append((term, status))
                 st.subheader("Screening Result")
 
-                if serious_match:
-                    st.error("Potential match with a serious ADR.")
+                st.subheader("Individual ADR Screening Results")
 
-                elif common_match:
-                    st.success("Potential match with a common ADR.")
+for term, status in results:
+    st.write("Reported reaction:", term)
 
-                else:
-                    st.warning("No direct database match found.")
+    if status == "Potential serious ADR match":
+        st.error(status)
+
+    elif status == "Potential common ADR match":
+        st.success(status)
+
+    else:
+        st.warning(status)
+
+    st.divider()
 
                 st.write("Medicine:", selected_drug)
                 st.write("Reported reaction:", reaction)
