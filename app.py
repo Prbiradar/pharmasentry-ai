@@ -157,13 +157,43 @@ elif page == "Drug-ADR Safety Screening":
                     if term.strip()
                 ]
 
-                common_match = any(
-                    term in common_adr for term in terms
-                )
+                
+aliases = {
+    "liver damage": [
+        "liver injury",
+        "hepatotoxicity",
+        "hepatic injury",
+        "hepatic damage"
+    ],
+    "hepatotoxicity": [
+        "liver injury",
+        "liver damage",
+        "hepatic injury"
+    ],
+    "liver injury": [
+        "liver damage",
+        "hepatotoxicity",
+        "hepatic injury"
+    ],
+    "diarrhea": ["diarrhoea"],
+    "diarrhoea": ["diarrhea"],
+    "skin rash": ["rash"],
+    "rash": ["skin rash"]
+}
 
-                serious_match = any(
-                    term in serious_adr for term in terms
-                )
+expanded_terms = set(terms)
+
+for term in terms:
+    expanded_terms.update(aliases.get(term, []))
+
+common_match = any(
+    term in common_adr for term in expanded_terms
+)
+
+serious_match = any(
+    term in serious_adr for term in expanded_terms
+)
+
 
                 st.subheader("Screening Result")
 
