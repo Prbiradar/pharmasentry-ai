@@ -177,16 +177,30 @@ elif page == "Drug-ADR Safety Screening":
                 for term in entered_terms:
                     expanded_terms.update(aliases.get(term, []))
 
-                common_match = any(
-                    term in common_adr
-                    for term in expanded_terms
-                )
+                results = []
 
-                serious_match = any(
-                    term in serious_adr
-                    for term in expanded_terms
-                )
+for term in entered_terms:
+    expanded = {term}
+    expanded.update(aliases.get(term, []))
 
+    common_found = any(
+        item in common_adr
+        for item in expanded
+    )
+
+    serious_found = any(
+        item in serious_adr
+        for item in expanded
+    )
+
+    if serious_found:
+        status = "Potential serious ADR match"
+    elif common_found:
+        status = "Potential common ADR match"
+    else:
+        status = "No direct database match"
+
+    results.append((term, status))
                 st.subheader("Screening Result")
 
                 if serious_match:
