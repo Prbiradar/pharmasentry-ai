@@ -1,0 +1,11 @@
+Drug_ID,Drug_Name,Drug_Class,Indication,Common_ADR,Serious_ADR,Warnings,Contraindications,Monitoring,Source,Source_Date,Verification_Status
+PS001,Paracetamol,Analgesic,,,,,,,,,
+PS002,Amoxicillin,Penicillin antibiotic,,,,,,,,,
+PS003,Metformin,Biguanide,,,,,,,,,
+PS004,Ibuprofen,NSAID,,,,,,,,,
+PS005,Amlodipine,Calcium channel blocker,,,,,,,,,
+PS006,Atorvastatin,HMG-CoA reductase inhibitor,,,,,,,,,
+PS007,Pantoprazole,Proton pump inhibitor,,,,,,,,,
+PS008,Ciprofloxacin,Fluoroquinolone,,,,,,,,,
+PS009,Losartan,Angiotensin receptor blocker,,,,,,,,,
+PS010,Glimepiride,Sulfonylurea,,,,,,,,,
