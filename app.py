@@ -31,6 +31,7 @@ page = st.sidebar.radio(
     [
         "Home",
         "Drug Safety Assistant",
+        "Drug-ADR Safety Screening",
         "ADR Completeness Checker",
         "Pharmacovigilance Learning Centre",
         "Research Dashboard",
