@@ -1076,6 +1076,9 @@ elif page == "Research Dashboard":
 
 elif page == "About":
 
+
+
+
     st.header("About PharmaSentry AI")
 
     st.write(
