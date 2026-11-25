@@ -156,8 +156,7 @@ elif page == "Drug-ADR Safety Screening":
                     for term in reaction.lower().split(",")
                     if term.strip()
                 ]
-
-                
+              
 aliases = {
     "liver damage": [
         "liver injury",
@@ -193,7 +192,6 @@ common_match = any(
 serious_match = any(
     term in serious_adr for term in expanded_terms
 )
-
 
                 st.subheader("Screening Result")
 
