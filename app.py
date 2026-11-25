@@ -111,25 +111,7 @@ elif page == "Drug Safety Assistant":
 
 elif page == "Drug-ADR Safety Screening":
 
-    st.header("Drug-ADR Safety Screening")
-    st.write("Compare reported reactions with the drug database.")
-
-    if drugs.empty:
-        st.error("Drug database is not available.")
-
-    else:
-        selected_drug = st.selectbox(
-            "Select suspected medicine",
-            sorted(drugs["Drug_Name"].astype(str).unique()),
-            key="screening_drug"
-        )
-
-        reaction = st.text_area(
-            "Enter reported adverse reactions",
-            placeholder="Example: Nausea, vomiting, liver damage"
-        )
-
-        if st.button("Screen Drug-ADR Record"):
+            if st.button("Screen Drug-ADR Record"):
 
             if not reaction.strip():
                 st.warning("Please enter an adverse reaction.")
@@ -147,59 +129,27 @@ elif page == "Drug-ADR Safety Screening":
                     selected_record.get("Serious_ADR", "")
                 ).lower()
 
-    aliases = {
-    # Liver-related reactions
-    "liver damage": ["liver injury", "hepatotoxicity"],
-    "hepatotoxicity": ["liver injury", "hepatic injury"],
-    "hepatic injury": ["liver injury", "hepatotoxicity"],
-    "hepatic damage": ["liver injury", "hepatotoxicity"],
-    "liver toxicity": ["liver injury", "hepatotoxicity"],
-    "hepatic toxicity": ["liver injury", "hepatotoxicity"],
-    "elevated liver enzymes": ["increased liver enzymes"],
-    "high sgpt": ["increased alt", "elevated alt"],
-    "high sgot": ["increased ast", "elevated ast"],
+                aliases = {
+                    "liver damage": ["liver injury", "hepatotoxicity"],
+                    "diarrhea": ["diarrhoea"],
+                    "loose stools": ["diarrhoea", "diarrhea"],
+                    "stomach pain": ["abdominal pain"],
+                    "feeling sick": ["nausea"],
+                    "queasiness": ["nausea"],
+                    "emesis": ["vomiting"],
+                    "throwing up": ["vomiting"],
+                    "skin rash": ["rash"],
+                    "itching": ["pruritus"],
+                    "hives": ["urticaria"],
+                    "head pain": ["headache"],
+                    "feeling dizzy": ["dizziness"],
+                    "tiredness": ["fatigue"],
+                    "weakness": ["asthenia"],
+                    "breathlessness": ["dyspnea"],
+                    "swelling": ["edema", "oedema"]
+                }
 
-    # Gastrointestinal reactions
-    "diarrhea": ["diarrhoea"],
-    "loose stools": ["diarrhoea", "diarrhea"],
-    "frequent loose stools": ["diarrhoea", "diarrhea"],
-    "stomach pain": ["abdominal pain"],
-    "belly pain": ["abdominal pain"],
-    "indigestion": ["dyspepsia"],
-    "feeling sick": ["nausea"],
-    "queasiness": ["nausea"],
-    "emesis": ["vomiting"],
-    "throwing up": ["vomiting"],
-    "being sick": ["vomiting"],
-    "upset stomach": ["abdominal discomfort"],
-
-    # Skin reactions
-    "skin rash": ["rash"],
-    "cutaneous rash": ["rash"],
-    "itching": ["pruritus"],
-    "itchy skin": ["pruritus"],
-    "hives": ["urticaria"],
-    "swelling of face": ["facial swelling", "angioedema"],
-
-    # Nervous system reactions
-    "head pain": ["headache"],
-    "light headedness": ["dizziness"],
-    "feeling dizzy": ["dizziness"],
-    "pins and needles": ["paresthesia"],
-    "tingling sensation": ["paresthesia"],
-
-    # General reactions
-    "tiredness": ["fatigue"],
-    "weakness": ["asthenia"],
-    "breathlessness": ["dyspnea"],
-    "shortness of breath": ["dyspnea"],
-    "difficulty breathing": ["dyspnea"],
-    "swelling": ["edema", "oedema"],
-    "oedema": ["edema"],
-    "edema": ["oedema"]
-}
-
-     entered_terms = [
+                entered_terms = [
                     term.strip().lower()
                     for term in reaction.split(",")
                     if term.strip()
