@@ -108,6 +108,102 @@ elif page == "Drug Safety Assistant":
             "against authoritative product labels and expert review."
         )
 
+elif page == "Drug-ADR Safety Screening":
+
+    st.header("Drug-ADR Safety Screening")
+
+    st.write(
+        "Compare a reported adverse reaction with the "
+        "preliminary drug safety database."
+    )
+
+    if drugs.empty:
+        st.error("Drug database is not available.")
+
+    else:
+        selected_drug = st.selectbox(
+            "Select suspected medicine",
+            sorted(drugs["Drug_Name"].astype(str).unique()),
+            key="screening_drug"
+        )
+
+        reaction = st.text_input(
+            "Enter reported adverse reaction",
+            placeholder="Example: Skin rash"
+        )
+
+        if st.button("Screen Drug-ADR Record"):
+
+            selected_record = drugs[
+                drugs["Drug_Name"].astype(str) == selected_drug
+            ].iloc[0]
+
+            common_adr = str(
+                selected_record.get("Common_ADR", "")
+            ).lower()
+
+            serious_adr = str(
+                selected_record.get("Serious_ADR", "")
+            ).lower()
+
+            if not reaction.strip():
+                st.warning("Please enter an adverse reaction.")
+
+            else:
+                terms = [
+                    term.strip()
+                    for term in reaction.lower().split(",")
+                    if term.strip()
+                ]
+
+                common_match = any(
+                    term in common_adr for term in terms
+                )
+
+                serious_match = any(
+                    term in serious_adr for term in terms
+                )
+
+                st.subheader("Screening Result")
+
+                if serious_match:
+                    st.error(
+                        "Potential match with a serious ADR "
+                        "listed in the database."
+                    )
+
+                elif common_match:
+                    st.success(
+                        "Potential match with a common ADR "
+                        "listed in the database."
+                    )
+
+                else:
+                    st.warning(
+                        "No direct text match found in the "
+                        "current database."
+                    )
+
+                st.write("**Medicine:**", selected_drug)
+                st.write("**Reported reaction:**", reaction)
+
+                st.write(
+                    "**Database common ADRs:**",
+                    selected_record.get("Common_ADR", "")
+                )
+
+                st.write(
+                    "**Database serious ADRs:**",
+                    selected_record.get("Serious_ADR", "")
+                )
+
+                st.info(
+                    "This is a preliminary text-matching screen. "
+                    "A match does not establish causality. "
+                    "A non-match does not rule out an ADR. "
+                    "Clinical review is required."
+                )
+
 elif page == "ADR Completeness Checker":
 
     st.header("ADR Case Completeness Checker")
