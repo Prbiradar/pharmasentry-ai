@@ -50,7 +50,8 @@ if page == "Home":
     st.write("1. Drug Safety Assistant")
     st.write("2. ADR Case Completeness Checker")
     st.write("3. Pharmacovigilance Learning Centre")
-    st.write("4. Research Dashboard")
+    st.write("4.💊 Drug–ADR Safety Screening")
+    st.write("5. Research Dashboard")
 
     st.info("This is an educational prototype, not a substitute for professional clinical judgement.")
 
