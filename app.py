@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import os
@@ -9,306 +8,206 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("💊 PharmaSentry AI")
-st.caption(
-    "Evidence-Grounded Pharmacovigilance "
-    "and Medication Safety Platform"
-)
-
-# Load drug database
 @st.cache_data
 def load_drugs():
     file_path = "Drug_Master.csv"
 
     if os.path.exists(file_path):
-        return pd.read_csv(file_path).fillna("")
+        df = pd.read_csv(file_path, encoding="utf-8-sig").fillna("")
+        df.columns = df.columns.str.strip()
+        return df
 
     return pd.DataFrame()
 
-drugs_df = load_drugs()
+drugs = load_drugs()
 
-# Sidebar navigation
+st.title("💊 PharmaSentry AI")
+st.caption("Evidence-Grounded Pharmacovigilance and Medication Safety Assistant")
+
 st.sidebar.title("Navigation")
 
 page = st.sidebar.radio(
-    "Select module",
+    "Select Module",
     [
         "Home",
         "Drug Safety Assistant",
         "ADR Completeness Checker",
-        "Learning Centre",
+        "Pharmacovigilance Learning Centre",
         "Research Dashboard",
         "About"
     ]
 )
 
-st.sidebar.info("Research Prototype | Version 2.0")
-
-
-# HOME
 if page == "Home":
-
     st.header("Welcome to PharmaSentry AI")
-
     st.write(
-        "A digital platform supporting pharmacovigilance "
-        "education, drug safety research and medication safety."
+        "An academic prototype for drug safety information, "
+        "adverse drug reaction awareness and pharmacovigilance education."
     )
 
-    col1, col2 = st.columns(2)
+    st.subheader("Available Modules")
+    st.write("1. Drug Safety Assistant")
+    st.write("2. ADR Case Completeness Checker")
+    st.write("3. Pharmacovigilance Learning Centre")
+    st.write("4. Research Dashboard")
 
-    with col1:
-        st.subheader("💊 Drug Safety Assistant")
-        st.write("Explore the connected drug safety database.")
+    st.info("This is an educational prototype, not a substitute for professional clinical judgement.")
 
-    with col2:
-        st.subheader("📋 ADR Completeness Checker")
-        st.write("Identify missing information in ADR reports.")
-
-    col3, col4 = st.columns(2)
-
-    with col3:
-        st.subheader("📚 Learning Centre")
-        st.write("Explore pharmacovigilance learning topics.")
-
-    with col4:
-        st.subheader("🔬 Research Dashboard")
-        st.write("View the database and prototype statistics.")
-
-    st.divider()
-
-    if not drugs_df.empty:
-        st.success(
-            f"Drug database connected: {len(drugs_df)} records loaded."
-        )
-    else:
-        st.error("Drug database not found. Check CSV filename.")
-
-
-# DRUG SAFETY ASSISTANT
 elif page == "Drug Safety Assistant":
 
     st.header("💊 Drug Safety Assistant")
 
-    if drugs_df.empty:
-        st.error("Unable to load Drug_Master.csv.")
+    if drugs.empty:
+        st.error("Drug database not found. Please check Drug_Master.csv.")
+    elif "Drug_Name" not in drugs.columns:
+        st.error("Drug_Name column is missing from the database.")
     else:
-
-        if "Drug_Name" not in drugs_df.columns:
-            st.error("Drug_Name column is missing.")
-        else:
-
-            drug_names = sorted(
-                drugs_df["Drug_Name"]
-                .astype(str)
-                .loc[lambda x: x.str.strip() != ""]
-                .unique()
-                .tolist()
-            )
-
-            if drug_names:
-
-                selected_drug = st.selectbox(
-                    "Search or select a medicine",
-                    drug_names
-                )
-
-                result = drugs_df[
-                    drugs_df["Drug_Name"].astype(str)
-                    == selected_drug
-                ].iloc[0]
-
-                st.subheader(selected_drug)
-
-                fields = [
-                    "Drug_Class",
-                    "Indication",
-                    "Common_ADR",
-                    "Serious_ADR",
-                    "Warnings",
-                    "Contraindications",
-                    "Monitoring",
-                    "Source",
-                    "Source_Date",
-                    "Verification_Status"
-                ]
-
-                for field in fields:
-                    if field in drugs_df.columns:
-                        value = str(result[field]).strip()
-
-                        if value:
-                            label = field.replace("_", " ")
-                            st.markdown(f"**{label}:** {value}")
-                        else:
-                            st.info(
-                                f"{field.replace('_', ' ')}: "
-                                "Information not yet entered."
-                            )
-
-                st.warning(
-                    "Educational research prototype only. "
-                    "Unverified information must not be used "
-                    "for clinical decisions."
-                )
-
-            else:
-                st.warning("No medicine names found in the database.")
-
-
-# ADR COMPLETENESS CHECKER
-elif page == "ADR Completeness Checker":
-
-    st.header("📋 ADR Case Completeness Checker")
-
-    st.write("Use fictional cases only during prototype testing.")
-
-    age = st.text_input("Patient age")
-    sex = st.selectbox(
-        "Patient sex",
-        ["Not specified", "Male", "Female", "Other"]
-    )
-    drug = st.text_input("Suspected medicine")
-    reaction = st.text_input("Reaction description")
-    onset = st.text_input("Date of reaction onset")
-    concomitant = st.text_input("Concomitant medicines")
-    history = st.text_area("Relevant medical history")
-    reporter = st.text_input("Reporter information")
-
-    if st.button("Check Case Completeness"):
-
-        fields = {
-            "Patient age": age,
-            "Patient sex": "" if sex == "Not specified" else sex,
-            "Suspected medicine": drug,
-            "Reaction description": reaction,
-            "Date of onset": onset,
-            "Concomitant medicines": concomitant,
-            "Medical history": history,
-            "Reporter information": reporter
-        }
-
-        missing = [
-            name for name, value in fields.items()
-            if not value.strip()
-        ]
-
-        st.subheader("Completeness Assessment")
-
-        if missing:
-            st.warning(
-                f"{len(missing)} fields require attention."
-            )
-
-            for item in missing:
-                st.write("❌", item)
-
-        else:
-            st.success("All prototype fields are completed.")
-
-        st.caption(
-            "This is a basic field-completeness check, "
-            "not a validated ICSR or causality assessment."
+        drug_names = sorted(
+            drugs["Drug_Name"].astype(str).unique().tolist()
         )
 
+        selected_drug = st.selectbox(
+            "Search and select a medicine",
+            drug_names
+        )
 
-# LEARNING CENTRE
-elif page == "Learning Centre":
+        result = drugs[
+            drugs["Drug_Name"].astype(str) == selected_drug
+        ].iloc[0]
+
+        st.subheader(str(result.get("Drug_Name", "")))
+        st.write("**Drug Class:**", result.get("Drug_Class", "Not available"))
+
+        st.divider()
+
+        fields = {
+            "Indication": "Indications",
+            "Common_ADR": "Common Adverse Drug Reactions",
+            "Serious_ADR": "Serious Adverse Drug Reactions",
+            "Warnings": "Warnings",
+            "Contraindications": "Contraindications",
+            "Monitoring": "Monitoring Recommendations",
+            "Source": "Information Source",
+            "Source_Date": "Source Date",
+            "Verification_Status": "Verification Status"
+        }
+
+        for column, heading in fields.items():
+            value = str(result.get(column, "")).strip()
+
+            st.markdown("### " + heading)
+
+            if value and value.lower() != "nan":
+                st.write(value)
+            else:
+                st.warning("Information not yet entered or verified.")
+
+        st.divider()
+        st.caption(
+            "Drug information is preliminary and requires verification "
+            "against authoritative product labels and expert review."
+        )
+
+elif page == "ADR Completeness Checker":
+
+    st.header("ADR Case Completeness Checker")
+    st.write("Enter a fictitious ADR case for educational completeness assessment.")
+
+    age = st.text_input("Patient Age")
+    sex = st.selectbox("Patient Sex", ["Select", "Male", "Female", "Other"])
+    drug = st.text_input("Suspected Drug")
+    reaction = st.text_input("Adverse Reaction")
+    onset = st.text_input("Reaction Onset Date")
+    history = st.text_area("Relevant Medical History")
+    concomitant = st.text_area("Concomitant Medicines")
+    seriousness = st.selectbox(
+        "Seriousness",
+        ["Select", "Serious", "Non-serious", "Not assessed"]
+    )
+
+    if st.button("Check Completeness"):
+        missing = []
+
+        if not age.strip():
+            missing.append("Patient Age")
+        if sex == "Select":
+            missing.append("Patient Sex")
+        if not drug.strip():
+            missing.append("Suspected Drug")
+        if not reaction.strip():
+            missing.append("Adverse Reaction")
+        if not onset.strip():
+            missing.append("Reaction Onset Date")
+        if not history.strip():
+            missing.append("Medical History")
+        if not concomitant.strip():
+            missing.append("Concomitant Medicines")
+        if seriousness == "Select":
+            missing.append("Seriousness")
+
+        if missing:
+            st.warning("Missing information:")
+            for item in missing:
+                st.write("- " + item)
+        else:
+            st.success("All selected basic fields are completed.")
+
+        st.info("This is a basic educational completeness check, not an official ADR reporting assessment.")
+
+elif page == "Pharmacovigilance Learning Centre":
 
     st.header("📚 Pharmacovigilance Learning Centre")
 
     topics = {
-        "Introduction to Pharmacovigilance":
-            "Pharmacovigilance involves the detection, "
-            "assessment, understanding and prevention of "
-            "adverse effects and other medicine-related problems.",
-
-        "Adverse Drug Reactions":
-            "An adverse drug reaction is a harmful and "
-            "unintended response associated with a medicine.",
-
-        "ICSR Reporting":
-            "An Individual Case Safety Report documents "
-            "information about a suspected adverse reaction.",
-
-        "Serious Adverse Events":
-            "Seriousness assessment considers outcomes such "
-            "as death, life-threatening events and hospitalisation.",
-
-        "Causality Assessment":
-            "Causality assessment evaluates the relationship "
-            "between a suspected medicine and an adverse reaction.",
-
-        "Pharmacovigilance in India":
-            "The Pharmacovigilance Programme of India "
-            "supports monitoring of medicine safety."
+        "Pharmacovigilance": "Science and activities relating to the detection, assessment, understanding and prevention of adverse effects or other medicine-related problems.",
+        "Adverse Drug Reaction": "A harmful and unintended response to a medicinal product.",
+        "ICSR": "Individual Case Safety Report containing information about a suspected adverse reaction in an individual patient.",
+        "Signal Detection": "Process of identifying information suggesting a new potentially causal association or a new aspect of a known association.",
+        "PVPI": "Pharmacovigilance Programme of India, the national pharmacovigilance programme."
     }
 
-    topic = st.selectbox("Select a topic", list(topics.keys()))
+    for topic, description in topics.items():
+        with st.expander(topic):
+            st.write(description)
 
-    st.subheader(topic)
-    st.write(topics[topic])
-
-
-# RESEARCH DASHBOARD
 elif page == "Research Dashboard":
 
-    st.header("🔬 Research Dashboard")
+    st.header("📊 Research Dashboard")
 
-    if not drugs_df.empty:
+    if not drugs.empty:
+        st.metric("Total Medicines in Database", len(drugs))
 
-        st.metric("Drug records", len(drugs_df))
-
-        if "Drug_Class" in drugs_df.columns:
+        if "Drug_Class" in drugs.columns:
             st.metric(
-                "Drug classes",
-                drugs_df["Drug_Class"].nunique()
+                "Different Drug Classes",
+                drugs["Drug_Class"].nunique()
             )
 
-        st.subheader("Drug Database Preview")
-        st.dataframe(drugs_df, use_container_width=True)
+        st.subheader("Drug Master Database")
+        st.dataframe(drugs, use_container_width=True)
 
         st.download_button(
-            "Download drug database CSV",
-            data=drugs_df.to_csv(index=False),
-            file_name="Drug_Master.csv",
+            "Download Drug Database",
+            data=drugs.to_csv(index=False).encode("utf-8"),
+            file_name="PharmaSentry_Drug_Master.csv",
             mime="text/csv"
         )
-
     else:
-        st.error("Drug database is not available.")
+        st.warning("Drug database is not available.")
 
-
-# ABOUT
 elif page == "About":
 
     st.header("About PharmaSentry AI")
 
     st.write(
-        "PharmaSentry AI is an independent academic "
-        "research prototype focused on pharmacovigilance, "
-        "medication safety and pharmacy education."
+        "PharmaSentry AI is an academic prototype designed "
+        "to support pharmacovigilance education and medication safety awareness."
     )
 
-    st.markdown(
-        """
-        **Development objectives**
-
-        - Evidence-grounded drug safety information
-        - ADR case completeness assessment
-        - Pharmacovigilance education
-        - English and Kannada learning support
-        - Research and expert validation
-        """
-    )
+    st.write("Developer: Pharmacy Research and Academic Project")
 
     st.warning(
-        "This prototype is not a substitute for "
-        "professional clinical judgement."
+        "The current prototype uses a local CSV database. "
+        "It does not yet contain an integrated AI model or independently "
+        "verified clinical decision-support functionality."
     )
-
-st.divider()
-
-st.caption(
-    "PharmaSentry AI | Academic Research Prototype | Version 2.0"
-)
