@@ -147,26 +147,59 @@ elif page == "Drug-ADR Safety Screening":
                     selected_record.get("Serious_ADR", "")
                 ).lower()
 
-                aliases = {
-                    "liver damage": ["liver injury", "hepatotoxicity"],
-                    "hepatotoxicity": ["liver injury", "severe liver injury"],
-                    "hepatic injury": ["liver injury", "severe liver injury"],
-                    "hepatic damage": ["liver injury", "severe liver injury"],
-                    "liver toxicity": ["liver injury", "severe liver injury"],
-                    "hepatic toxicity": ["liver injury", "severe liver injury"],
-                    "diarrhea": ["diarrhoea"],
-                    "loose stools": ["diarrhoea"],
-                    "frequent loose stools": ["diarrhoea"],
-                    "feeling sick": ["nausea"],
-                    "queasiness": ["nausea"],
-                    "emesis": ["vomiting"],
-                    "throwing up": ["vomiting"],
-                    "being sick": ["vomiting"],
-                    "skin rash": ["rash"],
-                    "cutaneous rash": ["rash"]
-                }
+    aliases = {
+    # Liver-related reactions
+    "liver damage": ["liver injury", "hepatotoxicity"],
+    "hepatotoxicity": ["liver injury", "hepatic injury"],
+    "hepatic injury": ["liver injury", "hepatotoxicity"],
+    "hepatic damage": ["liver injury", "hepatotoxicity"],
+    "liver toxicity": ["liver injury", "hepatotoxicity"],
+    "hepatic toxicity": ["liver injury", "hepatotoxicity"],
+    "elevated liver enzymes": ["increased liver enzymes"],
+    "high sgpt": ["increased alt", "elevated alt"],
+    "high sgot": ["increased ast", "elevated ast"],
 
-                entered_terms = [
+    # Gastrointestinal reactions
+    "diarrhea": ["diarrhoea"],
+    "loose stools": ["diarrhoea", "diarrhea"],
+    "frequent loose stools": ["diarrhoea", "diarrhea"],
+    "stomach pain": ["abdominal pain"],
+    "belly pain": ["abdominal pain"],
+    "indigestion": ["dyspepsia"],
+    "feeling sick": ["nausea"],
+    "queasiness": ["nausea"],
+    "emesis": ["vomiting"],
+    "throwing up": ["vomiting"],
+    "being sick": ["vomiting"],
+    "upset stomach": ["abdominal discomfort"],
+
+    # Skin reactions
+    "skin rash": ["rash"],
+    "cutaneous rash": ["rash"],
+    "itching": ["pruritus"],
+    "itchy skin": ["pruritus"],
+    "hives": ["urticaria"],
+    "swelling of face": ["facial swelling", "angioedema"],
+
+    # Nervous system reactions
+    "head pain": ["headache"],
+    "light headedness": ["dizziness"],
+    "feeling dizzy": ["dizziness"],
+    "pins and needles": ["paresthesia"],
+    "tingling sensation": ["paresthesia"],
+
+    # General reactions
+    "tiredness": ["fatigue"],
+    "weakness": ["asthenia"],
+    "breathlessness": ["dyspnea"],
+    "shortness of breath": ["dyspnea"],
+    "difficulty breathing": ["dyspnea"],
+    "swelling": ["edema", "oedema"],
+    "oedema": ["edema"],
+    "edema": ["oedema"]
+}
+
+     entered_terms = [
                     term.strip().lower()
                     for term in reaction.split(",")
                     if term.strip()
