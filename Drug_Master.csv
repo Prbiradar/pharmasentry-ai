@@ -1,11 +1,11 @@
 Drug_ID,Drug_Name,Drug_Class,Indication,Common_ADR,Serious_ADR,Warnings,Contraindications,Monitoring,Source,Source_Date,Verification_Status
-PS001,Paracetamol,Analgesic,,,,,,,,,
-PS002,Amoxicillin,Penicillin antibiotic,,,,,,,,,
-PS003,Metformin,Biguanide,,,,,,,,,
-PS004,Ibuprofen,NSAID,,,,,,,,,
-PS005,Amlodipine,Calcium channel blocker,,,,,,,,,
-PS006,Atorvastatin,HMG-CoA reductase inhibitor,,,,,,,,,
-PS007,Pantoprazole,Proton pump inhibitor,,,,,,,,,
-PS008,Ciprofloxacin,Fluoroquinolone,,,,,,,,,
-PS009,Losartan,Angiotensin receptor blocker,,,,,,,,,
-PS010,Glimepiride,Sulfonylurea,,,,,,,,,
+PS001,Paracetamol,Analgesic,Pain and fever,Nausea; rash; headache,Severe liver injury,Overdose and liver toxicity risk,Severe hepatic impairment; product-specific contraindications,Liver function when clinically indicated; total daily dose,DailyMed - Acetaminophen label,,Preliminary - verification pending
+PS002,Amoxicillin,Penicillin antibiotic,Susceptible bacterial infections,Diarrhoea; nausea; vomiting; rash,Anaphylaxis; severe skin reactions; C difficile-associated diarrhoea,Penicillin allergy; severe hypersensitivity reactions,Serious hypersensitivity to penicillins or beta-lactams,Allergy history; renal function when indicated,DailyMed - Amoxicillin label,,Preliminary - verification pending
+PS003,Metformin,Biguanide,Type 2 diabetes mellitus,Diarrhoea; nausea; vomiting; flatulence,Lactic acidosis,Risk of lactic acidosis; assess renal function,Metabolic acidosis; product-specific contraindications,Renal function; vitamin B12 when indicated,DailyMed - Metformin label,,Preliminary - verification pending
+PS004,Ibuprofen,NSAID,Pain; fever; inflammatory conditions,Dyspepsia; nausea; abdominal pain,Gastrointestinal bleeding; renal injury; cardiovascular events,Gastrointestinal; renal and cardiovascular risks,Hypersensitivity to ibuprofen or NSAIDs,Blood pressure; renal function; gastrointestinal symptoms,DailyMed - Ibuprofen label,,Preliminary - verification pending
+PS005,Amlodipine,Calcium channel blocker,Hypertension; angina,Peripheral oedema; headache; dizziness,Hypotension; worsening angina in susceptible patients,Hypotension; caution in severe hepatic impairment,Hypersensitivity to amlodipine,Blood pressure; oedema,DailyMed - Amlodipine label,,Preliminary - verification pending
+PS006,Atorvastatin,HMG-CoA reductase inhibitor,Dyslipidaemia; cardiovascular risk reduction,Myalgia; arthralgia; diarrhoea,Myopathy; rhabdomyolysis; liver injury,Assess muscle symptoms and drug interactions,Active liver disease; product-specific contraindications,Lipid profile; liver enzymes when clinically indicated,DailyMed - Atorvastatin label,,Preliminary - verification pending
+PS007,Pantoprazole,Proton pump inhibitor,GERD; erosive oesophagitis; acid-related disorders,Headache; diarrhoea; nausea,Acute interstitial nephritis; severe skin reactions,Consider risks with prolonged use,Hypersensitivity to pantoprazole or substituted benzimidazoles,Symptoms; magnesium or vitamin B12 when indicated,DailyMed - Pantoprazole label,,Preliminary - verification pending
+PS008,Ciprofloxacin,Fluoroquinolone,Susceptible bacterial infections,Nausea; diarrhoea; vomiting,Tendon rupture; peripheral neuropathy; serious CNS effects,Tendon injury; neuropathy; QT prolongation; dysglycaemia,Fluoroquinolone hypersensitivity; concomitant tizanidine use,Renal function; blood glucose in at-risk patients,DailyMed - Ciprofloxacin label,,Preliminary - verification pending
+PS009,Losartan,Angiotensin receptor blocker,Hypertension; selected heart failure and renal indications,Dizziness; hypotension; hyperkalaemia,Renal impairment; severe hyperkalaemia; foetal toxicity,Pregnancy risk; monitor potassium and renal function,Hypersensitivity; concomitant aliskiren in diabetes where specified,Blood pressure; potassium; renal function,DailyMed - Losartan label,,Preliminary - verification pending
+PS010,Glimepiride,Sulfonylurea,Type 2 diabetes mellitus,Hypoglycaemia; dizziness; headache,Severe hypoglycaemia; hypersensitivity reactions,Hypoglycaemia risk; caution with missed meals,Hypersensitivity to glimepiride or applicable sulfonylureas,Blood glucose; HbA1c; renal function when indicated,DailyMed - Glimepiride label,,Preliminary - verification pending
