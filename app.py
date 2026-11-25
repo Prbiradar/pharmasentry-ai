@@ -124,9 +124,9 @@ elif page == "Drug-ADR Safety Screening":
             key="screening_drug"
         )
 
-        reaction = st.text_input(
-            "Enter reported adverse reaction",
-            placeholder="Example: Liver damage"
+        reaction = st.text_area(
+    "Enter reported adverse reactions",
+    placeholder="Example: Nausea, vomiting, liver damage"
         )
 
         if st.button("Screen Drug-ADR Record"):
