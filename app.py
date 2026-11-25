@@ -254,7 +254,7 @@ elif page == "ADR Completeness Checker":
         st.info("This is a basic educational completeness check, not an official ADR reporting assessment.")
 
 
-elif page == "Learning Centre":
+elif page == "Pharmacovigilance Learning Centre":
 
     st.header("Pharmacovigilance Learning Centre")
     st.write(
