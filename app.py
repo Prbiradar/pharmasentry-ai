@@ -685,6 +685,363 @@ Official reference:
     st.subheader(topic)
     st.markdown(topics[topic])
 
+    st.divider()
+    st.header("📝 Interactive Pharmacovigilance Quiz")
+    st.write("Test your knowledge of the selected topic.")
+
+    quiz_data = {
+
+        "1. About Pharmacovigilance": [
+            ("What is the primary objective of pharmacovigilance?",
+             ["Increasing drug sales", "Improving patient safety",
+              "Reducing medicine prices", "Manufacturing medicines"],
+             1, "Pharmacovigilance aims to improve patient safety through medicine safety monitoring."),
+            ("Which organisation launched the WHO Programme for International Drug Monitoring?",
+             ["WHO", "UNICEF", "UNESCO", "World Bank"],
+             0, "WHO established the international programme to promote global ADR monitoring."),
+            ("When was the WHO international monitoring programme established?",
+             ["1950", "1968", "1985", "2000"],
+             1, "The WHO Programme for International Drug Monitoring was established in 1968."),
+            ("Pharmacovigilance mainly deals with:",
+             ["Only drug manufacturing", "Detection and prevention of medicine-related problems",
+              "Only drug marketing", "Only prescription writing"],
+             1, "It covers detection, assessment, understanding and prevention of adverse effects and other drug-related problems."),
+            ("Which activity is part of pharmacovigilance?",
+             ["Signal detection", "Drug packaging design", "Tablet coating only",
+              "Pharmaceutical advertising"],
+             0, "Signal detection is an important pharmacovigilance activity."),
+            ("Pharmacovigilance is important during:",
+             ["Only clinical trials", "Only drug development",
+              "The entire medicine life cycle", "Only drug manufacturing"],
+             2, "Medicine safety must be monitored throughout its life cycle."),
+            ("Who can report a suspected ADR?",
+             ["Only doctors", "Only pharmacists", "Only nurses",
+              "Healthcare professionals and consumers"],
+             3, "Suspected ADRs can be reported by healthcare professionals and consumers."),
+            ("Which is a source of pharmacovigilance information?",
+             ["Spontaneous ADR reports", "Clinical studies",
+              "Medical literature", "All of the above"],
+             3, "All these sources contribute to medicine safety monitoring."),
+            ("What does benefit-risk assessment evaluate?",
+             ["Medicine colour", "Balance between therapeutic benefits and risks",
+              "Tablet size", "Packaging cost"],
+             1, "Benefit-risk assessment considers the medicine's benefits in relation to its risks."),
+            ("Which term describes monitoring medicine safety after marketing?",
+             ["Post-marketing surveillance", "Preclinical formulation",
+              "Drug packaging", "Inventory management"],
+             0, "Post-marketing surveillance monitors medicine safety after approval and marketing.")
+        ],
+
+        "2. ADR and Its Types": [
+            ("What does ADR stand for?",
+             ["Adverse Drug Reaction", "Approved Drug Regulation",
+              "Active Drug Research", "Adverse Dose Requirement"],
+             0, "ADR means Adverse Drug Reaction."),
+            ("Type A ADRs are generally:",
+             ["Unpredictable", "Dose-related and predictable",
+              "Always delayed", "Withdrawal reactions"],
+             1, "Type A reactions are augmented pharmacological effects and are generally dose-related."),
+            ("Anaphylaxis due to penicillin is an example of:",
+             ["Type A", "Type B", "Type C", "Type E"],
+             1, "Type B reactions are bizarre and generally unpredictable."),
+            ("Type C ADRs are associated with:",
+             ["Chronic use", "Drug withdrawal",
+              "Immediate allergy", "Treatment failure"],
+             0, "Type C reactions are associated with prolonged or chronic medicine use."),
+            ("Type D ADRs are:",
+             ["Dose-related", "Delayed", "Withdrawal-related",
+              "Treatment failures"],
+             1, "Type D reactions appear after a time interval."),
+            ("Type E ADRs occur due to:",
+             ["Drug withdrawal", "Drug overdose",
+              "Chronic exposure", "Drug allergy"],
+             0, "Type E refers to reactions associated with the end of treatment or withdrawal."),
+            ("Type F ADRs refer to:",
+             ["Treatment failure", "Delayed reactions",
+              "Chronic reactions", "Bizarre reactions"],
+             0, "Type F describes unexpected failure of therapy."),
+            ("Which is a criterion for a serious adverse event?",
+             ["Mild headache only", "Hospitalisation",
+              "Temporary unpleasant taste", "Mild nausea only"],
+             1, "Hospitalisation is one of the regulatory seriousness criteria."),
+            ("Severity and seriousness are:",
+             ["Always identical", "Different concepts",
+              "Unrelated to ADRs", "Synonyms"],
+             1, "Severity describes intensity; seriousness is based on regulatory outcome criteria."),
+            ("An adverse event necessarily proves drug causality:",
+             ["True", "False", "Only in adults", "Only in clinical trials"],
+             1, "An adverse event does not automatically establish a causal relationship with a medicine.")
+        ],
+
+        "3. Individual Case Safety Report (ICSR)": [
+            ("What is the full form of ICSR?",
+             ["Individual Case Safety Report", "International Clinical Safety Review",
+              "Individual Clinical Study Record", "Internal Case Summary Report"],
+             0, "ICSR stands for Individual Case Safety Report."),
+            ("How many minimum elements are needed for a valid ICSR?",
+             ["Two", "Three", "Four", "Six"],
+             2, "Four elements are required: identifiable patient, reporter, suspected product and suspected reaction."),
+            ("Which is NOT one of the four minimum ICSR elements?",
+             ["Identifiable patient", "Identifiable reporter",
+              "Suspected medicinal product", "Laboratory investigation"],
+             3, "A laboratory investigation may support a case but is not one of the four minimum elements."),
+            ("What is dechallenge?",
+             ["Stopping or reducing the suspected medicine and observing the reaction",
+              "Increasing the dose", "Changing the brand",
+              "Starting another medicine"],
+             0, "Dechallenge assesses what happens after withdrawal or reduction of the suspected medicine."),
+            ("What is rechallenge?",
+             ["Stopping treatment permanently", "Reintroducing the suspected medicine and observing the reaction",
+              "Changing the dosage form", "Reporting a new patient"],
+             1, "Rechallenge involves re-exposure to the suspected medicine."),
+            ("Which information belongs to patient details?",
+             ["Age and sex", "Medicine price", "Manufacturer profit",
+              "Hospital building details"],
+             0, "Patient demographics such as age and sex are relevant ICSR information."),
+            ("What is duplicate case detection?",
+             ["Identifying repeated reports of the same case",
+              "Deleting all serious cases", "Changing the patient identity",
+              "Ignoring follow-up reports"],
+             0, "Duplicate detection prevents the same case from being counted more than once."),
+            ("Which is an example of concomitant medication information?",
+             ["Other medicines used by the patient",
+              "The patient's occupation only", "Medicine packaging",
+              "Hospital location"],
+             0, "Concomitant medicines are other medicines used during the relevant period."),
+            ("Does a valid ICSR automatically prove causality?",
+             ["Yes", "No", "Only for serious cases", "Only for new drugs"],
+             1, "An ICSR records a suspected association; causality requires further assessment."),
+            ("What is the purpose of follow-up in ICSR processing?",
+             ["To obtain missing or additional case information",
+              "To increase medicine sales", "To change the reporter",
+              "To remove the suspected reaction"],
+             0, "Follow-up improves the completeness and quality of case information.")
+        ],
+
+        "4. Signal Detection": [
+            ("What is a safety signal?",
+             ["A hypothesis suggesting a potentially new or changed safety association",
+              "Proof of drug toxicity", "A prescription order",
+              "A manufacturing licence"],
+             0, "A signal suggests a potential association that warrants further investigation."),
+            ("Which is a source of safety signals?",
+             ["Spontaneous reports", "Medical literature",
+              "Clinical studies", "All of the above"],
+             3, "Safety signals can arise from multiple data sources."),
+            ("What is PRR?",
+             ["Proportional Reporting Ratio", "Patient Reaction Record",
+              "Pharmaceutical Risk Review", "Product Registration Report"],
+             0, "PRR is a statistical method used in signal detection."),
+            ("What does ROR stand for?",
+             ["Reporting Odds Ratio", "Reaction Outcome Record",
+              "Risk Observation Review", "Regulatory Order Report"],
+             0, "ROR is Reporting Odds Ratio, a disproportionality measure."),
+            ("Which stage follows signal detection in signal management?",
+             ["Signal validation", "Drug advertising",
+              "Product packaging", "Prescription renewal"],
+             0, "Potential signals are validated before further assessment."),
+            ("Does a statistical signal prove causality?",
+             ["Yes, always", "No, it requires further evaluation",
+              "Only in children", "Only for vaccines"],
+             1, "Disproportionality methods identify reporting patterns, not proof of causation."),
+            ("Which method is used for quantitative signal detection?",
+             ["ROR", "Tablet hardness test", "Friability test",
+              "Dissolution test"],
+             0, "ROR is a quantitative pharmacovigilance signal detection method."),
+            ("What is signal prioritisation?",
+             ["Ranking signals according to their potential importance",
+              "Deleting all signals", "Changing medicine names",
+              "Stopping all clinical trials"],
+             0, "Prioritisation helps focus assessment on important potential safety concerns."),
+            ("What may follow confirmation of an important safety concern?",
+             ["Further investigation and regulatory action where appropriate",
+              "Automatic approval of the drug", "Ignoring the reports",
+              "Deleting the database"],
+             0, "Evidence may support additional investigation and appropriate safety measures."),
+            ("Which is an important source of spontaneous safety information?",
+             ["Healthcare professional reports", "Product advertisements",
+              "Packaging artwork", "Sales invoices"],
+             0, "Healthcare professionals can submit suspected ADR reports.")
+        ],
+
+        "5. Establishment and Development of PvPI": [
+            ("What is the full form of PvPI?",
+             ["Pharmacovigilance Programme of India", "Pharmaceutical Vaccine Programme of India",
+              "Patient Verification Programme of India", "Pharmacy Validation Programme of India"],
+             0, "PvPI stands for Pharmacovigilance Programme of India."),
+            ("In which year was PvPI launched?",
+             ["2005", "2010", "2015", "2020"],
+             1, "PvPI was launched in July 2010."),
+            ("Which ministry launched PvPI?",
+             ["Ministry of Health and Family Welfare",
+              "Ministry of Education", "Ministry of Finance",
+              "Ministry of Commerce"],
+             0, "PvPI was launched under the Ministry of Health and Family Welfare."),
+            ("Which institution is the current National Coordination Centre of PvPI?",
+             ["Indian Pharmacopoeia Commission",
+              "AIIMS Mumbai", "ICMR New Delhi", "NIPER Mohali"],
+             0, "IPC in Ghaziabad is the National Coordination Centre of PvPI."),
+            ("Where was the initial National Coordination Centre located?",
+             ["AIIMS New Delhi", "IPC Ghaziabad",
+              "CDSCO Mumbai", "NIPER Hyderabad"],
+             0, "AIIMS New Delhi initially served as the National Coordination Centre."),
+            ("In which year was the NCC shifted to IPC?",
+             ["2010", "2011", "2015", "2018"],
+             1, "The National Coordination Centre shifted to IPC on 15 April 2011."),
+            ("What does AMC stand for in PvPI?",
+             ["ADR Monitoring Centre", "Approved Medicine Committee",
+              "Adverse Medicine Council", "Annual Monitoring Cell"],
+             0, "AMCs are ADR Monitoring Centres participating in the programme."),
+            ("What is a major function of PvPI?",
+             ["Collection and evaluation of suspected ADR reports",
+              "Manufacturing all medicines", "Issuing driving licences",
+              "Conducting pharmacy admissions"],
+             0, "PvPI collects and evaluates suspected adverse drug reaction reports."),
+            ("Who can submit suspected ADR reports to PvPI?",
+             ["Only physicians", "Only pharmacists",
+              "Healthcare professionals and consumers", "Only manufacturers"],
+             2, "Healthcare professionals and consumers can report suspected ADRs."),
+            ("What is the main purpose of PvPI?",
+             ["Improving medicine safety in India",
+              "Increasing drug advertisements", "Controlling pharmacy fees",
+              "Manufacturing vaccines"],
+             0, "PvPI supports patient safety through medicine safety monitoring.")
+        ],
+
+        "6. CDSCO – Functions and Role in Pharmacovigilance": [
+            ("What is the full form of CDSCO?",
+             ["Central Drugs Standard Control Organisation",
+              "Central Drug Safety Coordination Office",
+              "Council for Drug Standards and Clinical Operations",
+              "Central Department of Scientific Clinical Oversight"],
+             0, "CDSCO stands for Central Drugs Standard Control Organisation."),
+            ("CDSCO functions under which ministry?",
+             ["Ministry of Health and Family Welfare",
+              "Ministry of Education", "Ministry of Finance",
+              "Ministry of Agriculture"],
+             0, "CDSCO functions under the Ministry of Health and Family Welfare."),
+            ("Who heads CDSCO?",
+             ["Drugs Controller General (India)",
+              "Director of WHO", "President of PCI",
+              "Director of AICTE"],
+             0, "The Drugs Controller General (India), or DCGI, heads CDSCO."),
+            ("Which is a major function of CDSCO?",
+             ["Regulation of new drugs and clinical trials",
+              "Conducting university examinations", "Teaching pharmacology",
+              "Manufacturing all generic medicines"],
+             0, "CDSCO performs regulatory functions relating to new drugs and clinical trials."),
+            ("What is the relationship between PvPI and CDSCO?",
+             ["They have complementary roles in medicine safety",
+              "They are the same organisation", "They are unrelated to drug safety",
+              "Both are pharmaceutical manufacturers"],
+             0, "PvPI monitors medicine safety and CDSCO performs regulatory functions."),
+            ("Which organisation is the National Coordination Centre of PvPI?",
+             ["IPC", "CDSCO headquarters", "AICTE", "UGC"],
+             0, "Indian Pharmacopoeia Commission is the National Coordination Centre."),
+            ("Which activity falls within CDSCO regulatory functions?",
+             ["Regulation of imported drugs",
+              "Conducting college sports", "Awarding university degrees",
+              "Issuing driving licences"],
+             0, "CDSCO has regulatory responsibilities concerning imported drugs."),
+            ("What may be an outcome of a regulatory safety review?",
+             ["Appropriate labelling changes or other regulatory measures",
+              "Automatic withdrawal of every medicine",
+              "No action under any circumstances", "Changing the patient's diagnosis"],
+             0, "Regulatory decisions depend on evidence and may include appropriate safety measures."),
+            ("Which is the correct distinction?",
+             ["PvPI monitors and evaluates safety information; CDSCO performs regulatory oversight",
+              "CDSCO collects all prescriptions; PvPI manufactures drugs",
+              "Both only conduct clinical examinations",
+              "Neither has a medicine safety role"],
+             0, "PvPI and CDSCO have complementary medicine-safety and regulatory roles."),
+            ("What does DCGI stand for?",
+             ["Drugs Controller General (India)",
+              "Drug Clinical Guidance Institute",
+              "Director of Clinical Government Inspection",
+              "Drug Coordination Group of India"],
+             0, "DCGI stands for Drugs Controller General (India).")
+        ]
+    }
+
+    if topic in quiz_data:
+
+        questions = quiz_data[topic]
+
+        st.write("**Number of questions:** 10")
+        st.write("**Maximum marks:** 10")
+
+        with st.form("pv_quiz_form"):
+
+            answers = []
+
+            for i, q in enumerate(questions):
+                st.markdown(f"**Q{i + 1}. {q[0]}**")
+
+                selected = st.radio(
+                    "Choose your answer:",
+                    q[1],
+                    index=None,
+                    key=f"pv_{topic}_{i}",
+                    label_visibility="collapsed"
+                )
+
+                answers.append(selected)
+                st.divider()
+
+            submitted = st.form_submit_button(
+                "Submit Quiz",
+                use_container_width=True
+            )
+
+        if submitted:
+
+            if any(answer is None for answer in answers):
+                st.warning("Please answer all 10 questions before submitting.")
+
+            else:
+                score = 0
+
+                for i, q in enumerate(questions):
+                    if answers[i] == q[1][q[2]]:
+                        score += 1
+
+                percentage = (score / len(questions)) * 100
+
+                st.subheader("Your Quiz Result")
+                st.metric("Score", f"{score}/10")
+                st.metric("Percentage", f"{percentage:.0f}%")
+
+                if percentage >= 80:
+                    st.success("Excellent! Outstanding knowledge.")
+                elif percentage >= 60:
+                    st.info("Good performance! Keep learning.")
+                else:
+                    st.warning("Keep practising and revise this topic.")
+
+                st.subheader("Answer Review")
+
+                for i, q in enumerate(questions):
+
+                    with st.expander(f"Question {i + 1}: {q[0]}"):
+
+                        correct_answer = q[1][q[2]]
+
+                        st.write("Your answer:", answers[i])
+                        st.write("Correct answer:", correct_answer)
+                        st.write("Explanation:", q[3])
+
+                        if answers[i] == correct_answer:
+                            st.success("Correct answer")
+                        else:
+                            st.error("Incorrect answer")
+
+                if st.button("Retake Quiz"):
+                    for i in range(len(questions)):
+                        key = f"pv_{topic}_{i}"
+                        if key in st.session_state:
+                            del st.session_state[key]
+                    st.rerun()
+
     st.info(
         "Educational content for pharmacy students and healthcare "
         "professionals. Refer to current official guidelines and "
