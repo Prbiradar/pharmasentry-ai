@@ -251,6 +251,251 @@ elif page == "Drug-ADR Safety Screening":
                     "or establish ADR causality. Professional review is required."
                 )
 
+
+elif page == "Drug Interaction Checker":
+
+    st.header("💊 Drug Interaction Checker")
+
+    st.write(
+        "Screen medicines for documented Drug-Drug "
+        "and Drug-Food interactions."
+    )
+
+    if interactions.empty:
+
+        st.error(
+            "Interaction database is not available. "
+            "Please check Interaction_Master.csv."
+        )
+
+    else:
+
+        interaction_type = st.radio(
+            "Select Interaction Type",
+            ["Drug-Drug", "Drug-Food"],
+            horizontal=True
+        )
+
+        if interaction_type == "Drug-Drug":
+
+            st.subheader("Drug-Drug Interaction Checker")
+
+            dd_data = interactions[
+                interactions["Interaction_Type"].astype(str).str.strip()
+                == "Drug-Drug"
+            ]
+
+            if dd_data.empty:
+
+                st.warning("No Drug-Drug records available.")
+
+            else:
+
+                drug_options = sorted(
+                    set(dd_data["Item_A"].astype(str))
+                    | set(dd_data["Item_B"].astype(str))
+                )
+
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    drug1 = st.selectbox(
+                        "Select First Medicine",
+                        drug_options,
+                        key="interaction_drug1"
+                    )
+
+                with col2:
+                    drug2 = st.selectbox(
+                        "Select Second Medicine",
+                        drug_options,
+                        key="interaction_drug2"
+                    )
+
+                if st.button(
+                    "Check Drug-Drug Interaction",
+                    key="check_dd"
+                ):
+
+                    if drug1 == drug2:
+
+                        st.warning(
+                            "Please select two different medicines."
+                        )
+
+                    else:
+
+                        matches = dd_data[
+                            (
+                                (dd_data["Item_A"] == drug1)
+                                & (dd_data["Item_B"] == drug2)
+                            )
+                            |
+                            (
+                                (dd_data["Item_A"] == drug2)
+                                & (dd_data["Item_B"] == drug1)
+                            )
+                        ]
+
+                        if not matches.empty:
+
+                            for _, record in matches.iterrows():
+
+                                st.error(
+                                    "Documented Drug-Drug "
+                                    "Interaction Found"
+                                )
+
+                                st.write(
+                                    "**Interaction Level:**",
+                                    record["Interaction_Level"]
+                                )
+
+                                st.write(
+                                    "**Mechanism:**",
+                                    record["Mechanism"]
+                                )
+
+                                st.write(
+                                    "**Potential Effect:**",
+                                    record["Potential_Effect"]
+                                )
+
+                                st.write(
+                                    "**Management / Precautions:**",
+                                    record["Management"]
+                                )
+
+                                st.write(
+                                    "**Reference:**",
+                                    record["Source"]
+                                )
+
+                                if record["Source_URL"]:
+                                    st.markdown(
+                                        f"[View Source]({record['Source_URL']})"
+                                    )
+
+                                st.write(
+                                    "**Verification Status:**",
+                                    record["Verification_Status"]
+                                )
+
+                        else:
+
+                            st.info(
+                                "No matching interaction record found "
+                                "in the current database. This does not "
+                                "rule out a possible interaction."
+                            )
+
+        elif interaction_type == "Drug-Food":
+
+            st.subheader("Drug-Food Interaction Checker")
+
+            df_data = interactions[
+                interactions["Interaction_Type"].astype(str).str.strip()
+                == "Drug-Food"
+            ]
+
+            if df_data.empty:
+
+                st.warning("No Drug-Food records available.")
+
+            else:
+
+                medicine_options = sorted(
+                    df_data["Item_A"].astype(str).unique()
+                )
+
+                food_options = sorted(
+                    df_data["Item_B"].astype(str).unique()
+                )
+
+                medicine = st.selectbox(
+                    "Select Medicine",
+                    medicine_options,
+                    key="food_medicine"
+                )
+
+                food = st.selectbox(
+                    "Select Food / Beverage",
+                    food_options,
+                    key="food_item"
+                )
+
+                if st.button(
+                    "Check Drug-Food Interaction",
+                    key="check_df"
+                ):
+
+                    matches = df_data[
+                        (df_data["Item_A"] == medicine)
+                        & (df_data["Item_B"] == food)
+                    ]
+
+                    if not matches.empty:
+
+                        for _, record in matches.iterrows():
+
+                            st.warning(
+                                "Documented Drug-Food "
+                                "Interaction Found"
+                            )
+
+                            st.write(
+                                "**Interaction Level:**",
+                                record["Interaction_Level"]
+                            )
+
+                            st.write(
+                                "**Mechanism:**",
+                                record["Mechanism"]
+                            )
+
+                            st.write(
+                                "**Potential Effect:**",
+                                record["Potential_Effect"]
+                            )
+
+                            st.write(
+                                "**Management / Precautions:**",
+                                record["Management"]
+                            )
+
+                            st.write(
+                                "**Reference:**",
+                                record["Source"]
+                            )
+
+                            if record["Source_URL"]:
+                                st.markdown(
+                                    f"[View Source]({record['Source_URL']})"
+                                )
+
+                            st.write(
+                                "**Verification Status:**",
+                                record["Verification_Status"]
+                            )
+
+                    else:
+
+                        st.info(
+                            "No matching interaction record found "
+                            "in the current database. This does not "
+                            "rule out a possible interaction."
+                        )
+
+    st.divider()
+
+    st.caption(
+        "Disclaimer: This is an educational interaction screening "
+        "prototype based on a limited database. It does not identify "
+        "all possible interactions or replace professional clinical "
+        "judgement. Consult a qualified pharmacist or prescriber "
+        "before making medication-related decisions."
+    )
+
 elif page == "ADR Completeness Checker":
 
     st.header("ADR Case Completeness Checker")
