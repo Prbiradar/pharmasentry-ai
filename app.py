@@ -110,6 +110,7 @@ elif page == "Drug Safety Assistant":
             "against authoritative product labels and expert review."
         )
 
+
 elif page == "Drug-ADR Safety Screening":
 
     st.header("💊 Drug-ADR Safety Screening")
@@ -127,7 +128,8 @@ elif page == "Drug-ADR Safety Screening":
 
         reaction = st.text_input(
             "Enter reported adverse reaction",
-            placeholder="Example: Liver damage"
+            placeholder="Example: Liver damage",
+            key="reported_adr"
         )
 
         if st.button("Screen Drug-ADR Record", key="screen_adr"):
@@ -172,7 +174,7 @@ elif page == "Drug-ADR Safety Screening":
                         if normalize_adr(term)
                     ]
 
-                 reported_terms = split_terms(reaction)
+                reported_terms = split_terms(reaction)
 
                 common_terms = split_terms(
                     selected_record.get("Common_ADR", "")
@@ -211,22 +213,20 @@ elif page == "Drug-ADR Safety Screening":
                 st.divider()
                 st.subheader("Screening Result")
 
-                st.write("**Suspected Medicine:**", selected_drug)
-                st.write("**Reported Reaction:**", reaction)
+                st.write("Suspected Medicine:", selected_drug)
+                st.write("Reported Reaction:", reaction)
 
                 if serious_matches:
                     st.error("Potential Serious ADR Match")
 
                     for reported, matched in serious_matches:
-                        st.write(f"Reported reaction: {reported}")
-                        st.write(f"Database entry: {matched}")
+                        st.write(f"{reported} → {matched}")
 
                 if common_matches:
                     st.success("Potential Common ADR Match")
 
                     for reported, matched in common_matches:
-                        st.write(f"Reported reaction: {reported}")
-                        st.write(f"Database entry: {matched}")
+                        st.write(f"{reported} → {matched}")
 
                 if not serious_matches and not common_matches:
                     st.info(
@@ -234,9 +234,9 @@ elif page == "Drug-ADR Safety Screening":
                     )
 
                 st.caption(
-                    "Educational keyword matching only. Database categories "
-                    "do not establish individual patient severity or ADR "
-                    "causality. Professional assessment is required."
+                    "Educational keyword matching only. These database "
+                    "categories do not determine individual patient severity "
+                    "or establish ADR causality. Professional review is required."
                 )
 
 elif page == "ADR Completeness Checker":
