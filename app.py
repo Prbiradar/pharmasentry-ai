@@ -112,7 +112,7 @@ elif page == "Drug Safety Assistant":
 
 elif page == "Drug-ADR Safety Screening":
 
-    st.header("Drug-ADR Safety Screening")
+    st.header("💊 Drug-ADR Safety Screening")
     st.write("Compare reported reactions with the drug database.")
 
     if drugs.empty:
@@ -148,64 +148,116 @@ elif page == "Drug-ADR Safety Screening":
                     selected_record.get("Serious_ADR", "")
                 ).lower()
 
+                import re
+
+                def normalize_adr(value):
+                    value = str(value).lower()
+                    value = value.replace("/", " ")
+                    value = value.replace("-", " ")
+                    value = re.sub(r"[^a-z0-9 ]", " ", value)
+                    return " ".join(value.split())
+
                 aliases = {
-                    "liver damage": ["liver injury", "hepatotoxicity"],
-                    "hepatotoxicity": ["liver injury", "hepatic injury"],
-                    "diarrhea": ["diarrhoea"],
-                    "loose stools": ["diarrhoea", "diarrhea"],
+                    "liver damage": ["hepatotoxicity", "liver injury"],
+                    "hepatotoxicity": ["liver damage", "liver injury"],
+                    "vomiting": ["emesis"],
+                    "diarrhea": ["loose stools"],
+                    "loose stools": ["diarrhea"],
                     "stomach pain": ["abdominal pain"],
-                    "feeling sick": ["nausea"],
-                    "queasiness": ["nausea"],
-                    "emesis": ["vomiting"],
-                    "throwing up": ["vomiting"],
+                    "abdominal pain": ["stomach pain"],
                     "skin rash": ["rash"],
-                    "itching": ["pruritus"],
-                    "hives": ["urticaria"],
-                    "head pain": ["headache"],
-                    "feeling dizzy": ["dizziness"],
-                    "tiredness": ["fatigue"],
-                    "weakness": ["asthenia"],
-                    "breathlessness": ["dyspnea"],
-                    "swelling": ["edema", "oedema"]
+                    "rash": ["skin rash"],
+                    "kidney injury": ["renal injury"],
+                    "renal injury": ["kidney injury"],
+                    "muscle pain": ["myalgia"],
+                    "myalgia": ["muscle pain"]
                 }
 
-                entered_terms = [
-                    term.strip().lower()
+                reported_terms = [
+                    normalize_adr(term)
                     for term in reaction.split(",")
-                    if term.strip()
+                    if normalize_adr(term)
                 ]
 
-                st.subheader("Individual ADR Screening Results")
+                common_terms = [
+                    normalize_adr(term)
+                    for term in re.split(r"[,;]", common_adr)
+                    if normalize_adr(term)
+                ]
 
-                for term in entered_terms:
-                    expanded = {term}
-                    expanded.update(aliases.get(term, []))
+                serious_terms = [
+                    normalize_adr(term)
+                    for term in re.split(r"[,;]", serious_adr)
+                    if normalize_adr(term)
+                ]
 
-                    common_found = any(
-                        item in common_adr for item in expanded
+                def find_matches(reported, database_terms):
+                    matched = []
+
+                    for term in reported:
+                        possible_terms = [term]
+                        possible_terms.extend(aliases.get(term, []))
+
+                        for db_term in database_terms:
+                            if any(
+                                possible == db_term
+                                or possible in db_term
+                                or db_term in possible
+                                for possible in possible_terms
+                            ):
+                                matched.append((term, db_term))
+                                break
+
+                    return matched
+
+                serious_matches = find_matches(
+                    reported_terms, serious_terms
+                )
+
+                common_matches = find_matches(
+                    reported_terms, common_terms
+                )
+
+                st.divider()
+                st.subheader("Screening Result")
+
+                st.write("**Suspected Medicine:**", selected_drug)
+                st.write("**Reported Reaction:**", reaction)
+
+                if serious_matches:
+                    st.error("Potential Serious ADR Match")
+
+                    for reported, matched in serious_matches:
+                        st.write(
+                            f"Reported term: {reported} | "
+                            f"Database match: {matched}"
+                        )
+
+                    st.warning(
+                        "The reaction matched an entry in the "
+                        "Serious_ADR database field. This is not "
+                        "a clinical severity or causality assessment."
                     )
 
-                    serious_found = any(
-                        item in serious_adr for item in expanded
+                if common_matches:
+                    st.success("Potential Common ADR Match")
+
+                    for reported, matched in common_matches:
+                        st.write(
+                            f"Reported term: {reported} | "
+                            f"Database match: {matched}"
+                        )
+
+                if not serious_matches and not common_matches:
+                    st.info(
+                        "No direct ADR match found in the available "
+                        "database. This does not exclude a possible ADR."
                     )
 
-                    if serious_found:
-                        st.error(
-                            f"{term}: Potential serious ADR match"
-                        )
-                    elif common_found:
-                        st.success(
-                            f"{term}: Potential common ADR match"
-                        )
-                    else:
-                        st.warning(
-                            f"{term}: No direct database match"
-                        )
-
-                st.info(
-                    "This is preliminary text matching, not a "
-                    "validated causality assessment. A match does "
-                    "not prove that the medicine caused the reaction."
+                st.caption(
+                    "Educational screening based on database keyword "
+                    "matching. Results require professional review and "
+                    "do not establish ADR causality."
                 )
 
 elif page == "ADR Completeness Checker":
