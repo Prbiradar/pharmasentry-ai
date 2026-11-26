@@ -57,64 +57,45 @@ if st.session_state.authenticated_user is None:
 
     st.markdown("""
     <style>
-    
-.stApp {
-    background: linear-gradient(135deg, #07152e, #123b60, #087e8b);
-}
+    .stApp {
+        background: linear-gradient(135deg, #07152e, #123b60, #087e8b);
+    }
 
-/* Make all general text visible */
-.stApp,
-.stApp p,
-.stApp label,
-.stApp h1,
-.stApp h2,
-.stApp h3,
-.stApp h4,
-.stApp span,
-.stApp .stMarkdown,
-.stApp [data-testid="stWidgetLabel"] {
-    color: #ffffff !important;
-}
+    .stApp, .stApp p, .stApp label,
+    .stApp h1, .stApp h2, .stApp h3,
+    .stApp span, .stApp .stMarkdown,
+    .stApp [data-testid="stWidgetLabel"] {
+        color: #ffffff !important;
+    }
 
-/* Main application branding */
-.login-title {
-    text-align: center;
-    color: #ffffff !important;
-    font-size: 38px;
-    font-weight: bold;
-    padding-top: 25px;
-}
+    .login-title {
+        text-align: center;
+        color: #ffffff !important;
+        font-size: 38px;
+        font-weight: bold;
+        padding-top: 25px;
+    }
 
-.login-subtitle {
-    text-align: center;
-    color: #d5eeee !important;
-    font-size: 15px;
-}
+    .login-subtitle {
+        text-align: center;
+        color: #d5eeee !important;
+        font-size: 15px;
+    }
 
-/* Login form labels */
-.stTextInput label,
-.stRadio label,
-.stRadio p {
-    color: #ffffff !important;
-}
+    .stTextInput label,
+    .stRadio label,
+    .stRadio p {
+        color: #ffffff !important;
+    }
 
-/* Improve footer visibility */
-.stApp footer {
-    color: #ffffff !important;
-}
-
-/* Keep input fields readable */
-.stTextInput input {
-    color: #172b4d !important;
-    background-color: #ffffff !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
+    .stTextInput input {
+        color: #172b4d !important;
+        background-color: #ffffff !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-    st.markdown(
+ st.markdown(
         '<div class="login-title">🛡️ PharmaSentry AI</div>',
         unsafe_allow_html=True
     )
