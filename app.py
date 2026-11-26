@@ -297,25 +297,26 @@ elif page == "Drug Interaction Checker":
                 )
 
                 drug1 = st.selectbox(
-    "🔍 Search First Medicine",
-    drug_options,
-    index=None,
-    placeholder="Type or select first medicine",
-    key="interaction_drug1"
-)
+                    "🔍 Search First Medicine",
+                    drug_options,
+                    index=None,
+                    placeholder="Type or select first medicine",
+                    key="interaction_drug1"
+                )
 
-drug2 = st.selectbox(
-    "🔍 Search Second Medicine",
-    drug_options,
-    index=None,
-    placeholder="Type or select second medicine",
-    key="interaction_drug2"
-)
+                drug2 = st.selectbox(
+                    "🔍 Search Second Medicine",
+                    drug_options,
+                    index=None,
+                    placeholder="Type or select second medicine",
+                    key="interaction_drug2"
+                )
 
                 if st.button(
                     "Check Drug-Drug Interaction",
                     key="check_dd"
                 ):
+
 
                     if drug1 == drug2:
 
