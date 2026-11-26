@@ -1103,104 +1103,198 @@ elif page == "Research Dashboard":
         )
     else:
         st.warning("Drug database is not available.")
+
 elif page == "About":
+
     st.title("🛡️ About PharmaSentry AI")
 
+    st.subheader("Application Overview")
+
+    st.write(
+        "PharmaSentry AI is an academic, research-oriented and "
+        "educational digital initiative designed to integrate "
+        "pharmaceutical sciences with artificial intelligence "
+        "concepts and digital technology."
+    )
+
+    st.write(
+        "The application focuses on pharmacovigilance, adverse "
+        "drug reaction (ADR) awareness, medicine safety information, "
+        "ADR documentation and rational medicine use."
+    )
+
+    st.write(
+        "Its primary objective is to provide an educational platform "
+        "for pharmacy students, academicians, researchers and "
+        "healthcare professionals to explore fundamental concepts "
+        "related to medication safety and pharmacovigilance."
+    )
+
+    st.divider()
+
+    st.subheader("💊 Application Features and Uses")
+
     st.markdown("""
-    ### Intelligent Pharmacovigilance & Medication Safety Assistant
+    **1. Drug Safety Assistant**
 
-    **PharmaSentry AI** is an educational pharmacovigilance
-    and medication-safety application developed to support
-    learning, drug safety awareness, and preliminary ADR screening.
+    Provides access to available drug information, including drug
+    classification, indications, common adverse reactions, serious
+    adverse reactions, warnings, contraindications and monitoring.
 
-    ### 🎯 Purpose of the Application
+    **2. Drug–ADR Safety Screening**
 
-    The application aims to make pharmacovigilance concepts
-    easier to understand and provide an accessible platform
-    for exploring medicine safety information.
+    Compares user-entered adverse reactions with the available
+    medicine database using preliminary keyword-matching logic.
 
-    ### 📱 Application Uses
+    **3. ADR Completeness Checker**
 
-    1. **Drug Safety Information**
-       - Explore drug classes and therapeutic indications.
-       - Review common and serious adverse drug reactions.
-       - Understand warnings, contraindications and monitoring.
+    Supports educational understanding of essential information
+    required for documenting an Individual Case Safety Report (ICSR).
 
-    2. **Drug–ADR Safety Screening**
-       - Enter a medicine name and suspected adverse reaction.
-       - Identify possible keyword matches in the available database.
-       - Review preliminary safety information.
+    **4. Pharmacovigilance Learning Centre**
 
-    3. **ADR Case Completeness Checker**
-       - Learn the essential information required in an ADR report.
-       - Identify missing information in a sample case.
-       - Understand the importance of complete safety documentation.
+    Provides learning material covering:
+    - Introduction to Pharmacovigilance
+    - Adverse Drug Reactions and their classification
+    - Individual Case Safety Reports (ICSR)
+    - Signal Detection
+    - Pharmacovigilance Programme of India (PvPI)
+    - Central Drugs Standard Control Organisation (CDSCO)
 
-    4. **Pharmacovigilance Learning Centre**
-       - Learn the fundamentals of pharmacovigilance.
-       - Understand ADR classification and ICSR.
-       - Explore signal detection, PvPI and CDSCO.
-       - Practise through interactive MCQ quizzes.
+    **5. Research Dashboard**
 
-    5. **Research and Education**
-       - Explore the drug safety database.
-       - Support pharmacy students and educators in learning.
-       - Understand basic pharmacovigilance workflows.
+    Provides an overview of the application's research,
+    development and evaluation activities.
 
-    ### ⚙️ How PharmaSentry AI Works
+    **6. Educational and Awareness Platform**
 
-    - Uses a structured medicine safety database.
-    - Retrieves available drug information from stored records.
-    - Applies preliminary rule-based keyword matching for ADR screening.
-    - Provides educational explanations and learning resources.
-
-    **Current development status:** This is an early educational
-    prototype. It does not currently use an integrated AI model.
-    Its screening functions are rule-based and require further
-    validation.
-
-    ### 👨‍⚕️ About the Author
-
-    **Dr. Praveen R Biradar**
-
-    Pharm.D | Assistant Professor | Pharmacy Educator
-    | Pharmacovigilance and Medication Safety Researcher
-    
-Institutional Affiliation
-
-Shantha College of Pharmacy, Peresandra,
-Chikkaballapura, Karnataka – 562104 
-
-    The application is developed as an academic and educational
-    initiative to promote awareness of pharmacovigilance,
-    adverse drug reaction reporting, rational medicine use,
-    and patient safety.
-
-    The author aims to encourage pharmacy students, educators,
-    researchers and healthcare professionals to explore
-    pharmacovigilance through accessible digital learning tools.
-
-    ### 🌟 Vision
-
-    To contribute towards a safer medication-use environment
-    through pharmacovigilance education, drug safety awareness,
-    research and responsible digital innovation.
-
-    ### ⚠️ Important Disclaimer
-
-    PharmaSentry AI is an educational and research prototype.
-    It is not a substitute for professional medical advice,
-    diagnosis, treatment or clinical judgement.
-
-    Preliminary keyword matches do not establish causality.
-    A missing match does not exclude a possible adverse reaction.
-    The application does not independently diagnose conditions,
-    recommend prescriptions or submit ADR reports to PvPI.
-
-    Drug information should be verified against current
-    authoritative sources and applicable Indian product
-    information before professional use.
+    Encourages awareness of medication safety, adverse drug
+    reaction reporting and rational medicine use.
     """)
 
     st.divider()
-    st.caption("PharmaSentry AI | Developed by Dr. Praveen R Biradar")
+
+    st.subheader("⚙️ How the Application Works")
+
+    st.write(
+        "PharmaSentry AI currently uses a structured drug database "
+        "and rule-based keyword-matching techniques to demonstrate "
+        "basic drug–ADR screening concepts."
+    )
+
+    st.write(
+        "The screening output depends on the information available "
+        "in the database. The present prototype does not use an "
+        "integrated AI language model or independently establish "
+        "clinical causality."
+    )
+
+    st.divider()
+
+    st.subheader("👨‍⚕️ About the Author")
+
+    st.write("Dr. Praveen R Biradar")
+
+    st.write(
+        "Pharm.D | Assistant Professor | Pharmacy Educator | "
+        "Pharmacovigilance and Medication Safety Researcher"
+    )
+
+    st.write("Institutional Affiliation")
+
+    st.write(
+        "Shantha College of Pharmacy, Peresandra, "
+        "Chikkaballapura, Karnataka – 562104"
+    )
+
+    st.write(
+        "The application is conceptualised and developed by "
+        "Dr. Praveen R Biradar as an academic and research-oriented "
+        "initiative to explore the integration of pharmaceutical "
+        "knowledge, pharmacovigilance and digital innovation."
+    )
+
+    st.write(
+        "The project reflects an interest in promoting "
+        "pharmacovigilance education, ADR awareness, medication "
+        "safety research and technology-supported pharmacy practice."
+    )
+
+    st.divider()
+
+    st.subheader("🔬 Vision and Future Scope")
+
+    st.write(
+        "The vision of PharmaSentry AI is to encourage the integration "
+        "of pharmaceutical sciences, pharmacovigilance and emerging "
+        "digital technologies to promote awareness of safer medicine use."
+    )
+
+    st.write("Future development objectives include:")
+
+    st.markdown("""
+    - Expansion of the verified drug safety database.
+    - Incorporation of authoritative Indian medicine safety information.
+    - Improvement of ADR terminology recognition and matching.
+    - Development of structured ADR documentation and evaluation tools.
+    - Integration of evidence-based information retrieval.
+    - Expert validation and systematic performance evaluation.
+    - Advancement towards more comprehensive digital pharmacovigilance tools.
+    """)
+
+    st.divider()
+
+    st.subheader("⚠️ Disclaimer")
+
+    st.warning(
+        "PharmaSentry AI is an academic and educational prototype "
+        "developed for learning, research and pharmacovigilance awareness."
+    )
+
+    st.write(
+        "The medicine information displayed in this application is "
+        "based on the currently available project database. Source "
+        "verification status may vary, and Indian product-label "
+        "verification is pending for some entries."
+    )
+
+    st.write(
+        "The Drug–ADR Safety Screening module uses preliminary "
+        "keyword matching. A database match does not establish "
+        "a causal relationship between a medicine and an adverse "
+        "reaction. Classification into common or serious database "
+        "entries does not determine the actual clinical severity "
+        "of an individual patient's reaction."
+    )
+
+    st.write(
+        "A negative screening result does not exclude the possibility "
+        "of an adverse drug reaction. The application must not be used "
+        "as a substitute for professional medical judgement, clinical "
+        "diagnosis, treatment decisions or prescribing decisions."
+    )
+
+    st.write(
+        "The ADR Completeness Checker is intended for educational "
+        "demonstration and does not replace official ICSR submission "
+        "requirements or pharmacovigilance expert review."
+    )
+
+    st.write(
+        "Users should consult current official guidance from WHO, "
+        "CDSCO, PvPI, ICH and other relevant regulatory authorities "
+        "before using information for professional purposes."
+    )
+
+    st.write(
+        "Do not enter identifiable patient information or confidential "
+        "medical records into this prototype."
+    )
+
+    st.divider()
+
+    st.caption(
+        "PharmaSentry AI | Conceptualised and Developed by "
+        "Dr. Praveen R Biradar | Shantha College of Pharmacy, "
+        "Peresandra, Chikkaballapura, Karnataka – 562104"
+    )
