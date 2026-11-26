@@ -2,6 +2,16 @@ import streamlit as st
 import pandas as pd
 import os
 from supabase import create_client
+# SUPABASE AUTHENTICATION CONNECTION
+SUPABASE_URL = st.secrets["SUPABASE_URL"]
+SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
+if "supabase_client" not in st.session_state:
+    st.session_state.supabase_client = create_client(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    )
+
+supabase = st.session_state.supabase_client
 st.set_page_config(
     page_title="PharmaSentry AI",
     page_icon="💊",
