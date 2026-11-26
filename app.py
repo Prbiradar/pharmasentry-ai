@@ -172,17 +172,18 @@ elif page == "Drug-ADR Safety Screening":
                         if normalize_adr(term)
                     ]
 
-                reported_terms = split_terms(reaction)
+                 reported_terms = split_terms(reaction)
+
                 common_terms = split_terms(
                     selected_record.get("Common_ADR", "")
                 )
 
-                                serious_terms = split_terms(selected_record.get("Serious_ADR", ""))
+                serious_terms = split_terms(
+                    selected_record.get("Serious_ADR", "")
+                )
 
-                st.write("### ADR Database Check")
-                st.write("Common ADR entries:", common_terms)
-                st.write("Serious ADR entries:", serious_terms)
-                st.write("Reported reaction terms:", reported_terms)                   
+                def find_matches(reported, database_terms):
+                    matches = []
 
                     for term in reported:
                         possible_terms = [term] + aliases.get(term, [])
@@ -202,33 +203,40 @@ elif page == "Drug-ADR Safety Screening":
                 serious_matches = find_matches(
                     reported_terms, serious_terms
                 )
+
                 common_matches = find_matches(
                     reported_terms, common_terms
                 )
 
                 st.divider()
                 st.subheader("Screening Result")
+
                 st.write("**Suspected Medicine:**", selected_drug)
                 st.write("**Reported Reaction:**", reaction)
 
                 if serious_matches:
-                    st.error("Potential Serious ADR Database Match")
+                    st.error("Potential Serious ADR Match")
+
                     for reported, matched in serious_matches:
-                        st.write(f"{reported} → {matched}")
+                        st.write(f"Reported reaction: {reported}")
+                        st.write(f"Database entry: {matched}")
 
                 if common_matches:
-                    st.success("Potential Common ADR Database Match")
+                    st.success("Potential Common ADR Match")
+
                     for reported, matched in common_matches:
-                        st.write(f"{reported} → {matched}")
+                        st.write(f"Reported reaction: {reported}")
+                        st.write(f"Database entry: {matched}")
 
                 if not serious_matches and not common_matches:
-                    st.info("No direct ADR match found in the available database.")
+                    st.info(
+                        "No direct ADR match found in the available database."
+                    )
 
                 st.caption(
-                    "Educational keyword screening only. These database "
-                    "categories do not determine an individual patient's "
-                    "ADR severity or establish causality. Professional "
-                    "assessment is required."
+                    "Educational keyword matching only. Database categories "
+                    "do not establish individual patient severity or ADR "
+                    "causality. Professional assessment is required."
                 )
 
 elif page == "ADR Completeness Checker":
