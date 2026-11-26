@@ -152,52 +152,83 @@ if st.session_state.authenticated_user is None:
                         st.error("Registration failed.")
                         st.code(str(e))
 
-        elif auth_option == "Create Account":
+         elif auth_option == "Create Account":
 
-            name = st.text_input("Full Name", key="register_name")
-            email = st.text_input("Email Address", key="register_email")
+            st.subheader("Create Your PharmaSentry AI Account")
+
+            name = st.text_input(
+                "Full Name",
+                key="register_name"
+            )
+
+            email = st.text_input(
+                "Email Address",
+                key="register_email"
+            )
+
             password = st.text_input(
                 "Create Password",
                 type="password",
                 key="register_password"
             )
+
             confirm_password = st.text_input(
                 "Confirm Password",
                 type="password",
                 key="confirm_password"
             )
 
-            if st.button("Create Account", use_container_width=True):
+            if st.button(
+                "Create Account",
+                use_container_width=True,
+                key="register_button"
+            ):
 
-                if not name.strip() or not email.strip():
-                    st.warning("Please enter your name and email.")
+                if not name.strip():
+                    st.warning("Please enter your full name.")
+
+                elif not email.strip():
+                    st.warning("Please enter your email address.")
 
                 elif len(password) < 8:
-                    st.warning("Password must contain at least 8 characters.")
+                    st.warning(
+                        "Password must contain at least 8 characters."
+                    )
 
                 elif password != confirm_password:
                     st.error("Passwords do not match.")
 
                 else:
+
                     try:
+
                         response = supabase.auth.sign_up({
                             "email": email.strip(),
                             "password": password,
                             "options": {
-                                "data": {"full_name": name.strip()}
+                                "data": {
+                                    "full_name": name.strip()
+                                }
                             }
                         })
 
                         st.success(
-                            "Registration submitted! Check your email "
-                            "and click the verification link before signing in."
+                            "Registration request submitted successfully."
                         )
 
-                    except Exception:
-                        st.error(
-                            "Registration failed. Please check your "
-                            "email or try again later."
+                        st.info(
+                            "Please check your email and verify your "
+                            "account before signing in."
                         )
+
+                    except Exception as e:
+
+                        st.error("Registration failed.")
+
+                        st.error("Supabase error details:")
+
+                        st.code(str(e))
+
 
         elif auth_option == "Forgot Password":
 
