@@ -123,7 +123,7 @@ if st.session_state.authenticated_user is None:
             horizontal=True
         )
 
-        if auth_option == "Sign In":
+       if auth_option == "Sign In":
 
             email = st.text_input(
                 "Email Address",
@@ -152,7 +152,7 @@ if st.session_state.authenticated_user is None:
                         st.error("Registration failed.")
                         st.code(str(e))
 
-         elif auth_option == "Create Account":
+       elif auth_option == "Create Account":
 
             st.subheader("Create Your PharmaSentry AI Account")
 
@@ -229,8 +229,7 @@ if st.session_state.authenticated_user is None:
 
                         st.code(str(e))
 
-
-        elif auth_option == "Forgot Password":
+       elif auth_option == "Forgot Password":
 
             reset_email = st.text_input(
                 "Registered Email Address",
