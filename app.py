@@ -177,14 +177,12 @@ elif page == "Drug-ADR Safety Screening":
                     selected_record.get("Common_ADR", "")
                 )
 
-               serious_terms = split_terms(
-                selected_record.get("Serious_ADR", "")
-                )
+                                serious_terms = split_terms(selected_record.get("Serious_ADR", ""))
 
                 st.write("### ADR Database Check")
                 st.write("Common ADR entries:", common_terms)
                 st.write("Serious ADR entries:", serious_terms)
-                st.write("Reported reaction terms:", reported_terms)                    
+                st.write("Reported reaction terms:", reported_terms)                   
 
                     for term in reported:
                         possible_terms = [term] + aliases.get(term, [])
