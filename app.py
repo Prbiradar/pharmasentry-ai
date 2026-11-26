@@ -58,36 +58,83 @@ st.caption("Evidence-Grounded Pharmacovigilance and Medication Safety Assistant"
 if "authenticated_user" not in st.session_state:
     st.session_state.authenticated_user = None
 
-
 # LOGIN PAGE DESIGN
+
 st.markdown("""
 <style>
+
+/* Main background */
+.stApp {
+    background: linear-gradient(135deg, #071A35, #123E68, #087E8B);
+}
+
+/* Main headings */
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp p,
+.stApp label,
+.stApp .stMarkdown {
+    color: #FFFFFF !important;
+}
+
+/* Login title */
 .login-title {
     text-align: center;
-    color: #ffffff;
-    font-size: 34px;
+    color: #FFFFFF !important;
+    font-size: 36px;
     font-weight: 800;
     margin-bottom: 5px;
 }
+
+/* Subtitle */
 .login-subtitle {
     text-align: center;
-    color: #dbeafe;
+    color: #FFFFFF !important;
     font-size: 15px;
     margin-bottom: 25px;
 }
-.stApp {
-    background: linear-gradient(135deg, #071a35, #123e68, #087e8b);
+
+/* Input fields */
+.stTextInput input {
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+    border: 2px solid #38BDF8 !important;
+    border-radius: 8px !important;
 }
+
+/* Input labels */
 .stTextInput label {
-    color: white !important;
-    font-weight: 600 !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
 }
+
+/* Radio buttons */
 .stRadio label {
-    color: white !important;
+    color: #FFFFFF !important;
 }
+
+/* Buttons */
+.stButton button {
+    background-color: #00A6A6 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    min-height: 45px;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #071A35;
+}
+
+section[data-testid="stSidebar"] * {
+    color: #FFFFFF !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
-
 
 # ==========================================
 # LOGIN SCREEN
