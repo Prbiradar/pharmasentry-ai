@@ -31,7 +31,7 @@ def load_interactions():
     return pd.DataFrame()
 
 drugs = load_drugs()
-
+interactions = load_interactions()
 st.title("💊 PharmaSentry AI")
 st.caption("Evidence-Grounded Pharmacovigilance and Medication Safety Assistant")
 
