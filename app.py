@@ -19,6 +19,17 @@ def load_drugs():
 
     return pd.DataFrame()
 
+@st.cache_data
+def load_interactions():
+    file_path = "Interaction_Master.csv"
+
+    if os.path.exists(file_path):
+        df = pd.read_csv(file_path, encoding="utf-8-sig").fillna("")
+        df.columns = df.columns.str.strip()
+        return df
+
+    return pd.DataFrame()
+
 drugs = load_drugs()
 
 st.title("💊 PharmaSentry AI")
