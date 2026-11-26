@@ -148,11 +148,9 @@ if st.session_state.authenticated_user is None:
                     st.success("Login successful!")
                     st.rerun()
 
-                except Exception:
-                    st.error(
-                        "Login failed. Check your email, password "
-                        "and email verification."
-                    )
+                except Exception as e:
+                        st.error("Registration failed.")
+                        st.code(str(e))
 
         elif auth_option == "Create Account":
 
