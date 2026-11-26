@@ -296,21 +296,21 @@ elif page == "Drug Interaction Checker":
                     | set(dd_data["Item_B"].astype(str))
                 )
 
-                col1, col2 = st.columns(2)
+                drug1 = st.selectbox(
+    "🔍 Search First Medicine",
+    drug_options,
+    index=None,
+    placeholder="Type or select first medicine",
+    key="interaction_drug1"
+)
 
-                with col1:
-                    drug1 = st.selectbox(
-                        "Select First Medicine",
-                        drug_options,
-                        key="interaction_drug1"
-                    )
-
-                with col2:
-                    drug2 = st.selectbox(
-                        "Select Second Medicine",
-                        drug_options,
-                        key="interaction_drug2"
-                    )
+drug2 = st.selectbox(
+    "🔍 Search Second Medicine",
+    drug_options,
+    index=None,
+    placeholder="Type or select second medicine",
+    key="interaction_drug2"
+)
 
                 if st.button(
                     "Check Drug-Drug Interaction",
