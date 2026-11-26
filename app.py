@@ -292,12 +292,12 @@ elif page == "Drug Interaction Checker":
             else:
 
                 drug_options = sorted(
-                    set(dd_data["Item_A"].astype(str))
-                    | set(dd_data["Item_B"].astype(str))
+                    set(dd_data["Item_A"].astype(str).str.strip())
+                    | set(dd_data["Item_B"].astype(str).str.strip())
                 )
 
                 drug1 = st.selectbox(
-                    "🔍 Search First Medicine",
+                    "Search First Medicine",
                     drug_options,
                     index=None,
                     placeholder="Type or select first medicine",
@@ -305,7 +305,7 @@ elif page == "Drug Interaction Checker":
                 )
 
                 drug2 = st.selectbox(
-                    "🔍 Search Second Medicine",
+                    "Search Second Medicine",
                     drug_options,
                     index=None,
                     placeholder="Type or select second medicine",
@@ -317,8 +317,11 @@ elif page == "Drug Interaction Checker":
                     key="check_dd"
                 ):
 
+                    if not drug1 or not drug2:
 
-                    if drug1 == drug2:
+                        st.warning("Please select both medicines.")
+
+                    elif drug1 == drug2:
 
                         st.warning(
                             "Please select two different medicines."
@@ -328,13 +331,13 @@ elif page == "Drug Interaction Checker":
 
                         matches = dd_data[
                             (
-                                (dd_data["Item_A"] == drug1)
-                                & (dd_data["Item_B"] == drug2)
+                                (dd_data["Item_A"].astype(str).str.strip() == drug1)
+                                & (dd_data["Item_B"].astype(str).str.strip() == drug2)
                             )
                             |
                             (
-                                (dd_data["Item_A"] == drug2)
-                                & (dd_data["Item_B"] == drug1)
+                                (dd_data["Item_A"].astype(str).str.strip() == drug2)
+                                & (dd_data["Item_B"].astype(str).str.strip() == drug1)
                             )
                         ]
 
@@ -343,8 +346,7 @@ elif page == "Drug Interaction Checker":
                             for _, record in matches.iterrows():
 
                                 st.error(
-                                    "Documented Drug-Drug "
-                                    "Interaction Found"
+                                    "Documented Drug-Drug Interaction Found"
                                 )
 
                                 st.write(
@@ -406,15 +408,15 @@ elif page == "Drug Interaction Checker":
             else:
 
                 medicine_options = sorted(
-                    df_data["Item_A"].astype(str).unique()
+                    df_data["Item_A"].astype(str).str.strip().unique()
                 )
 
                 food_options = sorted(
-                    df_data["Item_B"].astype(str).unique()
+                    df_data["Item_B"].astype(str).str.strip().unique()
                 )
 
-                  medicine = st.selectbox(
-                    "🔍 Search Medicine",
+                medicine = st.selectbox(
+                    "Search Medicine",
                     medicine_options,
                     index=None,
                     placeholder="Type or select medicine",
@@ -422,83 +424,90 @@ elif page == "Drug Interaction Checker":
                 )
 
                 food = st.selectbox(
-                    "🔍 Search Food / Beverage",
+                    "Search Food / Beverage",
                     food_options,
                     index=None,
                     placeholder="Type or select food or beverage",
                     key="food_item"
                 )
 
-     if st.button(
+                if st.button(
                     "Check Drug-Food Interaction",
                     key="check_df"
                 ):
 
-                    matches = df_data[
-                        (df_data["Item_A"] == medicine)
-                        & (df_data["Item_B"] == food)
-                    ]
+                    if not medicine or not food:
 
-                    if not matches.empty:
-
-                        for _, record in matches.iterrows():
-
-                            st.warning(
-                                "Documented Drug-Food "
-                                "Interaction Found"
-                            )
-
-                            st.write(
-                                "**Interaction Level:**",
-                                record["Interaction_Level"]
-                            )
-
-                            st.write(
-                                "**Mechanism:**",
-                                record["Mechanism"]
-                            )
-
-                            st.write(
-                                "**Potential Effect:**",
-                                record["Potential_Effect"]
-                            )
-
-                            st.write(
-                                "**Management / Precautions:**",
-                                record["Management"]
-                            )
-
-                            st.write(
-                                "**Reference:**",
-                                record["Source"]
-                            )
-
-                            if record["Source_URL"]:
-                                st.markdown(
-                                    f"[View Source]({record['Source_URL']})"
-                                )
-
-                            st.write(
-                                "**Verification Status:**",
-                                record["Verification_Status"]
-                            )
+                        st.warning(
+                            "Please select both medicine and food."
+                        )
 
                     else:
 
-                        st.info(
-                            "No matching interaction record found "
-                            "in the current database. This does not "
-                            "rule out a possible interaction."
-                        )
+                        matches = df_data[
+                            (df_data["Item_A"].astype(str).str.strip() == medicine)
+                            & (df_data["Item_B"].astype(str).str.strip() == food)
+                        ]
+
+                        if not matches.empty:
+
+                            for _, record in matches.iterrows():
+
+                                st.warning(
+                                    "Documented Drug-Food Interaction Found"
+                                )
+
+                                st.write(
+                                    "**Interaction Level:**",
+                                    record["Interaction_Level"]
+                                )
+
+                                st.write(
+                                    "**Mechanism:**",
+                                    record["Mechanism"]
+                                )
+
+                                st.write(
+                                    "**Potential Effect:**",
+                                    record["Potential_Effect"]
+                                )
+
+                                st.write(
+                                    "**Management / Precautions:**",
+                                    record["Management"]
+                                )
+
+                                st.write(
+                                    "**Reference:**",
+                                    record["Source"]
+                                )
+
+                                if record["Source_URL"]:
+                                    st.markdown(
+                                        f"[View Source]({record['Source_URL']})"
+                                    )
+
+                                st.write(
+                                    "**Verification Status:**",
+                                    record["Verification_Status"]
+                                )
+
+                        else:
+
+                            st.info(
+                                "No matching interaction record found "
+                                "in the current database. This does not "
+                                "rule out a possible interaction."
+                            )
 
     st.divider()
 
     st.caption(
-        "Disclaimer: This is an educational interaction screening "
-        "prototype based on a limited database. It does not identify "
-        "all possible interactions or replace professional clinical "
-        "judgement. Consult a qualified pharmacist or prescriber "
-        "before making medication-related decisions."
+        "Educational interaction screening prototype based on a "
+        "limited database. It does not identify all possible "
+        "interactions or replace professional clinical judgement. "
+        "Consult a qualified pharmacist or prescriber before "
+        "making medication-related decisions."
     )
 
 elif page == "ADR Completeness Checker":
