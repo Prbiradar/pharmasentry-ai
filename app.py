@@ -413,19 +413,23 @@ elif page == "Drug Interaction Checker":
                     df_data["Item_B"].astype(str).unique()
                 )
 
-                medicine = st.selectbox(
-                    "Select Medicine",
+                  medicine = st.selectbox(
+                    "🔍 Search Medicine",
                     medicine_options,
+                    index=None,
+                    placeholder="Type or select medicine",
                     key="food_medicine"
                 )
 
                 food = st.selectbox(
-                    "Select Food / Beverage",
+                    "🔍 Search Food / Beverage",
                     food_options,
+                    index=None,
+                    placeholder="Type or select food or beverage",
                     key="food_item"
                 )
 
-                if st.button(
+     if st.button(
                     "Check Drug-Food Interaction",
                     key="check_df"
                 ):
