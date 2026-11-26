@@ -1166,9 +1166,10 @@ elif page == "About":
     Pharm.D | Assistant Professor | Pharmacy Educator
     | Pharmacovigilance and Medication Safety Researcher
     
-        st.markdown("**Institutional Affiliation:**")
-    st.markdown("Shantha College of Pharmacy, Peresandra,")
-    st.markdown("Chikkaballapura, Karnataka – 562104")
+            **Institutional Affiliation:**
+
+    Shantha College of Pharmacy, Peresandra,
+    Chikkaballapura, Karnataka – 562104
 
     The application is developed as an academic and educational
     initiative to promote awareness of pharmacovigilance,
