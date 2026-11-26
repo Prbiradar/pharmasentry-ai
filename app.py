@@ -50,235 +50,6 @@ st.caption("Evidence-Grounded Pharmacovigilance and Medication Safety Assistant"
 # PHARMASENTRY AI - USER AUTHENTICATION
 # ==========================================
 
-if "authenticated_user" not in st.session_state:
-    st.session_state.authenticated_user = None
-
-if st.session_state.authenticated_user is None:
-
-    st.markdown("""
-    <style>
-    .stApp {
-        background: linear-gradient(135deg, #07152e, #123b60, #087e8b);
-    }
-
-    .stApp, .stApp p, .stApp label,
-    .stApp h1, .stApp h2, .stApp h3,
-    .stApp span, .stApp .stMarkdown,
-    .stApp [data-testid="stWidgetLabel"] {
-        color: #ffffff !important;
-    }
-
-    .login-title {
-        text-align: center;
-        color: #ffffff !important;
-        font-size: 38px;
-        font-weight: bold;
-        padding-top: 25px;
-    }
-
-    .login-subtitle {
-        text-align: center;
-        color: #d5eeee !important;
-        font-size: 15px;
-    }
-
-    .stTextInput label,
-    .stRadio label,
-    .stRadio p {
-        color: #ffffff !important;
-    }
-
-    .stTextInput input {
-        color: #172b4d !important;
-        background-color: #ffffff !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.markdown(
-        '<div class="login-title">🛡️ PharmaSentry AI</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<div class="login-subtitle">'
-        'Evidence-Grounded Pharmacovigilance and Medication Safety Assistant'
-        '</div>',
-        unsafe_allow_html=True
-    )
-
-    st.write("")
-    st.write("")
-
-    _, login_col, _ = st.columns([1, 2, 1])
-
-    with login_col:
-
-        st.subheader("Welcome")
-        st.write("Sign in or create your individual account.")
-
-        auth_option = st.radio(
-            "Choose an option",
-            ["Sign In", "Create Account", "Forgot Password"],
-            horizontal=True
-        )
-
-       if auth_option == "Sign In":
-
-            email = st.text_input(
-                "Email Address",
-                key="login_email"
-            )
-
-            password = st.text_input(
-                "Password",
-                type="password",
-                key="login_password"
-            )
-
-            if st.button("Sign In", use_container_width=True):
-
-                try:
-                    response = supabase.auth.sign_in_with_password({
-                        "email": email.strip(),
-                        "password": password
-                    })
-
-                    st.session_state.authenticated_user = response.user
-                    st.success("Login successful!")
-                    st.rerun()
-
-                except Exception as e:
-                        st.error("Registration failed.")
-                        st.code(str(e))
-
-       elif auth_option == "Create Account":
-
-            st.subheader("Create Your PharmaSentry AI Account")
-
-            name = st.text_input(
-                "Full Name",
-                key="register_name"
-            )
-
-            email = st.text_input(
-                "Email Address",
-                key="register_email"
-            )
-
-            password = st.text_input(
-                "Create Password",
-                type="password",
-                key="register_password"
-            )
-
-            confirm_password = st.text_input(
-                "Confirm Password",
-                type="password",
-                key="confirm_password"
-            )
-
-            if st.button(
-                "Create Account",
-                use_container_width=True,
-                key="register_button"
-            ):
-
-                if not name.strip():
-                    st.warning("Please enter your full name.")
-
-                elif not email.strip():
-                    st.warning("Please enter your email address.")
-
-                elif len(password) < 8:
-                    st.warning(
-                        "Password must contain at least 8 characters."
-                    )
-
-                elif password != confirm_password:
-                    st.error("Passwords do not match.")
-
-                else:
-
-                    try:
-
-                        response = supabase.auth.sign_up({
-                            "email": email.strip(),
-                            "password": password,
-                            "options": {
-                                "data": {
-                                    "full_name": name.strip()
-                                }
-                            }
-                        })
-
-                        st.success(
-                            "Registration request submitted successfully."
-                        )
-
-                        st.info(
-                            "Please check your email and verify your "
-                            "account before signing in."
-                        )
-
-                    except Exception as e:
-
-                        st.error("Registration failed.")
-
-                        st.error("Supabase error details:")
-
-                        st.code(str(e))
-
-       elif auth_option == "Forgot Password":
-
-            reset_email = st.text_input(
-                "Registered Email Address",
-                key="reset_email"
-            )
-
-            if st.button("Send Password Reset Link",
-                         use_container_width=True):
-
-                if not reset_email.strip():
-                    st.warning("Please enter your registered email.")
-
-                else:
-                    try:
-                        supabase.auth.reset_password_for_email(
-                            reset_email.strip()
-                        )
-
-                        st.success(
-                            "If the account exists, a password reset "
-                            "email will be sent."
-                        )
-
-                    except Exception:
-                        st.error("Unable to send reset email. Try again later.")
-
-    st.markdown(
-        "<center>Developed by Dr. Praveen R Biradar</center>",
-        unsafe_allow_html=True
-    )
-
-    st.stop()
-
-else:
-
-    st.sidebar.success(
-        "Signed in: " +
-        str(st.session_state.authenticated_user.email)
-    )
-
-    if st.sidebar.button("Logout"):
-
-        try:
-            supabase.auth.sign_out()
-        except Exception:
-            pass
-
-        st.session_state.authenticated_user = None
-        st.rerun()
 
 # ==========================================
 # PHARMASENTRY AI - USER AUTHENTICATION
@@ -287,27 +58,42 @@ else:
 if "authenticated_user" not in st.session_state:
     st.session_state.authenticated_user = None
 
-if st.session_state.authenticated_user is None:
 
-    st.markdown("""
-    <style>
-    .stApp {
-        background: linear-gradient(135deg, #07152e, #123b60, #087e8b);
-    }
-    .login-title {
-        text-align: center;
-        color: white;
-        font-size: 38px;
-        font-weight: bold;
-        padding-top: 25px;
-    }
-    .login-subtitle {
-        text-align: center;
-        color: #d5eeee;
-        font-size: 15px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+# LOGIN PAGE DESIGN
+st.markdown("""
+<style>
+.login-title {
+    text-align: center;
+    color: #ffffff;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+.login-subtitle {
+    text-align: center;
+    color: #dbeafe;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+.stApp {
+    background: linear-gradient(135deg, #071a35, #123e68, #087e8b);
+}
+.stTextInput label {
+    color: white !important;
+    font-weight: 600 !important;
+}
+.stRadio label {
+    color: white !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
+# ==========================================
+# LOGIN SCREEN
+# ==========================================
+
+if st.session_state.authenticated_user is None:
 
     st.markdown(
         '<div class="login-title">🛡️ PharmaSentry AI</div>',
@@ -316,138 +102,199 @@ if st.session_state.authenticated_user is None:
 
     st.markdown(
         '<div class="login-subtitle">'
-        'Evidence-Grounded Pharmacovigilance and Medication Safety Assistant'
+        'Intelligent Pharmacovigilance & Drug Safety Platform'
         '</div>',
         unsafe_allow_html=True
     )
 
-    st.write("")
-    st.write("")
+    st.markdown("---")
 
-    _, login_col, _ = st.columns([1, 2, 1])
+    auth_option = st.radio(
+        "Choose an option",
+        ["Sign In", "Create Account", "Forgot Password"],
+        horizontal=True,
+        key="authentication_option"
+    )
 
-    with login_col:
+    # ======================================
+    # SIGN IN
+    # ======================================
 
-        st.subheader("Welcome")
-        st.write("Sign in or create your individual account.")
+    if auth_option == "Sign In":
 
-        auth_option = st.radio(
-            "Choose an option",
-            ["Sign In", "Create Account", "Forgot Password"],
-            horizontal=True
+        st.subheader("Welcome Back")
+
+        email = st.text_input(
+            "Email Address",
+            key="login_email"
         )
 
-        if auth_option == "Sign In":
+        password = st.text_input(
+            "Password",
+            type="password",
+            key="login_password"
+        )
 
-            email = st.text_input(
-                "Email Address",
-                key="login_email"
-            )
+        if st.button(
+            "Sign In",
+            use_container_width=True,
+            key="login_button"
+        ):
 
-            password = st.text_input(
-                "Password",
-                type="password",
-                key="login_password"
-            )
+            if not email.strip() or not password:
+                st.warning("Please enter your email and password.")
 
-            if st.button("Sign In", use_container_width=True):
-
+            else:
                 try:
                     response = supabase.auth.sign_in_with_password({
                         "email": email.strip(),
                         "password": password
                     })
 
-                    st.session_state.authenticated_user = response.user
-                    st.success("Login successful!")
-                    st.rerun()
+                    if response.user is not None:
+                        st.session_state.authenticated_user = response.user
+                        st.success("Login successful!")
+                        st.rerun()
 
-                except Exception:
-                    st.error(
-                        "Login failed. Check your email, password "
-                        "and email verification."
+                    else:
+                        st.error("Unable to sign in. Please try again.")
+
+                except Exception as e:
+                    st.error("Sign in failed.")
+                    st.code(str(e))
+
+    # ======================================
+    # CREATE ACCOUNT
+    # ======================================
+
+    elif auth_option == "Create Account":
+
+        st.subheader("Create Your Account")
+
+        name = st.text_input(
+            "Full Name",
+            key="register_name"
+        )
+
+        email = st.text_input(
+            "Email Address",
+            key="register_email"
+        )
+
+        password = st.text_input(
+            "Create Password",
+            type="password",
+            key="register_password"
+        )
+
+        confirm_password = st.text_input(
+            "Confirm Password",
+            type="password",
+            key="confirm_password"
+        )
+
+        if st.button(
+            "Create Account",
+            use_container_width=True,
+            key="register_button"
+        ):
+
+            if not name.strip():
+                st.warning("Please enter your full name.")
+
+            elif not email.strip():
+                st.warning("Please enter your email address.")
+
+            elif len(password) < 8:
+                st.warning(
+                    "Password must contain at least 8 characters."
+                )
+
+            elif password != confirm_password:
+                st.error("Passwords do not match.")
+
+            else:
+                try:
+                    response = supabase.auth.sign_up({
+                        "email": email.strip(),
+                        "password": password,
+                        "options": {
+                            "data": {
+                                "full_name": name.strip()
+                            }
+                        }
+                    })
+
+                    st.success(
+                        "Registration request submitted successfully."
                     )
 
-        elif auth_option == "Create Account":
+                    st.info(
+                        "Please check your email and verify your "
+                        "account before signing in."
+                    )
 
-            name = st.text_input("Full Name", key="register_name")
-            email = st.text_input("Email Address", key="register_email")
-            password = st.text_input(
-                "Create Password",
-                type="password",
-                key="register_password"
-            )
-            confirm_password = st.text_input(
-                "Confirm Password",
-                type="password",
-                key="confirm_password"
-            )
+                except Exception as e:
+                    st.error("Registration failed.")
+                    st.error("Supabase error details:")
+                    st.code(str(e))
 
-            if st.button("Create Account", use_container_width=True):
+    # ======================================
+    # FORGOT PASSWORD
+    # ======================================
 
-                if not name.strip() or not email.strip():
-                    st.warning("Please enter your name and email.")
+    elif auth_option == "Forgot Password":
 
-                elif len(password) < 8:
-                    st.warning("Password must contain at least 8 characters.")
+        st.subheader("Reset Your Password")
 
-                elif password != confirm_password:
-                    st.error("Passwords do not match.")
+        reset_email = st.text_input(
+            "Registered Email Address",
+            key="reset_email"
+        )
 
-                else:
-                    try:
-                        response = supabase.auth.sign_up({
-                            "email": email.strip(),
-                            "password": password,
-                            "options": {
-                                "data": {"full_name": name.strip()}
-                            }
-                        })
+        if st.button(
+            "Send Password Reset Email",
+            use_container_width=True,
+            key="reset_button"
+        ):
 
-                        st.success(
-                            "Registration submitted! Check your email "
-                            "and click the verification link before signing in."
-                        )
+            if not reset_email.strip():
+                st.warning("Please enter your registered email address.")
 
-                    except Exception:
-                        st.error(
-                            "Registration failed. Please check your "
-                            "email or try again later."
-                        )
+            else:
+                try:
+                    supabase.auth.reset_password_for_email(
+                        reset_email.strip()
+                    )
 
-        elif auth_option == "Forgot Password":
+                    st.success(
+                        "Password reset request submitted."
+                    )
 
-            reset_email = st.text_input(
-                "Registered Email Address",
-                key="reset_email"
-            )
+                    st.info(
+                        "If the email is registered, check your inbox "
+                        "for password reset instructions."
+                    )
 
-            if st.button("Send Password Reset Link",
-                         use_container_width=True):
+                except Exception as e:
+                    st.error("Password reset request failed.")
+                    st.code(str(e))
 
-                if not reset_email.strip():
-                    st.warning("Please enter your registered email.")
-
-                else:
-                    try:
-                        supabase.auth.reset_password_for_email(
-                            reset_email.strip()
-                        )
-
-                        st.success(
-                            "If the account exists, a password reset "
-                            "email will be sent."
-                        )
-
-                    except Exception:
-                        st.error("Unable to send reset email. Try again later.")
+    st.markdown("---")
 
     st.markdown(
-        "<center>Developed by Dr. Praveen R Biradar</center>",
+        "<center>Developed by <b>Dr. Praveen R Biradar</b>"
+        "<br>PharmaSentry AI | Educational Pharmacovigilance Platform"
+        "</center>",
         unsafe_allow_html=True
     )
 
     st.stop()
+
+
+# ==========================================
+# LOGGED-IN USER SECTION
+# ==========================================
 
 else:
 
@@ -456,7 +303,7 @@ else:
         str(st.session_state.authenticated_user.email)
     )
 
-    if st.sidebar.button("Logout"):
+    if st.sidebar.button("Logout", use_container_width=True):
 
         try:
             supabase.auth.sign_out()
@@ -466,9 +313,12 @@ else:
         st.session_state.authenticated_user = None
         st.rerun()
 
+
 # ==========================================
-# END OF AUTHENTICATION
+# EXISTING APP NAVIGATION STARTS BELOW
 # ==========================================
+
+          
 st.sidebar.title("Navigation")
 
 page = st.sidebar.radio(
