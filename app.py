@@ -95,10 +95,10 @@ if st.session_state.authenticated_user is None:
     </style>
     """, unsafe_allow_html=True)
 
- st.markdown(
+     st.markdown(
         '<div class="login-title">🛡️ PharmaSentry AI</div>',
         unsafe_allow_html=True
-    )
+     )
 
     st.markdown(
         '<div class="login-subtitle">'
