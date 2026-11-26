@@ -177,8 +177,8 @@ elif page == "Drug-ADR Safety Screening":
                     selected_record.get("Common_ADR", "")
                 )
 
-                    serious_terms = split_terms(
-                    selected_record.get("Serious_ADR", "")
+               serious_terms = split_terms(
+                selected_record.get("Serious_ADR", "")
                 )
 
                 st.write("### ADR Database Check")
