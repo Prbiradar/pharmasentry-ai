@@ -179,7 +179,11 @@ elif page == "Drug-ADR Safety Screening":
                 serious_terms = split_terms(
                     selected_record.get("Serious_ADR", "")
                 )
-
+                
+                st.write("### ADR Database Check")
+                st.write("Common ADR entries:", common_terms)
+                st.write("Serious ADR entries:", serious_terms)
+                st.write("Reported reaction terms:", reported_terms)
                 def find_matches(reported, database_terms):
                     matches = []
 
