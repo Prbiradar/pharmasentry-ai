@@ -784,14 +784,45 @@ elif page == "Drug Interaction Checker":
 
                                 severity = str(record["Interaction_Level"]).strip().lower()
 
+                                
                                 if severity == "major":
-                                    st.error("MAJOR INTERACTION")
+                                    severity_color = "#D32F2F"
+                                    severity_text = "MAJOR INTERACTION"
 
                                 elif severity == "moderate":
-                                    st.warning("MODERATE INTERACTION")
+                                    severity_color = "#F57C00"
+                                    severity_text = "MODERATE INTERACTION"
 
                                 elif severity == "minor":
-                                    st.success("MINOR INTERACTION")
+                                    severity_color = "#2E7D32"
+                                    severity_text = "MINOR INTERACTION"
+
+                                else:
+                                    severity_color = "#455A64"
+                                    severity_text = str(record["Interaction_Level"]).upper()
+
+                                st.markdown(
+                                    f"""
+                                    <div style="
+                                        background-color: {severity_color};
+                                        color: #FFFFFF;
+                                        padding: 14px 12px;
+                                        border-radius: 8px;
+                                        font-size: 20px;
+                                        font-weight: 800;
+                                        text-align: center;
+                                        width: 100%;
+                                        box-sizing: border-box;
+                                        white-space: normal;
+                                        overflow-wrap: anywhere;
+                                        line-height: 1.5;
+                                    ">
+                                        {severity_text}
+                                    </div>
+                                    """,
+                                    unsafe_allow_html=True
+                                )
+
 
                                 else:
                                     st.info(
