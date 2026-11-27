@@ -2,9 +2,10 @@ import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
 import os
-from supabase import create_client, ClientOptions
+from supabase import create_client
 
 # SUPABASE AUTHENTICATION CONNECTION
+
 SUPABASE_URL = st.secrets["SUPABASE_URL"]
 SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
 
@@ -12,14 +13,6 @@ if "supabase_client" not in st.session_state:
     st.session_state.supabase_client = create_client(
         SUPABASE_URL,
         SUPABASE_KEY
-    )
-
-supabase = st.session_state.supabase_client
-        SUPABASE_URL,
-        SUPABASE_KEY,
-        auth=AuthClientOptions(
-            flow_type="pkce"
-        )
     )
 
 supabase = st.session_state.supabase_client
