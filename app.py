@@ -764,8 +764,21 @@ elif page == "Drug Interaction Checker":
 
                             for _, record in matches.iterrows():
 
-                                st.error(
-                                    "Documented Drug-Drug Interaction Found"
+                                st.markdown(
+    """
+    <div style="
+        background-color: #17365D;
+        color: white;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    ">
+        Documented Drug-Drug Interaction Found
+    </div>
+    """,
+    unsafe_allow_html=True
                                 )
 
                                 st.write(
