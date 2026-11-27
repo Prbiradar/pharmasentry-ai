@@ -407,9 +407,21 @@ if st.session_state.authenticated_user is None:
 
 else:
 
-    st.sidebar.success(
-        "Signed in: " +
-        str(st.session_state.authenticated_user.email)
+    st.sidebar.markdown(
+    f"""
+    <div style="
+        color: white;
+        background-color: #17324d;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #48c6cf;
+        font-weight: 600;
+        overflow-wrap: anywhere;">
+        Signed in:<br>
+        {st.session_state.authenticated_user.email}
+    </div>
+    """,
+    unsafe_allow_html=True
     )
 
     if st.sidebar.button("Logout", use_container_width=True):
@@ -458,7 +470,21 @@ if page == "Home":
     st.write("4.💊 Drug–ADR Safety Screening")
     st.write("5. Research Dashboard")
 
-    st.info("This is an educational prototype, not a substitute for professional clinical judgement.")
+    st.markdown(
+    """
+    <div style="
+        color: white;
+        background-color: #17324d;
+        padding: 12px 16px;
+        border-radius: 10px;
+        border: 1px solid #48c6cf;
+        font-weight: 500;
+        text-align: center;">
+        This is an educational prototype, not a substitute for professional clinical judgement.
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
 
 elif page == "Drug Safety Assistant":
 
