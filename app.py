@@ -162,6 +162,57 @@ if recovery_code and not st.session_state.recovery_mode:
         st.query_params.clear()
 
 # ==========================================
+# SET NEW PASSWORD SCREEN
+# ==========================================
+
+if st.session_state.recovery_mode:
+
+    st.title("🔐 Reset Your Password")
+
+    st.write("Create a new password for your PharmaSentry AI account.")
+
+    new_password = st.text_input(
+        "New Password",
+        type="password",
+        key="new_password"
+    )
+
+    confirm_new_password = st.text_input(
+        "Confirm New Password",
+        type="password",
+        key="confirm_new_password"
+    )
+
+    if st.button("Update Password", use_container_width=True):
+
+        if len(new_password) < 8:
+            st.warning("Password must contain at least 8 characters.")
+
+        elif new_password != confirm_new_password:
+            st.error("Passwords do not match.")
+
+        else:
+            try:
+                supabase.auth.update_user({
+                    "password": new_password
+                })
+
+                st.success("Your password has been updated successfully.")
+
+                st.session_state.recovery_mode = False
+                st.session_state.authenticated_user = None
+
+                supabase.auth.sign_out()
+
+                st.rerun()
+
+            except Exception as e:
+                st.error("Password update failed.")
+                st.code(str(e))
+
+    st.stop()
+
+# ==========================================
 # LOGIN SCREEN
 # ==========================================
 
