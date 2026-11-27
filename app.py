@@ -781,29 +781,23 @@ elif page == "Drug Interaction Checker":
     unsafe_allow_html=True
                                 )
 
-                                                                severity = str(record["Interaction_Level"]).strip().lower()
+                                severity = str(record["Interaction_Level"]).strip().lower()
 
                                 if severity == "major":
                                     st.markdown(
-                                        '<div style="background-color:#D32F2F;color:white;'
-                                        'padding:10px;border-radius:8px;font-weight:bold;">'
-                                        'MAJOR INTERACTION</div>',
+                                        '<div style="background-color:#D32F2F;color:white;padding:10px;border-radius:8px;font-weight:bold;">MAJOR INTERACTION</div>',
                                         unsafe_allow_html=True
                                     )
 
                                 elif severity == "moderate":
                                     st.markdown(
-                                        '<div style="background-color:#F57C00;color:white;'
-                                        'padding:10px;border-radius:8px;font-weight:bold;">'
-                                        'MODERATE INTERACTION</div>',
+                                        '<div style="background-color:#F57C00;color:white;padding:10px;border-radius:8px;font-weight:bold;">MODERATE INTERACTION</div>',
                                         unsafe_allow_html=True
                                     )
 
                                 elif severity == "minor":
                                     st.markdown(
-                                        '<div style="background-color:#2E7D32;color:white;'
-                                        'padding:10px;border-radius:8px;font-weight:bold;">'
-                                        'MINOR INTERACTION</div>',
+                                        '<div style="background-color:#2E7D32;color:white;padding:10px;border-radius:8px;font-weight:bold;">MINOR INTERACTION</div>',
                                         unsafe_allow_html=True
                                     )
 
@@ -811,30 +805,6 @@ elif page == "Drug Interaction Checker":
                                     st.warning(
                                         "Interaction Level: " + str(record["Interaction_Level"])
                                     )
-
-if severity == "major":
-    st.markdown(
-        '<div style="background-color:#D32F2F;color:white;'
-        'padding:10px;border-radius:8px;font-weight:bold;">'
-        'MAJOR INTERACTION</div>',
-        unsafe_allow_html=True
-    )
-
-elif severity == "moderate":
-    st.markdown(
-        '<div style="background-color:#F57C00;color:white;'
-        'padding:10px;border-radius:8px;font-weight:bold;">'
-        'MODERATE INTERACTION</div>',
-        unsafe_allow_html=True
-    )
-
-elif severity == "minor":
-    st.markdown(
-        '<div style="background-color:#2E7D32;color:white;'
-        'padding:10px;border-radius:8px;font-weight:bold;">'
-        'MINOR INTERACTION</div>',
-        unsafe_allow_html=True
-    )
 
 else:
     st.warning(
