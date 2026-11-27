@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
 import os
-from supabase import create_client, AuthClientOptions
+from supabase import create_client, ClientOptions
 
 # SUPABASE AUTHENTICATION CONNECTION
 SUPABASE_URL = st.secrets["SUPABASE_URL"]
