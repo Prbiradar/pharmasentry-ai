@@ -311,8 +311,11 @@ if st.session_state.authenticated_user is None:
             else:
                 try:
                     supabase.auth.reset_password_for_email(
-                        reset_email.strip()
-                    )
+    reset_email.strip(),
+    {
+        "redirect_to": "https://pharmasentry-ai-mszngbkzwmwjexv3uesynv.streamlit.app/"
+    }
+)
 
                     st.success(
                         "Password reset request submitted."
