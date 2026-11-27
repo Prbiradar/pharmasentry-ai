@@ -372,41 +372,21 @@ if st.session_state.authenticated_user is None:
 
         st.subheader("Reset Your Password")
 
-        reset_email = st.text_input(
-            "Registered Email Address",
-            key="reset_email"
+        st.write(
+            "Open the secure PharmaSentry AI recovery page "
+            "to request a password reset email and create a new password."
         )
 
-        if st.button(
-            "Send Password Reset Email",
-            use_container_width=True,
-            key="reset_button"
-        ):
+        st.link_button(
+            "Open Secure Password Recovery",
+            "https://prbiradar.github.io/pharmasentry-ai/reset-password.html",
+            use_container_width=True
+        )
 
-            if not reset_email.strip():
-                st.warning("Please enter your registered email address.")
-
-            else:
-                try:
-                    supabase.auth.reset_password_for_email(
-    reset_email.strip(),
-    {
-        "redirect_to": "https://pharmasentry-ai-mszngbkzwmwjexv3uesynv.streamlit.app/"
-    }
-)
-
-                    st.success(
-                        "Password reset request submitted."
-                    )
-
-                    st.info(
-                        "If the email is registered, check your inbox "
-                        "for password reset instructions."
-                    )
-
-                except Exception as e:
-                    st.error("Password reset request failed.")
-                    st.code(str(e))
+        st.info(
+            "Enter your registered email address on the recovery page. "
+            "Check your inbox for the password reset link."
+        )
 
     st.markdown("---")
 
@@ -418,6 +398,7 @@ if st.session_state.authenticated_user is None:
     )
 
     st.stop()
+
 
 
 # ==========================================
