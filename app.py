@@ -138,6 +138,35 @@ section[data-testid="stSidebar"] * {
 """, unsafe_allow_html=True)
 
 # ==========================================
+# PASSWORD RECOVERY LINK HANDLING
+# ==========================================
+
+if "recovery_mode" not in st.session_state:
+    st.session_state.recovery_mode = False
+
+if "recovery_error" not in st.session_state:
+    st.session_state.recovery_error = None
+
+recovery_code = st.query_params.get("code")
+
+if recovery_code and not st.session_state.recovery_mode:
+
+    try:
+        recovery_response = supabase.auth.exchange_code_for_session(
+            {"auth_code": recovery_code}
+        )
+
+        st.session_state.authenticated_user = recovery_response.user
+        st.session_state.recovery_mode = True
+
+        st.query_params.clear()
+        st.rerun()
+
+    except Exception as e:
+        st.session_state.recovery_error = str(e)
+        st.query_params.clear()
+
+# ==========================================
 # LOGIN SCREEN
 # ==========================================
 
