@@ -51,11 +51,6 @@ st.caption("Evidence-Grounded Pharmacovigilance and Medication Safety Assistant"
 # PHARMASENTRY AI - USER AUTHENTICATION
 # ==========================================
 
-
-# ==========================================
-# PHARMASENTRY AI - USER AUTHENTICATION
-# ==========================================
-
 if "authenticated_user" not in st.session_state:
     st.session_state.authenticated_user = None
 
