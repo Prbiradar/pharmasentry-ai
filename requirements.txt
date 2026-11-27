@@ -1,5 +1,3 @@
 streamlit
 pandas
-streamlit
-pandas
-supabase
+supabase==2.34.0
