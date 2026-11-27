@@ -760,8 +760,7 @@ elif page == "Drug Interaction Checker":
                             )
                         ]
 
-                
-                        if not matches.empty:
+                            if not matches.empty:
 
                             for _, record in matches.iterrows():
 
@@ -784,19 +783,15 @@ elif page == "Drug Interaction Checker":
 
                                 severity = str(record["Interaction_Level"]).strip().lower()
 
-                                
                                 if severity == "major":
                                     severity_color = "#D32F2F"
                                     severity_text = "MAJOR INTERACTION"
-
                                 elif severity == "moderate":
                                     severity_color = "#F57C00"
                                     severity_text = "MODERATE INTERACTION"
-
                                 elif severity == "minor":
                                     severity_color = "#2E7D32"
                                     severity_text = "MINOR INTERACTION"
-
                                 else:
                                     severity_color = "#455A64"
                                     severity_text = str(record["Interaction_Level"]).upper()
@@ -814,7 +809,6 @@ elif page == "Drug Interaction Checker":
                                         width: 100%;
                                         box-sizing: border-box;
                                         white-space: normal;
-                                        overflow-wrap: anywhere;
                                         line-height: 1.5;
                                     ">
                                         {severity_text}
@@ -822,13 +816,6 @@ elif page == "Drug Interaction Checker":
                                     """,
                                     unsafe_allow_html=True
                                 )
-
-
-                                else:
-                                    st.info(
-                                        "Interaction Level: " +
-                                        str(record["Interaction_Level"])
-                                    )
 
                                 st.write(
                                     "**Mechanism:**",
