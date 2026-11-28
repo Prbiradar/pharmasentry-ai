@@ -670,7 +670,6 @@ elif page == "Drug-ADR Safety Screening":
                     "or establish ADR causality. Professional review is required."
                 )
 
-
 elif page == "Drug Interaction Checker":
 
     st.header("💊 Drug Interaction Checker")
