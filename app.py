@@ -760,6 +760,8 @@ elif page == "Drug Interaction Checker":
 
                             if severity == "major":
 
+    if severity == "major":
+
     st.markdown(
         """
         <div style="
@@ -775,7 +777,6 @@ elif page == "Drug Interaction Checker":
         """,
         unsafe_allow_html=True
     )
-
 elif severity == "moderate":
 
     st.markdown(
