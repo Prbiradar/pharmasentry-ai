@@ -869,7 +869,7 @@ elif page == "Drug Interaction Checker":
                             & (df_data["Item_B"].astype(str).str.strip() == food)
                         ]
 
-                        if not matches.empty:
+                                                if not matches.empty:
 
                             for _, record in matches.iterrows():
 
@@ -919,7 +919,6 @@ elif page == "Drug Interaction Checker":
                                 "in the current database. This does not "
                                 "rule out a possible interaction."
                             )
-
     st.divider()
 
     st.caption(
