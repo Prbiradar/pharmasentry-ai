@@ -539,20 +539,44 @@ if page == "Home":
 
     st.markdown("---")
 
-    st.header("🧠 Pharmacy Learning Spotlight")
+    st.markdown(
+        """
+        <div style="
+            background:#17324d;
+            padding:22px;
+            border-radius:14px;
+            border:1px solid #48c6cf;
+            margin-top:15px;
+            margin-bottom:15px;
+        ">
+            <h2 style="color:#7DD3FC;">
+                🧠 Pharmacy Learning Spotlight
+            </h2>
 
-    st.info(
-        "Today's question: Why is pharmacovigilance important "
-        "even after a medicine receives regulatory approval?"
+            <h4 style="color:white;">
+                Today's Learning Question
+            </h4>
+
+            <p style="color:white;font-size:16px;">
+                Why is pharmacovigilance important even after a
+                medicine receives regulatory approval?
+            </p>
+
+            <hr>
+
+            <h4 style="color:#7DD3FC;">
+                💡 Remember
+            </h4>
+
+            <p style="color:white;font-size:15px;">
+                Continuous monitoring helps identify previously
+                unrecognized adverse drug reactions, evaluate
+                medicine safety and improve patient protection.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
     )
-
-    st.success(
-        "Remember: Continuous monitoring helps identify "
-        "previously unrecognized adverse drug reactions, "
-        "evaluate medicine safety and improve patient protection."
-    )
-
-    st.markdown("---")
 
     st.markdown(
         """
@@ -582,7 +606,6 @@ if page == "Home":
         "This is an educational prototype, not a substitute "
         "for professional clinical judgement."
     )
-
 
 elif page == "Drug Safety Assistant":
 
