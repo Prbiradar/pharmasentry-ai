@@ -984,8 +984,7 @@ elif page == "Drug Interaction Checker":
     st.header("💊 Drug Interaction Checker")
 
     st.write(
-        "Screen medicines for documented Drug-Drug "
-        "and Drug-Food interactions."
+        "Screen medicines for documented Drug-Drug and Drug-Food interactions."
     )
 
     if interactions.empty:
@@ -1000,8 +999,13 @@ elif page == "Drug Interaction Checker":
         interaction_type = st.radio(
             "Select Interaction Type",
             ["Drug-Drug", "Drug-Food"],
-            horizontal=True
+            horizontal=True,
+            key="interaction_type"
         )
+
+        # ==========================================
+        # DRUG-DRUG INTERACTION CHECKER
+        # ==========================================
 
         if interaction_type == "Drug-Drug":
 
@@ -1019,8 +1023,13 @@ elif page == "Drug Interaction Checker":
             else:
 
                 drug_options = sorted(
-                    set(dd_data["Item_A"].dropna().astype(str).str.strip())
-                    | set(dd_data["Item_B"].dropna().astype(str).str.strip())
+                    set(
+                        dd_data["Item_A"].dropna().astype(str).str.strip()
+                    )
+                    |
+                    set(
+                        dd_data["Item_B"].dropna().astype(str).str.strip()
+                    )
                 )
 
                 drug1 = st.selectbox(
@@ -1039,58 +1048,126 @@ elif page == "Drug Interaction Checker":
                     key="drug2"
                 )
 
-                if st.button("Check Drug-Drug Interaction", key="check_dd"):
+                if st.button(
+                    "Check Drug-Drug Interaction",
+                    key="check_dd"
+                ):
 
                     if not drug1 or not drug2:
 
-                        st.warning("Please select both medicines.")
+                        st.warning(
+                            "Please select both medicines."
+                        )
 
                     elif drug1 == drug2:
 
-                        st.warning("Please select two different medicines.")
+                        st.warning(
+                            "Please select two different medicines."
+                        )
 
                     else:
 
                         matches = dd_data[
                             (
-                                (dd_data["Item_A"].astype(str).str.strip() == drug1)
-                                & (dd_data["Item_B"].astype(str).str.strip() == drug2)
+                                (
+                                    dd_data["Item_A"].astype(str).str.strip()
+                                    == drug1
+                                )
+                                &
+                                (
+                                    dd_data["Item_B"].astype(str).str.strip()
+                                    == drug2
+                                )
                             )
                             |
                             (
-                                (dd_data["Item_A"].astype(str).str.strip() == drug2)
-                                & (dd_data["Item_B"].astype(str).str.strip() == drug1)
+                                (
+                                    dd_data["Item_A"].astype(str).str.strip()
+                                    == drug2
+                                )
+                                &
+                                (
+                                    dd_data["Item_B"].astype(str).str.strip()
+                                    == drug1
+                                )
                             )
                         ]
 
-                        if not matches.empty:
-
-                            for _, record in matches.iterrows():
-
-                                severity = str(record["Interaction_Level"]).strip().lower()
-
-                                if severity == "major":
-                                    st.error("MAJOR DRUG-DRUG INTERACTION")
-                                elif severity == "moderate":
-                                    st.warning("MODERATE DRUG-DRUG INTERACTION")
-                                elif severity == "minor":
-                                    st.info("MINOR DRUG-DRUG INTERACTION")
-                                else:
-                                    st.info("DRUG-DRUG INTERACTION")
-
-                                st.write("**Interaction Level:**", record["Interaction_Level"])
-                                st.write("**Mechanism:**", record["Mechanism"])
-                                st.write("**Potential Effect:**", record["Potential_Effect"])
-                                st.write("**Management:**", record["Management"])
-                                st.write("**Source:**", record["Source"])
-                                st.write("**Verification Status:**", record["Verification_Status"])
-
-                        else:
+                        if matches.empty:
 
                             st.info(
                                 "No matching Drug-Drug interaction found "
-                                "in the current database."
+                                "in the current database. This does not "
+                                "rule out a possible interaction."
                             )
+
+                        else:
+
+                            for _, record in matches.iterrows():
+
+                                severity = str(
+                                    record["Interaction_Level"]
+                                ).strip().lower()
+
+                                if severity == "major":
+
+                                    st.error(
+                                        "MAJOR DRUG-DRUG INTERACTION"
+                                    )
+
+                                elif severity == "moderate":
+
+                                    st.warning(
+                                        "MODERATE DRUG-DRUG INTERACTION"
+                                    )
+
+                                elif severity == "minor":
+
+                                    st.info(
+                                        "MINOR DRUG-DRUG INTERACTION"
+                                    )
+
+                                else:
+
+                                    st.info(
+                                        "DRUG-DRUG INTERACTION"
+                                    )
+
+                                st.write(
+                                    "Interaction Level:",
+                                    record["Interaction_Level"]
+                                )
+
+                                st.write(
+                                    "Mechanism:",
+                                    record["Mechanism"]
+                                )
+
+                                st.write(
+                                    "Potential Effect:",
+                                    record["Potential_Effect"]
+                                )
+
+                                st.write(
+                                    "Management:",
+                                    record["Management"]
+                                )
+
+                                st.write(
+                                    "Source:",
+                                    record["Source"]
+                                )
+
+                                st.write(
+                                    "Verification Status:",
+                                    record["Verification_Status"]
+                                )
+
+                                st.divider()
+
+        # ==========================================
+        # DRUG-FOOD INTERACTION CHECKER
+        # ==========================================
 
         elif interaction_type == "Drug-Food":
 
@@ -1103,7 +1180,9 @@ elif page == "Drug Interaction Checker":
 
             if df_data.empty:
 
-                st.warning("No Drug-Food records available.")
+                st.warning(
+                    "No Drug-Food records available."
+                )
 
             else:
 
@@ -1131,48 +1210,102 @@ elif page == "Drug Interaction Checker":
                     key="food_item"
                 )
 
-                if st.button("Check Drug-Food Interaction", key="check_df"):
+                if st.button(
+                    "Check Drug-Food Interaction",
+                    key="check_df"
+                ):
 
                     if not medicine or not food:
 
-                        st.warning("Please select both medicine and food.")
+                        st.warning(
+                            "Please select both medicine and food."
+                        )
 
                     else:
 
                         matches = df_data[
-                            (df_data["Item_A"].astype(str).str.strip() == medicine)
-                            & (df_data["Item_B"].astype(str).str.strip() == food)
+                            (
+                                df_data["Item_A"].astype(str).str.strip()
+                                == medicine
+                            )
+                            &
+                            (
+                                df_data["Item_B"].astype(str).str.strip()
+                                == food
+                            )
                         ]
 
-                        if not matches.empty:
+                        if matches.empty:
 
-                            for _, record in matches.iterrows():
-
-                                severity = str(record["Interaction_Level"]).strip().lower()
-
-                                if severity == "major":
-                                    st.error("MAJOR DRUG-FOOD INTERACTION")
-                                elif severity == "moderate":
-                                    st.warning("MODERATE DRUG-FOOD INTERACTION")
-                                elif severity == "minor":
-                                    st.info("MINOR DRUG-FOOD INTERACTION")
-                                else:
-                                    st.info("DRUG-FOOD INTERACTION")
-
-                                st.write("**Interaction Level:**", record["Interaction_Level"])
-                                st.write("**Mechanism:**", record["Mechanism"])
-                                st.write("**Potential Effect:**", record["Potential_Effect"])
-                                st.write("**Management:**", record["Management"])
-                                st.write("**Source:**", record["Source"])
-                                st.write("**Verification Status:**", record["Verification_Status"])
+                            st.info(
+                                "No matching Drug-Food interaction found "
+                                "in the current database. This does not "
+                                "rule out a possible interaction."
+                            )
 
                         else:
 
-                            st.info(
-                                "No matching Drug-Food interaction record found "
-                                "in the current database. This does not rule out "
-                                "a possible interaction."
-                            )
+                            for _, record in matches.iterrows():
+
+                                severity = str(
+                                    record["Interaction_Level"]
+                                ).strip().lower()
+
+                                if severity == "major":
+
+                                    st.error(
+                                        "MAJOR DRUG-FOOD INTERACTION"
+                                    )
+
+                                elif severity == "moderate":
+
+                                    st.warning(
+                                        "MODERATE DRUG-FOOD INTERACTION"
+                                    )
+
+                                elif severity == "minor":
+
+                                    st.info(
+                                        "MINOR DRUG-FOOD INTERACTION"
+                                    )
+
+                                else:
+
+                                    st.info(
+                                        "DRUG-FOOD INTERACTION"
+                                    )
+
+                                st.write(
+                                    "Interaction Level:",
+                                    record["Interaction_Level"]
+                                )
+
+                                st.write(
+                                    "Mechanism:",
+                                    record["Mechanism"]
+                                )
+
+                                st.write(
+                                    "Potential Effect:",
+                                    record["Potential_Effect"]
+                                )
+
+                                st.write(
+                                    "Management:",
+                                    record["Management"]
+                                )
+
+                                st.write(
+                                    "Source:",
+                                    record["Source"]
+                                )
+
+                                st.write(
+                                    "Verification Status:",
+                                    record["Verification_Status"]
+                                )
+
+                                st.divider()
 
 elif page == "ADR Completeness Checker":
 
