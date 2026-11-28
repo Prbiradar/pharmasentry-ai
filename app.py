@@ -581,8 +581,7 @@ if page == "Home":
     )
 
     st.warning(
-        "This is an educational prototype, not a substitute "
-        "for professional clinical judgement."
+       "Empowering pharmacy education through intelligent drug information, safety screening and pharmacovigilance innovation."
     )
 
 elif page == "Drug Safety Assistant":
