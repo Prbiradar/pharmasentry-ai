@@ -709,109 +709,122 @@ elif page == "Drug Interaction Checker":
                 st.warning("No Drug-Drug records available.")
 
             else:
+    drug_options = sorted(
+        set(dd_data["Item_A"].astype(str).str.strip())
+        | set(dd_data["Item_B"].astype(str).str.strip())
+    )
 
-                drug_options = sorted(
-                    set(dd_data["Item_A"].astype(str).str.strip())
-                    | set(dd_data["Item_B"].astype(str).str.strip())
+    drug1 = st.selectbox(
+        "Search First Medicine",
+        drug_options,
+        index=None,
+        placeholder="Type or select first medicine",
+        key="interaction_drug1"
+    )
+
+    drug2 = st.selectbox(
+        "Search Second Medicine",
+        drug_options,
+        index=None,
+        placeholder="Type or select second medicine",
+        key="interaction_drug2"
+    )
+
+    if st.button(
+        "Check Drug-Drug Interaction",
+        key="check_dd"
+    ):
+        if not drug1 or not drug2:
+            st.warning("Please select both medicines.")
+
+        elif drug1 == drug2:
+            st.warning("Please select two different medicines.")
+
+        else:
+            matches = dd_data[
+                (
+                    (dd_data["Item_A"].astype(str).str.strip() == drug1)
+                    & (dd_data["Item_B"].astype(str).str.strip() == drug2)
                 )
-
-                drug1 = st.selectbox(
-                    "Search First Medicine",
-                    drug_options,
-                    index=None,
-                    placeholder="Type or select first medicine",
-                    key="interaction_drug1"
+                |
+                (
+                    (dd_data["Item_A"].astype(str).str.strip() == drug2)
+                    & (dd_data["Item_B"].astype(str).str.strip() == drug1)
                 )
+            ]
 
-                drug2 = st.selectbox(
-                    "Search Second Medicine",
-                    drug_options,
-                    index=None,
-                    placeholder="Type or select second medicine",
-                    key="interaction_drug2"
-                )
+            if not matches.empty:
 
-                if st.button(
-                    "Check Drug-Drug Interaction",
-                    key="check_dd"
-                ):
+                for _, record in matches.iterrows():
 
-                    if not drug1 or not drug2:
+                    st.warning(
+                        "Documented Drug-Drug Interaction Found"
+                    )
 
-                        st.warning("Please select both medicines.")
+                    severity = str(
+                        record["Interaction_Level"]
+                    ).strip().lower()
 
-                    elif drug1 == drug2:
+                    if severity == "major":
+                        st.error(
+                            "HIGH-RISK SAFETY ALERT: This interaction may cause serious harm. Seek review by a qualified prescriber."
+                        )
 
+                    elif severity == "moderate":
                         st.warning(
-                            "Please select two different medicines."
+                            "CLINICAL CAUTION: Clinical assessment, monitoring or dose adjustment may be needed."
+                        )
+
+                    elif severity == "minor":
+                        st.info(
+                            "SAFETY INFORMATION: This interaction is generally of lower clinical significance."
                         )
 
                     else:
+                        st.info(
+                            "Review this interaction with a qualified prescriber."
+                        )
 
-                        matches = dd_data[
-                            (
-                                (dd_data["Item_A"].astype(str).str.strip() == drug1)
-                                & (dd_data["Item_B"].astype(str).str.strip() == drug2)
-                            )
-                            |
-                            (
-                                (dd_data["Item_A"].astype(str).str.strip() == drug2)
-                                & (dd_data["Item_B"].astype(str).str.strip() == drug1)
-                            )                        ]
+                    st.write(
+                        "**Interaction Level:**",
+                        record["Interaction_Level"]
+                    )
 
-                                                        if severity == "major":
-                                    st.error(
-                                        "HIGH-RISK SAFETY ALERT: This interaction may cause serious harm. Seek review by a qualified prescriber."
-                                    )
+                    st.write(
+                        "**Mechanism:**",
+                        record["Mechanism"]
+                    )
 
-                                elif severity == "moderate":
-                                    st.warning(
-                                        "CLINICAL CAUTION: Clinical assessment, monitoring or dose adjustment may be needed."
-                                    )
+                    st.write(
+                        "**Potential Effect:**",
+                        record["Potential_Effect"]
+                    )
 
-                                elif severity == "minor":
-                                    st.info(
-                                        "SAFETY INFORMATION: This interaction is generally of lower clinical significance."
-                                    )
+                    st.write(
+                        "**Management / Precautions:**",
+                        record["Management"]
+                    )
 
-                                else:
-                                    st.info(
-                                        "Review this interaction with a qualified prescriber."
-                                    )
+                    st.write(
+                        "**Reference:**",
+                        record["Source"]
+                    )
 
-                                st.write(
-                                    "**Mechanism:**",
-                                    record["Mechanism"]
-                                )
+                    if record["Source_URL"]:
+                        st.markdown(
+                            f"[VIEW SOURCE]({record['Source_URL']})"
+                        )
 
-                                st.write(
-                                    "**Potential Effect:**",
-                                    record["Potential_Effect"]
-                                )
+                    st.write(
+                        "**Verification Status:**",
+                        record["Verification_Status"]
+                    )
 
-                                st.write(
-                                    "**Management / Precautions:**",
-                                    record["Management"]
-                                )
-
-                                st.write(
-                                    "**Reference:**",
-                                    record["Source"]
-                                )
-
-                                if record["Source_URL"]:
-                                    st.markdown(
-                                        f"[VIEW SOURCE]({record['Source_URL']})"
-                                    )
-
-                                st.write(
-                                    "**Verification Status:**",
-                                    record["Verification_Status"]
-                                )
-                                "in the current database. This does not "
-                                "rule out a possible interaction."
-                            )
-
+            else:
+                st.info(
+                    "No matching interaction record found in the current database. "
+                    "This does not rule out a possible interaction."
+                )
         elif interaction_type == "Drug-Food":
 
             st.subheader("Drug-Food Interaction Checker")
