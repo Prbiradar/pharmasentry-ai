@@ -816,6 +816,28 @@ elif page == "Drug Interaction Checker":
                                     unsafe_allow_html=True
                                 )
 
+                               if severity == "major":
+                                    st.error(
+                                        "HIGH-RISK SAFETY ALERT: This interaction "
+                                        "may cause serious harm. Avoid the combination "
+                                        "unless specifically reviewed and managed by "
+                                        "a qualified prescriber."
+                                    )
+
+                                elif severity == "moderate":
+                                    st.warning(
+                                        "CLINICAL CAUTION: This interaction may require "
+                                        "clinical assessment, monitoring or dose adjustment "
+                                        "by a qualified prescriber."
+                                    )
+
+                                elif severity == "minor":
+                                    st.info(
+                                        "SAFETY INFORMATION: This interaction is generally "
+                                        "of lower clinical significance. Monitor as appropriate."
+                                    )
+
+                                
                                 st.write(
                                     "**Mechanism:**",
                                     record["Mechanism"]
