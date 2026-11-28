@@ -867,6 +867,16 @@ if interaction_type == "Drug-Drug":
                     placeholder="Type or select food or beverage",
                     key="food_item"
                 )
+key="food_medicine"
+                )
+
+                food = st.selectbox(
+                    "Search Food / Beverage",
+                    food_options,
+                    index=None,
+                    placeholder="Type or select food or beverage",
+                    key="food_item"
+                )
 
                 if st.button(
                     "Check Drug-Food Interaction",
@@ -914,7 +924,7 @@ else:
         st.info(
             "No matching Drug-Food interaction record found."
         )    "in the current database. This does not "
-                                "rule out a possible interaction."
+             "rule out a possible interaction."
                             )
     st.divider()
 
