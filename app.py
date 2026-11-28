@@ -910,46 +910,177 @@ elif interaction_type == "Drug-Food":
 
                         st.write(
                             "**Mechanism:**",
-                            record["Mechanism"]
-                        )
 
-                        st.write(
-                            "**Potential Effect:**",
-                            record["Potential_Effect"]
-                        )
+        if interaction_type == "Drug-Drug":
 
-                        st.write(
-                            "**Management:**",
-                            record["Management"]
-                        )
+            st.subheader("Drug-Drug Interaction Checker")
 
-                        st.write(
-                            "**Source:**",
-                            record["Source"]
-                        )
+            dd_data = interactions[
+                interactions["Interaction_Type"].astype(str).str.strip()
+                == "Drug-Drug"
+            ]
 
-                        st.write(
-                            "**Verification Status:**",
-                            record["Verification_Status"]
-                        )
+            if dd_data.empty:
 
-                else:
+                st.warning("No Drug-Drug records available.")
 
-                    st.info(
-                        "No matching Drug-Food interaction record found "
-                        "in the current database. This does not rule out "
-                        "a possible interaction."
-                    )
+            else:
 
-    st.divider()
+                drug_options = sorted(
+                    set(dd_data["Item_A"].dropna().astype(str).str.strip())
+                    | set(dd_data["Item_B"].dropna().astype(str).str.strip())
+                )
 
-    st.caption(
-        "Educational interaction screening prototype based on a "
-        "limited database. It does not identify all possible "
-        "interactions or replace professional clinical judgement. "
-        "Consult a qualified pharmacist or prescriber before "
-        "making medication-related decisions."
-    )
+                drug1 = st.selectbox(
+                    "Select First Medicine",
+                    drug_options,
+                    index=None,
+                    placeholder="Search first medicine",
+                    key="drug1"
+                )
+
+                drug2 = st.selectbox(
+                    "Select Second Medicine",
+                    drug_options,
+                    index=None,
+                    placeholder="Search second medicine",
+                    key="drug2"
+                )
+
+                if st.button("Check Drug-Drug Interaction", key="check_dd"):
+
+                    if not drug1 or not drug2:
+
+                        st.warning("Please select both medicines.")
+
+                    elif drug1 == drug2:
+
+                        st.warning("Please select two different medicines.")
+
+                    else:
+
+                        matches = dd_data[
+                            (
+                                (dd_data["Item_A"].astype(str).str.strip() == drug1)
+                                & (dd_data["Item_B"].astype(str).str.strip() == drug2)
+                            )
+                            |
+                            (
+                                (dd_data["Item_A"].astype(str).str.strip() == drug2)
+                                & (dd_data["Item_B"].astype(str).str.strip() == drug1)
+                            )
+                        ]
+
+                        if not matches.empty:
+
+                            for _, record in matches.iterrows():
+
+                                severity = str(record["Interaction_Level"]).strip().lower()
+
+                                if severity == "major":
+                                    st.error("MAJOR DRUG-DRUG INTERACTION")
+                                elif severity == "moderate":
+                                    st.warning("MODERATE DRUG-DRUG INTERACTION")
+                                elif severity == "minor":
+                                    st.info("MINOR DRUG-DRUG INTERACTION")
+                                else:
+                                    st.info("DRUG-DRUG INTERACTION")
+
+                                st.write("**Interaction Level:**", record["Interaction_Level"])
+                                st.write("**Mechanism:**", record["Mechanism"])
+                                st.write("**Potential Effect:**", record["Potential_Effect"])
+                                st.write("**Management:**", record["Management"])
+                                st.write("**Source:**", record["Source"])
+                                st.write("**Verification Status:**", record["Verification_Status"])
+
+                        else:
+
+                            st.info(
+                                "No matching Drug-Drug interaction found "
+                                "in the current database."
+                            )
+
+        elif interaction_type == "Drug-Food":
+
+            st.subheader("Drug-Food Interaction Checker")
+
+            df_data = interactions[
+                interactions["Interaction_Type"].astype(str).str.strip()
+                == "Drug-Food"
+            ]
+
+            if df_data.empty:
+
+                st.warning("No Drug-Food records available.")
+
+            else:
+
+                medicine_options = sorted(
+                    df_data["Item_A"].dropna().astype(str).str.strip().unique()
+                )
+
+                food_options = sorted(
+                    df_data["Item_B"].dropna().astype(str).str.strip().unique()
+                )
+
+                medicine = st.selectbox(
+                    "Search Medicine",
+                    medicine_options,
+                    index=None,
+                    placeholder="Type or select medicine",
+                    key="food_medicine"
+                )
+
+                food = st.selectbox(
+                    "Search Food / Beverage",
+                    food_options,
+                    index=None,
+                    placeholder="Type or select food or beverage",
+                    key="food_item"
+                )
+
+                if st.button("Check Drug-Food Interaction", key="check_df"):
+
+                    if not medicine or not food:
+
+                        st.warning("Please select both medicine and food.")
+
+                    else:
+
+                        matches = df_data[
+                            (df_data["Item_A"].astype(str).str.strip() == medicine)
+                            & (df_data["Item_B"].astype(str).str.strip() == food)
+                        ]
+
+                        if not matches.empty:
+
+                            for _, record in matches.iterrows():
+
+                                severity = str(record["Interaction_Level"]).strip().lower()
+
+                                if severity == "major":
+                                    st.error("MAJOR DRUG-FOOD INTERACTION")
+                                elif severity == "moderate":
+                                    st.warning("MODERATE DRUG-FOOD INTERACTION")
+                                elif severity == "minor":
+                                    st.info("MINOR DRUG-FOOD INTERACTION")
+                                else:
+                                    st.info("DRUG-FOOD INTERACTION")
+
+                                st.write("**Interaction Level:**", record["Interaction_Level"])
+                                st.write("**Mechanism:**", record["Mechanism"])
+                                st.write("**Potential Effect:**", record["Potential_Effect"])
+                                st.write("**Management:**", record["Management"])
+                                st.write("**Source:**", record["Source"])
+                                st.write("**Verification Status:**", record["Verification_Status"])
+
+                        else:
+
+                            st.info(
+                                "No matching Drug-Food interaction record found "
+                                "in the current database. This does not rule out "
+                                "a possible interaction."
+                            )
 
 elif page == "ADR Completeness Checker":
 
