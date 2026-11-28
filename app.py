@@ -828,7 +828,6 @@ if interaction_type == "Drug-Drug":
                         "This does not rule out a possible interaction."
                     )
 
-        
 elif interaction_type == "Drug-Food":
 
     st.subheader("Drug-Food Interaction Checker")
@@ -910,6 +909,99 @@ elif interaction_type == "Drug-Food":
 
                         st.write(
                             "**Mechanism:**",
+
+        if interaction_type == "Drug-Drug":
+
+            st.subheader("Drug-Drug Interaction Checker")
+
+            dd_data = interactions[
+                interactions["Interaction_Type"].astype(str).str.strip()
+                == "Drug-Drug"
+            ]
+
+            if dd_data.empty:
+
+                st.warning("No Drug-Drug records available.")
+
+            else:
+
+                drug_options = sorted(
+                    set(dd_data["Item_A"].dropna().astype(str).str.strip())
+                    | set(dd_data["Item_B"].dropna().astype(str).str.strip())
+                )
+
+                drug1 = st.selectbox(
+                    "Select First Medicine",
+                    drug_options,
+                    index=None,
+                    placeholder="Search first medicine",
+                    key="drug1"
+                )
+
+                drug2 = st.selectbox(
+                    "Select Second Medicine",
+                    drug_options,
+                    index=None,
+                    placeholder="Search second medicine",
+                    key="drug2"
+                )
+
+                if st.button("Check Drug-Drug Interaction", key="check_dd"):
+
+                    if not drug1 or not drug2:
+
+                        st.warning("Please select both medicines.")
+
+                    elif drug1 == drug2:
+
+                        st.warning("Please select two different medicines.")
+
+                    else:
+
+                        matches = dd_data[
+                            (
+                                (dd_data["Item_A"].astype(str).str.strip() == drug1)
+                                & (dd_data["Item_B"].astype(str).str.strip() == drug2)
+                            )
+                            |
+                            (
+                                (dd_data["Item_A"].astype(str).str.strip() == drug2)
+                                & (dd_data["Item_B"].astype(str).str.strip() == drug1)
+                            )
+                        ]
+
+                        if not matches.empty:
+
+                            for _, record in matches.iterrows():
+
+                                severity = str(record["Interaction_Level"]).strip().lower()
+
+                                if severity == "major":
+                                    st.error("MAJOR DRUG-DRUG INTERACTION")
+
+elif page == "Drug Interaction Checker":
+
+    st.header("💊 Drug Interaction Checker")
+
+    st.write(
+        "Screen medicines for documented Drug-Drug "
+        "and Drug-Food interactions."
+    )
+
+    if interactions.empty:
+
+        st.error(
+            "Interaction database is not available. "
+            "Please check Interaction_Master.csv."
+        )
+
+    else:
+
+        interaction_type = st.radio(
+            "Select Interaction Type",
+            ["Drug-Drug", "Drug-Food"],
+            horizontal=True
+        )
 
         if interaction_type == "Drug-Drug":
 
