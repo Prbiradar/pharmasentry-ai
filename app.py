@@ -759,108 +759,25 @@ elif page == "Drug Interaction Checker":
                                 & (dd_data["Item_B"].astype(str).str.strip() == drug1)
                             )                        ]
 
-                        if not matches.empty:
+                                                        if severity == "major":
+                                    st.error(
+                                        "HIGH-RISK SAFETY ALERT: This interaction may cause serious harm. Seek review by a qualified prescriber."
+                                    )
 
-                            for _, record in matches.iterrows():
-
-                                st.markdown(
-                                    """
-                                    <div style="
-                                        background-color: #17365D;
-                                        color: white;
-                                        padding: 12px;
-                                        border-radius: 8px;
-                                        font-size: 18px;
-                                        font-weight: bold;
-                                        text-align: center;
-                                    ">
-                                        Documented Drug-Drug Interaction Found
-                                    </div>
-                                    """,
-                                    unsafe_allow_html=True
-                                )
-
-                                severity = str(record["Interaction_Level"]).strip().lower()
-
-                                if severity == "major":
-                                    severity_color = "#D32F2F"
-                                    severity_text = "MAJOR INTERACTION"
                                 elif severity == "moderate":
-                                    severity_color = "#F57C00"
-                                    severity_text = "MODERATE INTERACTION"
-                                elif severity == "minor":
-                                    severity_color = "#2E7D32"
-                                    severity_text = "MINOR INTERACTION"
-                                else:
-                                    severity_color = "#455A64"
-                                    severity_text = str(record["Interaction_Level"]).upper()
+                                    st.warning(
+                                        "CLINICAL CAUTION: Clinical assessment, monitoring or dose adjustment may be needed."
+                                    )
 
-                                st.markdown(
-                                    f"""
-                                    <div style="
-                                        background-color: {severity_color};
-                                        color: #FFFFFF;
-                                        padding: 14px 12px;
-                                        border-radius: 8px;
-                                        font-size: 20px;
-                                        font-weight: 800;
-                                        text-align: center;
-                                        width: 100%;
-                                        box-sizing: border-box;
-                                        white-space: normal;
-                                        line-height: 1.5;
-                                    ">
-                                        {severity_text}
-                                    </div>
-                                    """,
-                                    unsafe_allow_html=True
-                                )
-
-                               if severity == "major":
-                                    safety_color = "#8B0000"
-                                    safety_message = (
-                                        "HIGH-RISK SAFETY ALERT: This interaction may cause "
-                                        "serious harm. Avoid the combination unless specifically "
-                                        "reviewed and managed by a qualified prescriber."
-                                    )
-                                elif severity == "moderate":
-                                    safety_color = "#9A4D00"
-                                    safety_message = (
-                                        "CLINICAL CAUTION: This interaction may require "
-                                        "clinical assessment, monitoring or dose adjustment "
-                                        "by a qualified prescriber."
-                                    )
                                 elif severity == "minor":
-                                    safety_color = "#1B5E20"
-                                    safety_message = (
-                                        "SAFETY INFORMATION: This interaction is generally "
-                                        "of lower clinical significance. Monitor as appropriate."
+                                    st.info(
+                                        "SAFETY INFORMATION: This interaction is generally of lower clinical significance."
                                     )
+
                                 else:
-                                    safety_color = "#455A64"
-                                    safety_message = (
+                                    st.info(
                                         "Review this interaction with a qualified prescriber."
                                     )
-
-                                st.markdown(
-                                    f"""
-                                    <div style="
-                                        background-color: {safety_color};
-                                        color: #FFFFFF;
-                                        padding: 16px;
-                                        border-radius: 8px;
-                                        font-size: 16px;
-                                        font-weight: bold;
-                                        line-height: 1.7;
-                                        width: 100%;
-                                        box-sizing: border-box;
-                                        overflow-wrap: anywhere;
-                                    ">
-                                        {safety_message}
-                                    </div>
-                                    """,
-                                    unsafe_allow_html=True
-                                )
 
                                 st.write(
                                     "**Mechanism:**",
@@ -871,6 +788,7 @@ elif page == "Drug Interaction Checker":
                                     "**Potential Effect:**",
                                     record["Potential_Effect"]
                                 )
+
                                 st.write(
                                     "**Management / Precautions:**",
                                     record["Management"]
@@ -883,33 +801,13 @@ elif page == "Drug Interaction Checker":
 
                                 if record["Source_URL"]:
                                     st.markdown(
-    f"""
-    <a href="{record['Source_URL']}" target="_blank"
-       style="
-           display: inline-block;
-           background-color: #17365D;
-           color: #FFFFFF;
-           padding: 10px 18px;
-           border-radius: 7px;
-           font-weight: bold;
-           text-decoration: none;
-           font-size: 16px;
-       ">
-       VIEW SOURCE
-    </a>
-    """,
-    unsafe_allow_html=True
-)
+                                        f"[VIEW SOURCE]({record['Source_URL']})"
+                                    )
 
                                 st.write(
                                     "**Verification Status:**",
                                     record["Verification_Status"]
                                 )
-
-                        else:
-
-                            st.info(
-                                "No matching interaction record found "
                                 "in the current database. This does not "
                                 "rule out a possible interaction."
                             )
