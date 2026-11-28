@@ -542,33 +542,33 @@ if page == "Home":
     st.markdown(
         """
         <div style="
-            background:#17324d;
+            background-color:#17324d;
             padding:22px;
             border-radius:14px;
             border:1px solid #48c6cf;
             margin-top:15px;
             margin-bottom:15px;
         ">
-            <h2 style="color:#7DD3FC;">
+            <h2 style="color:#7DD3FC !important;">
                 🧠 Pharmacy Learning Spotlight
             </h2>
 
-            <h4 style="color:white;">
+            <h4 style="color:#FFFFFF !important;">
                 Today's Learning Question
             </h4>
 
-            <p style="color:white;font-size:16px;">
+            <p style="color:#FFFFFF !important;font-size:16px;">
                 Why is pharmacovigilance important even after a
                 medicine receives regulatory approval?
             </p>
 
             <hr>
 
-            <h4 style="color:#7DD3FC;">
+            <h4 style="color:#7DD3FC !important;">
                 💡 Remember
             </h4>
 
-            <p style="color:white;font-size:15px;">
+            <p style="color:#FFFFFF !important;font-size:15px;">
                 Continuous monitoring helps identify previously
                 unrecognized adverse drug reactions, evaluate
                 medicine safety and improve patient protection.
