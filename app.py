@@ -538,42 +538,39 @@ if page == "Home":
         )
 
     st.markdown("---")
-    
-    st.markdown("""
-    <div style="
-        background:linear-gradient(135deg,#102D4E,#174D68);
-        padding:24px;
-        border-radius:15px;
-        border:1px solid #48C6CF;
-        margin-top:15px;
-        margin-bottom:20px;
-    ">
-        <h2 style="color:#7DD3FC !important;">
-            🧠 Pharmacy Learning Spotlight
-        </h2>
+     
+    st.markdown("---")
 
-        <h4 style="color:#FFD166 !important;">
-            📘 Today's Learning Question
-        </h4>
+    st.header("🧠 Pharmacy Learning Spotlight")
 
-        <p style="color:#FFFFFF !important;font-size:17px;">
-            Why is pharmacovigilance important even after a
-            medicine receives regulatory approval?
-        </p>
-
-        <hr style="border-color:#48C6CF;">
-
-        <h4 style="color:#7DD3FC !important;">
-            💡 Remember
-        </h4>
-
-        <p style="color:#FFFFFF !important;font-size:16px;">
-            Continuous monitoring helps identify previously
-            unrecognized adverse drug reactions, evaluate
-            medicine safety and improve patient protection.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div style="
+            background-color: #17324D;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #48C6CF;
+        ">
+            <h3 style="color: #FFD166;">
+                📘 Today's Learning Question
+            </h3>
+            <p style="color: white; font-size: 17px;">
+                Why is pharmacovigilance important even after a
+                medicine receives regulatory approval?
+            </p>
+            <hr>
+            <h3 style="color: #7DD3FC;">
+                💡 Remember
+            </h3>
+            <p style="color: white; font-size: 16px;">
+                Continuous monitoring helps identify previously
+                unrecognized adverse drug reactions, evaluate
+                medicine safety and improve patient protection.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.markdown("---")
 
