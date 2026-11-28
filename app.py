@@ -399,8 +399,6 @@ if st.session_state.authenticated_user is None:
 
     st.stop()
 
-
-
 # ==========================================
 # LOGGED-IN USER SECTION
 # ==========================================
@@ -434,12 +432,10 @@ else:
         st.session_state.authenticated_user = None
         st.rerun()
 
-
 # ==========================================
 # EXISTING APP NAVIGATION STARTS BELOW
 # ==========================================
-
-          
+      
 st.sidebar.title("Navigation")
 
 page = st.sidebar.radio(
@@ -540,7 +536,6 @@ elif page == "Drug Safety Assistant":
             "Drug information is preliminary and requires verification "
             "against authoritative product labels and expert review."
         )
-
 
 elif page == "Drug-ADR Safety Screening":
 
