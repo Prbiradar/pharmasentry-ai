@@ -538,21 +538,23 @@ if page == "Home":
 
     st.subheader("📘 Today's Learning Question")
 
-    st.info(
-        "Why is pharmacovigilance important even after a "
-        "medicine receives regulatory approval?"
+    st.markdown(
+        '<p style="color:#FFD166 !important; font-size:17px; font-weight:700;">'
+        'Why is pharmacovigilance important even after a medicine receives regulatory approval?'
+        '</p>',
+        unsafe_allow_html=True
     )
 
     st.subheader("💡 Remember")
 
-    st.success(
-        "Continuous monitoring helps identify previously "
-        "unrecognized adverse drug reactions, evaluate "
-        "medicine safety and improve patient protection."
+    st.markdown(
+        '<p style="color:#7DD3FC !important; font-size:16px; font-weight:600;">'
+        'Continuous monitoring helps identify previously unrecognized adverse drug reactions, evaluate medicine safety and improve patient protection.'
+        '</p>',
+        unsafe_allow_html=True
     )
 
     st.markdown("---")
-
 
     st.markdown(
         """
