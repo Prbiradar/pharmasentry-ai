@@ -758,21 +758,77 @@ elif page == "Drug Interaction Checker":
                                     record["Interaction_Level"]
                                 ).strip().lower()
 
-                                if severity == "major":
+                            if severity == "major":
 
-                                    st.error("MAJOR DRUG-DRUG INTERACTION")
+    st.markdown(
+        """
+        <div style="
+            background-color:#B71C1C;
+            color:white;
+            padding:14px;
+            border-radius:8px;
+            font-weight:bold;
+            font-size:18px;
+            text-align:center;">
+            🔴 MAJOR DRUG-DRUG INTERACTION
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-                                elif severity == "moderate":
+elif severity == "moderate":
 
-                                    st.warning("MODERATE DRUG-DRUG INTERACTION")
+    st.markdown(
+        """
+        <div style="
+            background-color:#E65100;
+            color:white;
+            padding:14px;
+            border-radius:8px;
+            font-weight:bold;
+            font-size:18px;
+            text-align:center;">
+            🟠 MODERATE DRUG-DRUG INTERACTION
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-                                elif severity == "minor":
+elif severity == "minor":
 
-                                    st.info("MINOR DRUG-DRUG INTERACTION")
+    st.markdown(
+        """
+        <div style="
+            background-color:#1B5E20;
+            color:white;
+            padding:14px;
+            border-radius:8px;
+            font-weight:bold;
+            font-size:18px;
+            text-align:center;">
+            🟢 MINOR DRUG-DRUG INTERACTION
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-                                else:
+else:
 
-                                    st.info("DRUG-DRUG INTERACTION")
+    st.markdown(
+        """
+        <div style="
+            background-color:#455A64;
+            color:white;
+            padding:14px;
+            border-radius:8px;
+            font-weight:bold;
+            font-size:18px;
+            text-align:center;">
+            ⚪ DRUG-DRUG INTERACTION
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
                                 st.write("**Interaction Level:**", record["Interaction_Level"])
                                 st.write("**Mechanism:**", record["Mechanism"])
