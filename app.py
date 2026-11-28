@@ -757,10 +757,9 @@ elif page == "Drug Interaction Checker":
                             (
                                 (dd_data["Item_A"].astype(str).str.strip() == drug2)
                                 & (dd_data["Item_B"].astype(str).str.strip() == drug1)
-                            )
-                        ]
+                            )                        ]
 
-                            if not matches.empty:
+                        if not matches.empty:
 
                             for _, record in matches.iterrows():
 
