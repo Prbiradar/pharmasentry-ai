@@ -758,8 +758,6 @@ elif page == "Drug Interaction Checker":
                                     record["Interaction_Level"]
                                 ).strip().lower()
 
-                            if severity == "major":
-
     if severity == "major":
 
     st.markdown(
