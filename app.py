@@ -2102,8 +2102,11 @@ elif page == "About":
     st.subheader("⚠️ Disclaimer")
 
     st.warning(
-        "PharmaSentry AI is an academic and educational prototype "
-        "developed for learning, research and pharmacovigilance awareness."
+            st.markdown(
+        '<p style="color:#7DD3FC !important; font-size:15px; font-weight:600;">'
+        'PharmaSentry AI is an academic and educational prototype developed for learning, research and pharmacovigilance awareness.'
+        '</p>',
+        unsafe_allow_html=True
     )
 
     st.write(
