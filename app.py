@@ -753,8 +753,7 @@ else:
                 )
             ]
 
-            if not matches.empty:
-
+                        if not matches.empty:
                 for _, record in matches.iterrows():
 
                     st.warning(
@@ -769,62 +768,37 @@ else:
                         st.error(
                             "HIGH-RISK SAFETY ALERT: This interaction may cause serious harm. Seek review by a qualified prescriber."
                         )
-
                     elif severity == "moderate":
                         st.warning(
                             "CLINICAL CAUTION: Clinical assessment, monitoring or dose adjustment may be needed."
                         )
-
                     elif severity == "minor":
                         st.info(
                             "SAFETY INFORMATION: This interaction is generally of lower clinical significance."
                         )
-
                     else:
                         st.info(
                             "Review this interaction with a qualified prescriber."
                         )
 
-                    st.write(
-                        "**Interaction Level:**",
-                        record["Interaction_Level"]
-                    )
-
-                    st.write(
-                        "**Mechanism:**",
-                        record["Mechanism"]
-                    )
-
-                    st.write(
-                        "**Potential Effect:**",
-                        record["Potential_Effect"]
-                    )
-
-                    st.write(
-                        "**Management / Precautions:**",
-                        record["Management"]
-                    )
-
-                    st.write(
-                        "**Reference:**",
-                        record["Source"]
-                    )
+                    st.write("**Interaction Level:**", record["Interaction_Level"])
+                    st.write("**Mechanism:**", record["Mechanism"])
+                    st.write("**Potential Effect:**", record["Potential_Effect"])
+                    st.write("**Management / Precautions:**", record["Management"])
+                    st.write("**Reference:**", record["Source"])
 
                     if record["Source_URL"]:
                         st.markdown(
                             f"[VIEW SOURCE]({record['Source_URL']})"
                         )
 
-                    st.write(
-                        "**Verification Status:**",
-                        record["Verification_Status"]
-                    )
+                    st.write("**Verification Status:**", record["Verification_Status"])
 
-             else:
+            else:
                 st.info(
                     "No matching interaction record found in the current database. "
                     "This does not rule out a possible interaction."
-                )               
+                )
         elif interaction_type == "Drug-Food":
 
             st.subheader("Drug-Food Interaction Checker")
