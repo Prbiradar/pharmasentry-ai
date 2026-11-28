@@ -2118,9 +2118,6 @@ elif page == "About":
     st.write(
         "The Drug–ADR Safety Screening module uses preliminary "
         "keyword matching. A database match does not establish "
-    )
-
-        "keyword matching. A database match does not establish "
         "a causal relationship between a medicine and an adverse "
         "reaction. Classification into common or serious database "
         "entries does not determine the actual clinical severity "
