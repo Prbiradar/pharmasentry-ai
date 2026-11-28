@@ -816,33 +816,55 @@ elif page == "Drug Interaction Checker":
                                     unsafe_allow_html=True
                                 )
 
-                                st.markdown(
-    """
-    <div style="
-        background-color: #8B0000;
-        color: #FFFFFF;
-        padding: 16px;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: bold;
-        line-height: 1.7;
-        width: 100%;
-        box-sizing: border-box;
-        overflow-wrap: anywhere;
-    ">
-        HIGH-RISK SAFETY ALERT: This interaction may cause serious harm.
-        Avoid the combination unless specifically reviewed and managed
-        by a qualified prescriber.
-    </div>
-    """,
-    unsafe_allow_html=True
-                                )
+                                                                if severity == "major":
+                                    safety_color = "#8B0000"
+                                    safety_message = (
+                                        "HIGH-RISK SAFETY ALERT: This interaction may cause "
+                                        "serious harm. Avoid the combination unless specifically "
+                                        "reviewed and managed by a qualified prescriber."
+                                    )
+
                                 elif severity == "moderate":
-                                    st.warning("CLINICAL CAUTION: This interaction may require clinical assessment, monitoring or dose adjustment by a qualified prescriber.")
+                                    safety_color = "#9A4D00"
+                                    safety_message = (
+                                        "CLINICAL CAUTION: This interaction may require "
+                                        "clinical assessment, monitoring or dose adjustment "
+                                        "by a qualified prescriber."
+                                    )
 
                                 elif severity == "minor":
-                                    st.info("SAFETY INFORMATION: This interaction is generally of lower clinical significance. Monitor as appropriate.")
+                                    safety_color = "#1B5E20"
+                                    safety_message = (
+                                        "SAFETY INFORMATION: This interaction is generally "
+                                        "of lower clinical significance. Monitor as appropriate."
+                                    )
 
+                                else:
+                                    safety_color = "#455A64"
+                                    safety_message = (
+                                        "Review this interaction with a qualified prescriber."
+                                    )
+
+                                st.markdown(
+                                    f"""
+                                    <div style="
+                                        background-color: {safety_color};
+                                        color: #FFFFFF;
+                                        padding: 16px;
+                                        border-radius: 8px;
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                        line-height: 1.7;
+                                        width: 100%;
+                                        box-sizing: border-box;
+                                        overflow-wrap: anywhere;
+                                    ">
+                                        {safety_message}
+                                    </div>
+                                    """,
+                                    unsafe_allow_html=True
+                                )
+                                
                                 st.write(
                                     "**Mechanism:**",
                                     record["Mechanism"]
