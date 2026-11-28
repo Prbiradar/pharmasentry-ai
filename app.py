@@ -816,8 +816,8 @@ elif page == "Drug Interaction Checker":
                                     unsafe_allow_html=True
                                 )
 
-                                                            if severity == "major":
-                                    safety_color = "#8B0000"
+                              if severity == "major":
+                                    safety_color = "#8B0000" 
                                     safety_message = (
                                         "HIGH-RISK SAFETY ALERT: This interaction may cause "
                                         "serious harm. Avoid the combination unless specifically "
