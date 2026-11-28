@@ -820,11 +820,11 @@ else:
                         record["Verification_Status"]
                     )
 
-                        else:
+             else:
                 st.info(
                     "No matching interaction record found in the current database. "
                     "This does not rule out a possible interaction."
-                )
+                )            
         elif interaction_type == "Drug-Food":
 
             st.subheader("Drug-Food Interaction Checker")
