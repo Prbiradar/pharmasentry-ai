@@ -453,33 +453,250 @@ page = st.sidebar.radio(
 )
 
 if page == "Home":
-    st.header("Welcome to PharmaSentry AI")
-    st.write(
-        "An academic prototype for drug safety information, "
-        "adverse drug reaction awareness and pharmacovigilance education."
-    )
-
-    st.subheader("Available Modules")
-    st.write("1. Drug Safety Assistant")
-    st.write("2. ADR Case Completeness Checker")
-    st.write("3. Pharmacovigilance Learning Centre")
-    st.write("4.💊 Drug–ADR Safety Screening")
-    st.write("5. Research Dashboard")
 
     st.markdown(
-    """
-    <div style="
-        color: white;
-        background-color: #17324d;
-        padding: 12px 16px;
-        border-radius: 10px;
-        border: 1px solid #48c6cf;
-        font-weight: 500;
-        text-align: center;">
-        This is an educational prototype, not a substitute for professional clinical judgement.
-    </div>
-    """,
-    unsafe_allow_html=True
+        """
+        <div style="
+            background: linear-gradient(120deg,#071A35,#125477,#087E8B);
+            padding: 35px 28px;
+            border-radius: 18px;
+            border: 1px solid #48c6cf;
+            margin-bottom: 25px;
+            text-align: center;">
+
+            <div style="font-size:48px;">🛡️ 💊</div>
+
+            <h1 style="
+                color:white;
+                font-size:36px;
+                font-weight:800;
+                margin-bottom:8px;">
+                PharmaSentry AI
+            </h1>
+
+            <p style="
+                color:#BCECF0;
+                font-size:17px;
+                font-weight:600;">
+                INTELLIGENT PHARMACY & DRUG SAFETY PLATFORM
+            </p>
+
+            <p style="
+                color:white;
+                font-size:15px;">
+                Smarter Screening | Safer Medicines | Better Learning
+            </p>
+
+            <p style="
+                color:#BCECF0;
+                font-size:13px;">
+                Advancing Pharmacy Through Technology
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("## 🧬 Explore Your Pharmacy Intelligence Hub")
+
+    st.markdown(
+        """
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:15px;">
+
+            <div style="background:#123E68;padding:20px;
+            border-radius:14px;border:1px solid #38BDF8;">
+                <div style="font-size:32px;">💊</div>
+                <h3 style="color:white;">Drug Safety Assistant</h3>
+                <p style="color:#D6E5EF;">
+                Explore medicine information and drug safety data.
+                </p>
+            </div>
+
+            <div style="background:#123E68;padding:20px;
+            border-radius:14px;border:1px solid #38BDF8;">
+                <div style="font-size:32px;">🛡️</div>
+                <h3 style="color:white;">Drug-ADR Screening</h3>
+                <p style="color:#D6E5EF;">
+                Explore adverse drug reaction safety information.
+                </p>
+            </div>
+
+            <div style="background:#123E68;padding:20px;
+            border-radius:14px;border:1px solid #38BDF8;">
+                <div style="font-size:32px;">⚠️</div>
+                <h3 style="color:white;">Interaction Checker</h3>
+                <p style="color:#D6E5EF;">
+                Screen documented drug-drug and drug-food interactions.
+                </p>
+            </div>
+
+            <div style="background:#123E68;padding:20px;
+            border-radius:14px;border:1px solid #38BDF8;">
+                <div style="font-size:32px;">📋</div>
+                <h3 style="color:white;">ADR Completeness</h3>
+                <p style="color:#D6E5EF;">
+                Learn essential elements of ADR case documentation.
+                </p>
+            </div>
+
+            <div style="background:#123E68;padding:20px;
+            border-radius:14px;border:1px solid #38BDF8;">
+                <div style="font-size:32px;">🎓</div>
+                <h3 style="color:white;">Learning Centre</h3>
+                <p style="color:#D6E5EF;">
+                Strengthen pharmacovigilance and pharmacy knowledge.
+                </p>
+            </div>
+
+            <div style="background:#123E68;padding:20px;
+            border-radius:14px;border:1px solid #38BDF8;">
+                <div style="font-size:32px;">📊</div>
+                <h3 style="color:white;">Research Dashboard</h3>
+                <p style="color:#D6E5EF;">
+                Explore pharmacy research and innovation.
+                </p>
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("---")
+
+    st.markdown("## 🚀 Emerging Trends in Pharmacy")
+
+    st.markdown(
+        """
+        <div style="
+            background:#17324d;
+            padding:22px;
+            border-radius:14px;
+            border:1px solid #48c6cf;">
+
+            <p style="color:#7DD3FC;font-size:17px;">
+            🤖 <b>Artificial Intelligence in Drug Discovery</b>
+            </p>
+            <p style="color:white;">
+            Explore how AI can support molecular screening,
+            drug design and pharmaceutical research.
+            </p>
+
+            <hr>
+
+            <p style="color:#7DD3FC;font-size:17px;">
+            📱 <b>Digital Pharmacovigilance</b>
+            </p>
+            <p style="color:white;">
+            Discover electronic ADR reporting, safety databases
+            and digital adverse-event monitoring.
+            </p>
+
+            <hr>
+
+            <p style="color:#7DD3FC;font-size:17px;">
+            🧬 <b>Precision Medicine</b>
+            </p>
+            <p style="color:white;">
+            Understand how genetic and patient-specific factors
+            can influence medicine selection and response.
+            </p>
+
+            <hr>
+
+            <p style="color:#7DD3FC;font-size:17px;">
+            💉 <b>Advanced Drug Delivery Systems</b>
+            </p>
+            <p style="color:white;">
+            Explore nanotechnology, targeted delivery and
+            innovative pharmaceutical formulations.
+            </p>
+
+            <hr>
+
+            <p style="color:#7DD3FC;font-size:17px;">
+            🩺 <b>Digital Therapeutics</b>
+            </p>
+            <p style="color:white;">
+            Learn about software-based interventions
+            designed to support healthcare and treatment.
+            </p>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("---")
+
+    st.markdown("## 🧠 Pharmacy Learning Spotlight")
+
+    st.info(
+        "Today's learning question: Why is pharmacovigilance "
+        "important even after a medicine receives regulatory approval?"
+    )
+
+    st.markdown(
+        """
+        <div style="
+            background:#17324d;
+            padding:18px;
+            border-radius:12px;
+            border-left:5px solid #48c6cf;">
+
+            <h4 style="color:#7DD3FC;">
+            💡 Remember
+            </h4>
+
+            <p style="color:white;">
+            Continuous monitoring helps identify previously
+            unrecognized adverse drug reactions, evaluate
+            medicine safety and improve patient protection.
+            </p>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("---")
+
+    st.markdown(
+        """
+        <div style="
+            background:#17324d;
+            padding:18px;
+            border-radius:12px;
+            border:1px solid #48c6cf;
+            text-align:center;">
+
+            <h3 style="color:white;">
+            PharmaSentry AI
+            </h3>
+
+            <p style="color:#7DD3FC;font-weight:600;">
+            Developed by Dr. Praveen R Biradar
+            </p>
+
+            <p style="color:white;font-size:13px;">
+            Pharmacy Innovation | Drug Safety | Digital Healthcare
+            </p>
+
+            <p style="color:#BCECF0;font-size:12px;">
+            Educational and research prototype.
+            </p>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.warning(
+        "This is an educational prototype, not a substitute "
+        "for professional clinical judgement."
     )
 
 elif page == "Drug Safety Assistant":
