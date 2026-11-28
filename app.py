@@ -488,62 +488,45 @@ Advancing Pharmacy Through Technology
 
     st.markdown(
         """
-        <div style="display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-        gap:15px;">
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:15px;">
 
-            <div style="background:#123E68;padding:20px;
-            border-radius:14px;border:1px solid #38BDF8;">
+            <div style="background:#123E68;padding:20px;border-radius:14px;border:1px solid #38BDF8;">
                 <div style="font-size:32px;">💊</div>
                 <h3 style="color:white;">Drug Safety Assistant</h3>
-                <p style="color:#D6E5EF;">
-                Explore medicine information and drug safety data.
-                </p>
+                <p style="color:#D6E5EF;">Explore medicine information and drug safety data.</p>
             </div>
 
-            <div style="background:#123E68;padding:20px;
-            border-radius:14px;border:1px solid #38BDF8;">
+            <div style="background:#123E68;padding:20px;border-radius:14px;border:1px solid #38BDF8;">
                 <div style="font-size:32px;">🛡️</div>
                 <h3 style="color:white;">Drug-ADR Screening</h3>
-                <p style="color:#D6E5EF;">
-                Explore adverse drug reaction safety information.
-                </p>
+                <p style="color:#D6E5EF;">Explore adverse drug reaction safety information.</p>
             </div>
 
-            <div style="background:#123E68;padding:20px;
-            border-radius:14px;border:1px solid #38BDF8;">
+            <div style="background:#123E68;padding:20px;border-radius:14px;border:1px solid #38BDF8;">
                 <div style="font-size:32px;">⚠️</div>
                 <h3 style="color:white;">Interaction Checker</h3>
-                <p style="color:#D6E5EF;">
-                Screen documented drug-drug and drug-food interactions.
-                </p>
+                <p style="color:#D6E5EF;">Screen documented drug-drug and drug-food interactions.</p>
             </div>
 
-            <div style="background:#123E68;padding:20px;
-            border-radius:14px;border:1px solid #38BDF8;">
+            <div style="background:#123E68;padding:20px;border-radius:14px;border:1px solid #38BDF8;">
                 <div style="font-size:32px;">📋</div>
                 <h3 style="color:white;">ADR Completeness</h3>
-                <p style="color:#D6E5EF;">
-                Learn essential elements of ADR case documentation.
-                </p>
+                <p style="color:#D6E5EF;">Learn essential elements of ADR case documentation.</p>
             </div>
 
-            <div style="background:#123E68;padding:20px;
-            border-radius:14px;border:1px solid #38BDF8;">
+            <div style="background:#123E68;padding:20px;border-radius:14px;border:1px solid #38BDF8;">
                 <div style="font-size:32px;">🎓</div>
                 <h3 style="color:white;">Learning Centre</h3>
-                <p style="color:#D6E5EF;">
-                Strengthen pharmacovigilance and pharmacy knowledge.
-                </p>
+                <p style="color:#D6E5EF;">Strengthen pharmacovigilance and pharmacy knowledge.</p>
             </div>
 
-            <div style="background:#123E68;padding:20px;
-            border-radius:14px;border:1px solid #38BDF8;">
+            <div style="background:#123E68;padding:20px;border-radius:14px;border:1px solid #38BDF8;">
                 <div style="font-size:32px;">📊</div>
                 <h3 style="color:white;">Research Dashboard</h3>
-                <p style="color:#D6E5EF;">
-                Explore pharmacy research and innovation.
-                </p>
+                <p style="color:#D6E5EF;">Explore pharmacy research and innovation.</p>
             </div>
 
         </div>
