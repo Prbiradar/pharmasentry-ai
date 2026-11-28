@@ -454,48 +454,36 @@ page = st.sidebar.radio(
 
 if page == "Home":
 
-    st.markdown(
+        st.markdown(
         """
-        <div style="
-            background: linear-gradient(120deg,#071A35,#125477,#087E8B);
-            padding: 35px 28px;
-            border-radius: 18px;
-            border: 1px solid #48c6cf;
-            margin-bottom: 25px;
-            text-align: center;">
+<div style="background:linear-gradient(120deg,#071A35,#125477,#087E8B);
+padding:35px 28px;border-radius:18px;border:1px solid #48c6cf;
+margin-bottom:25px;text-align:center;">
 
-            <div style="font-size:48px;">🛡️ 💊</div>
+<div style="font-size:48px;">🛡️ 💊</div>
 
-            <h1 style="
-                color:white;
-                font-size:36px;
-                font-weight:800;
-                margin-bottom:8px;">
-                PharmaSentry AI
-            </h1>
+<h1 style="color:white;font-size:36px;font-weight:800;">
+PharmaSentry AI
+</h1>
 
-            <p style="
-                color:#BCECF0;
-                font-size:17px;
-                font-weight:600;">
-                INTELLIGENT PHARMACY & DRUG SAFETY PLATFORM
-            </p>
+<p style="color:#BCECF0;font-size:17px;font-weight:600;">
+INTELLIGENT PHARMACY & DRUG SAFETY PLATFORM
+</p>
 
-            <p style="
-                color:white;
-                font-size:15px;">
-                Smarter Screening | Safer Medicines | Better Learning
-            </p>
+<p style="color:white;font-size:15px;">
+Smarter Screening | Safer Medicines | Better Learning
+</p>
 
-            <p style="
-                color:#BCECF0;
-                font-size:13px;">
-                Advancing Pharmacy Through Technology
-            </p>
-        </div>
+<p style="color:#BCECF0;font-size:13px;">
+Advancing Pharmacy Through Technology
+</p>
+
+</div>
         """,
         unsafe_allow_html=True
-    )
+        )
+
+    st.markdown("<div style='height:25px;'></div>", unsafe_allow_html=True)
 
     st.markdown("## 🧬 Explore Your Pharmacy Intelligence Hub")
 
