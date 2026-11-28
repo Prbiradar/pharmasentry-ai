@@ -454,7 +454,7 @@ page = st.sidebar.radio(
 
 if page == "Home":
 
-        st.markdown(
+    st.markdown(
         """
 <div style="background:linear-gradient(120deg,#071A35,#125477,#087E8B);
 padding:35px 28px;border-radius:18px;border:1px solid #48c6cf;
@@ -484,15 +484,13 @@ Advancing Pharmacy Through Technology
     )
 
     st.write("")
-
     st.markdown("## 🧬 Explore Your Pharmacy Intelligence Hub")
 
     st.markdown(
         """
-        <div style="
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:15px;">
+        <div style="display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+        gap:15px;">
 
             <div style="background:#123E68;padding:20px;
             border-radius:14px;border:1px solid #38BDF8;">
@@ -554,16 +552,12 @@ Advancing Pharmacy Through Technology
     )
 
     st.markdown("---")
-
     st.markdown("## 🚀 Emerging Trends in Pharmacy")
 
     st.markdown(
         """
-        <div style="
-            background:#17324d;
-            padding:22px;
-            border-radius:14px;
-            border:1px solid #48c6cf;">
+        <div style="background:#17324d;padding:22px;
+        border-radius:14px;border:1px solid #48c6cf;">
 
             <p style="color:#7DD3FC;font-size:17px;">
             🤖 <b>Artificial Intelligence in Drug Discovery</b>
@@ -619,7 +613,6 @@ Advancing Pharmacy Through Technology
     )
 
     st.markdown("---")
-
     st.markdown("## 🧠 Pharmacy Learning Spotlight")
 
     st.info(
@@ -629,15 +622,10 @@ Advancing Pharmacy Through Technology
 
     st.markdown(
         """
-        <div style="
-            background:#17324d;
-            padding:18px;
-            border-radius:12px;
-            border-left:5px solid #48c6cf;">
+        <div style="background:#17324d;padding:18px;
+        border-radius:12px;border-left:5px solid #48c6cf;">
 
-            <h4 style="color:#7DD3FC;">
-            💡 Remember
-            </h4>
+            <h4 style="color:#7DD3FC;">💡 Remember</h4>
 
             <p style="color:white;">
             Continuous monitoring helps identify previously
@@ -654,16 +642,11 @@ Advancing Pharmacy Through Technology
 
     st.markdown(
         """
-        <div style="
-            background:#17324d;
-            padding:18px;
-            border-radius:12px;
-            border:1px solid #48c6cf;
-            text-align:center;">
+        <div style="background:#17324d;padding:18px;
+        border-radius:12px;border:1px solid #48c6cf;
+        text-align:center;">
 
-            <h3 style="color:white;">
-            PharmaSentry AI
-            </h3>
+            <h3 style="color:white;">PharmaSentry AI</h3>
 
             <p style="color:#7DD3FC;font-weight:600;">
             Developed by Dr. Praveen R Biradar
