@@ -538,23 +538,42 @@ if page == "Home":
         )
 
     st.markdown("---")
+    
+    st.markdown("""
+    <div style="
+        background:linear-gradient(135deg,#102D4E,#174D68);
+        padding:24px;
+        border-radius:15px;
+        border:1px solid #48C6CF;
+        margin-top:15px;
+        margin-bottom:20px;
+    ">
+        <h2 style="color:#7DD3FC !important;">
+            🧠 Pharmacy Learning Spotlight
+        </h2>
 
-    st.header("🧠 Pharmacy Learning Spotlight")
+        <h4 style="color:#FFD166 !important;">
+            📘 Today's Learning Question
+        </h4>
 
-    st.subheader("Today's Learning Question")
+        <p style="color:#FFFFFF !important;font-size:17px;">
+            Why is pharmacovigilance important even after a
+            medicine receives regulatory approval?
+        </p>
 
-    st.info(
-        "Why is pharmacovigilance important even after a "
-        "medicine receives regulatory approval?"
-    )
+        <hr style="border-color:#48C6CF;">
 
-    st.subheader("💡 Remember")
+        <h4 style="color:#7DD3FC !important;">
+            💡 Remember
+        </h4>
 
-    st.success(
-        "Continuous monitoring helps identify previously "
-        "unrecognized adverse drug reactions, evaluate "
-        "medicine safety and improve patient protection."
-    )
+        <p style="color:#FFFFFF !important;font-size:16px;">
+            Continuous monitoring helps identify previously
+            unrecognized adverse drug reactions, evaluate
+            medicine safety and improve patient protection.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("---")
 
