@@ -873,67 +873,47 @@ if interaction_type == "Drug-Drug":
                     key="check_df"
                 ):
 
-                    if not medicine or not food:
+if not medicine or not food:
 
-                        st.warning(
-                            "Please select both medicine and food."
-                        )
+    st.warning(
+        "Please select both medicine and food."
+    )
 
-                    else:
+else:
 
-                        matches = df_data[
-                            (df_data["Item_A"].astype(str).str.strip() == medicine)
-                            & (df_data["Item_B"].astype(str).str.strip() == food)
-                        ]
+    matches = df_data[
+        (df_data["Item_A"].astype(str).str.strip() == medicine)
+        & (df_data["Item_B"].astype(str).str.strip() == food)
+    ]
 
-                                                if not matches.empty:
+    if not matches.empty:
 
-                            for _, record in matches.iterrows():
+        for _, record in matches.iterrows():
 
-                                st.warning(
-                                    "Documented Drug-Food Interaction Found"
-                                )
+            st.warning(
+                "Documented Drug-Food Interaction Found"
+            )
 
-                                st.write(
-                                    "**Interaction Level:**",
-                                    record["Interaction_Level"]
-                                )
+            st.write(
+                "**Interaction Level:**",
+                record["Interaction_Level"]
+            )
 
-                                st.write(
-                                    "**Mechanism:**",
-                                    record["Mechanism"]
-                                )
+            st.write(
+                "**Mechanism:**",
+                record["Mechanism"]
+            )
 
-                                st.write(
-                                    "**Potential Effect:**",
-                                    record["Potential_Effect"]
-                                )
+            st.write(
+                "**Potential Effect:**",
+                record["Potential_Effect"]
+            )
 
-                                st.write(
-                                    "**Management / Precautions:**",
-                                    record["Management"]
-                                )
+    else:
 
-                                st.write(
-                                    "**Reference:**",
-                                    record["Source"]
-                                )
-
-                                if record["Source_URL"]:
-                                    st.markdown(
-                                        f"[View Source]({record['Source_URL']})"
-                                    )
-
-                                st.write(
-                                    "**Verification Status:**",
-                                    record["Verification_Status"]
-                                )
-
-                        else:
-
-                            st.info(
-                                "No matching interaction record found "
-                                "in the current database. This does not "
+        st.info(
+            "No matching Drug-Food interaction record found."
+        )    "in the current database. This does not "
                                 "rule out a possible interaction."
                             )
     st.divider()
