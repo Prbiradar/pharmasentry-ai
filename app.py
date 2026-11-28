@@ -2098,11 +2098,10 @@ elif page == "About":
     """)
 
     st.divider()
-
+   
     st.subheader("⚠️ Disclaimer")
 
-    st.warning(
-            st.markdown(
+    st.markdown(
         '<p style="color:#7DD3FC !important; font-size:15px; font-weight:600;">'
         'PharmaSentry AI is an academic and educational prototype developed for learning, research and pharmacovigilance awareness.'
         '</p>',
@@ -2118,6 +2117,9 @@ elif page == "About":
 
     st.write(
         "The Drug–ADR Safety Screening module uses preliminary "
+        "keyword matching. A database match does not establish "
+    )
+
         "keyword matching. A database match does not establish "
         "a causal relationship between a medicine and an adverse "
         "reaction. Classification into common or serious database "
