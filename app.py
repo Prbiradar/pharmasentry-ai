@@ -695,110 +695,140 @@ elif page == "Drug Interaction Checker":
             horizontal=True
         )
 
-        if interaction_type == "Drug-Drug":
+if interaction_type == "Drug-Drug":
 
-            st.subheader("Drug-Drug Interaction Checker")
+    st.subheader("Drug-Drug Interaction Checker")
 
-            dd_data = interactions[
-                interactions["Interaction_Type"].astype(str).str.strip()
-                == "Drug-Drug"
-            ]
+    dd_data = interactions[
+        interactions["Interaction_Type"].astype(str).str.strip()
+        == "Drug-Drug"
+    ]
 
-            if dd_data.empty:
+    if dd_data.empty:
 
-                st.warning("No Drug-Drug records available.")
+        st.warning("No Drug-Drug records available.")
 
-else:
-    drug_options = sorted(
-        set(dd_data["Item_A"].astype(str).str.strip())
-        | set(dd_data["Item_B"].astype(str).str.strip())
-    )
+    else:
 
-    drug1 = st.selectbox(
-        "Search First Medicine",
-        drug_options,
-        index=None,
-        placeholder="Type or select first medicine",
-        key="interaction_drug1"
-    )
+        drug_options = sorted(
+            set(dd_data["Item_A"].astype(str).str.strip())
+            | set(dd_data["Item_B"].astype(str).str.strip())
+        )
 
-    drug2 = st.selectbox(
-        "Search Second Medicine",
-        drug_options,
-        index=None,
-        placeholder="Type or select second medicine",
-        key="interaction_drug2"
-    )
+        drug1 = st.selectbox(
+            "Search First Medicine",
+            drug_options,
+            index=None,
+            placeholder="Type or select first medicine",
+            key="interaction_drug1"
+        )
 
-    if st.button(
-        "Check Drug-Drug Interaction",
-        key="check_dd"
-    ):
-        if not drug1 or not drug2:
-            st.warning("Please select both medicines.")
+        drug2 = st.selectbox(
+            "Search Second Medicine",
+            drug_options,
+            index=None,
+            placeholder="Type or select second medicine",
+            key="interaction_drug2"
+        )
 
-        elif drug1 == drug2:
-            st.warning("Please select two different medicines.")
+        if st.button(
+            "Check Drug-Drug Interaction",
+            key="check_dd"
+        ):
 
-        else:
-            matches = dd_data[
-                (
-                    (dd_data["Item_A"].astype(str).str.strip() == drug1)
-                    & (dd_data["Item_B"].astype(str).str.strip() == drug2)
-                )
-                |
-                (
-                    (dd_data["Item_A"].astype(str).str.strip() == drug2)
-                    & (dd_data["Item_B"].astype(str).str.strip() == drug1)
-                )
-            ]
+            if not drug1 or not drug2:
+                st.warning("Please select both medicines.")
 
-                        if not matches.empty:
-                for _, record in matches.iterrows():
-
-                    st.warning(
-                        "Documented Drug-Drug Interaction Found"
-                    )
-
-                    severity = str(
-                        record["Interaction_Level"]
-                    ).strip().lower()
-
-                    if severity == "major":
-                        st.error(
-                            "HIGH-RISK SAFETY ALERT: This interaction may cause serious harm. Seek review by a qualified prescriber."
-                        )
-                    elif severity == "moderate":
-                        st.warning(
-                            "CLINICAL CAUTION: Clinical assessment, monitoring or dose adjustment may be needed."
-                        )
-                    elif severity == "minor":
-                        st.info(
-                            "SAFETY INFORMATION: This interaction is generally of lower clinical significance."
-                        )
-                    else:
-                        st.info(
-                            "Review this interaction with a qualified prescriber."
-                        )
-
-                    st.write("**Interaction Level:**", record["Interaction_Level"])
-                    st.write("**Mechanism:**", record["Mechanism"])
-                    st.write("**Potential Effect:**", record["Potential_Effect"])
-                    st.write("**Management / Precautions:**", record["Management"])
-                    st.write("**Reference:**", record["Source"])
-
-                    if record["Source_URL"]:
-                        st.markdown(
-                            f"[VIEW SOURCE]({record['Source_URL']})"
-                        )
-
-                    st.write("**Verification Status:**", record["Verification_Status"])
+            elif drug1 == drug2:
+                st.warning("Please select two different medicines.")
 
             else:
-                st.info(
-                    "No matching interaction record found in the current database. "
-                    "This does not rule out a possible interaction."
-                )
+
+                matches = dd_data[
+                    (
+                        (dd_data["Item_A"].astype(str).str.strip() == drug1)
+                        & (dd_data["Item_B"].astype(str).str.strip() == drug2)
+                    )
+                    |
+                    (
+                        (dd_data["Item_A"].astype(str).str.strip() == drug2)
+                        & (dd_data["Item_B"].astype(str).str.strip() == drug1)
+                    )
+                ]
+
+                if not matches.empty:
+
+                    for _, record in matches.iterrows():
+
+                        st.warning(
+                            "Documented Drug-Drug Interaction Found"
+                        )
+
+                        severity = str(
+                            record["Interaction_Level"]
+                        ).strip().lower()
+
+                        if severity == "major":
+                            st.error(
+                                "HIGH-RISK SAFETY ALERT: This interaction may cause serious harm. Seek review by a qualified prescriber."
+                            )
+
+                        elif severity == "moderate":
+                            st.warning(
+                                "CLINICAL CAUTION: Clinical assessment, monitoring or dose adjustment may be needed."
+                            )
+
+                        elif severity == "minor":
+                            st.info(
+                                "SAFETY INFORMATION: This interaction is generally of lower clinical significance."
+                            )
+
+                        else:
+                            st.info(
+                                "Review this interaction with a qualified prescriber."
+                            )
+
+                        st.write(
+                            "**Interaction Level:**",
+                            record["Interaction_Level"]
+                        )
+
+                        st.write(
+                            "**Mechanism:**",
+                            record["Mechanism"]
+                        )
+
+                        st.write(
+                            "**Potential Effect:**",
+                            record["Potential_Effect"]
+                        )
+
+                        st.write(
+                            "**Management / Precautions:**",
+                            record["Management"]
+                        )
+
+                        st.write(
+                            "**Reference:**",
+                            record["Source"]
+                        )
+
+                        if record["Source_URL"]:
+                            st.markdown(
+                                f"[VIEW SOURCE]({record['Source_URL']})"
+                            )
+
+                        st.write(
+                            "**Verification Status:**",
+                            record["Verification_Status"]
+                        )
+
+                else:
+                    st.info(
+                        "No matching interaction record found in the current database. "
+                        "This does not rule out a possible interaction."
+                    )
+
         elif interaction_type == "Drug-Food":
 
             st.subheader("Drug-Food Interaction Checker")
