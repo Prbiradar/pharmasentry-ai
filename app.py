@@ -569,6 +569,9 @@ if page == "Home":
             <p style="color:#7DD3FC;font-weight:600;">
                 Developed by Dr. Praveen R Biradar
             </p>
+            <p style="color:#7DD3FC !important; font-size:14px; font-weight:600;">
+    Empowering pharmacy education through intelligent drug information, safety screening and pharmacovigilance innovation.
+</p>
             <p style="color:white;font-size:13px;">
                 Pharmacy Innovation | Drug Safety | Digital Healthcare
             </p>
@@ -578,12 +581,6 @@ if page == "Home":
         </div>
         """,
         unsafe_allow_html=True
-    )
-
-    st.warning(
-      <p style="color:#7DD3FC !important; font-size:14px; font-weight:600;">
-    Empowering pharmacy education through intelligent drug information, safety screening and pharmacovigilance innovation.
-</p>
     )
 
 elif page == "Drug Safety Assistant":
