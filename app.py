@@ -816,9 +816,27 @@ elif page == "Drug Interaction Checker":
                                     unsafe_allow_html=True
                                 )
 
-                                if severity == "major":
-                                    st.error("HIGH-RISK SAFETY ALERT: This interaction may cause serious harm. Avoid the combination unless specifically reviewed and managed by a qualified prescriber.")
-
+                                st.markdown(
+    """
+    <div style="
+        background-color: #8B0000;
+        color: #FFFFFF;
+        padding: 16px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 1.7;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: anywhere;
+    ">
+        HIGH-RISK SAFETY ALERT: This interaction may cause serious harm.
+        Avoid the combination unless specifically reviewed and managed
+        by a qualified prescriber.
+    </div>
+    """,
+    unsafe_allow_html=True
+                                )
                                 elif severity == "moderate":
                                     st.warning("CLINICAL CAUTION: This interaction may require clinical assessment, monitoring or dose adjustment by a qualified prescriber.")
 
@@ -847,8 +865,23 @@ elif page == "Drug Interaction Checker":
 
                                 if record["Source_URL"]:
                                     st.markdown(
-                                        f"[View Source]({record['Source_URL']})"
-                                    )
+    f"""
+    <a href="{record['Source_URL']}" target="_blank"
+       style="
+           display: inline-block;
+           background-color: #17365D;
+           color: #FFFFFF;
+           padding: 10px 18px;
+           border-radius: 7px;
+           font-weight: bold;
+           text-decoration: none;
+           font-size: 16px;
+       ">
+       VIEW SOURCE
+    </a>
+    """,
+    unsafe_allow_html=True
+)
 
                                 st.write(
                                     "**Verification Status:**",
