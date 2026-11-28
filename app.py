@@ -816,14 +816,13 @@ elif page == "Drug Interaction Checker":
                                     unsafe_allow_html=True
                                 )
 
-                              if severity == "major":
-                                    safety_color = "#8B0000" 
+                               if severity == "major":
+                                    safety_color = "#8B0000"
                                     safety_message = (
                                         "HIGH-RISK SAFETY ALERT: This interaction may cause "
                                         "serious harm. Avoid the combination unless specifically "
                                         "reviewed and managed by a qualified prescriber."
                                     )
-
                                 elif severity == "moderate":
                                     safety_color = "#9A4D00"
                                     safety_message = (
@@ -831,14 +830,12 @@ elif page == "Drug Interaction Checker":
                                         "clinical assessment, monitoring or dose adjustment "
                                         "by a qualified prescriber."
                                     )
-
                                 elif severity == "minor":
                                     safety_color = "#1B5E20"
                                     safety_message = (
                                         "SAFETY INFORMATION: This interaction is generally "
                                         "of lower clinical significance. Monitor as appropriate."
                                     )
-
                                 else:
                                     safety_color = "#455A64"
                                     safety_message = (
@@ -874,7 +871,6 @@ elif page == "Drug Interaction Checker":
                                     "**Potential Effect:**",
                                     record["Potential_Effect"]
                                 )
-
                                 st.write(
                                     "**Management / Precautions:**",
                                     record["Management"]
