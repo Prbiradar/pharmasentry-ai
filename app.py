@@ -829,103 +829,119 @@ if interaction_type == "Drug-Drug":
                         "This does not rule out a possible interaction."
                     )
 
-        elif interaction_type == "Drug-Food":
+        
+elif interaction_type == "Drug-Food":
 
-            st.subheader("Drug-Food Interaction Checker")
+    st.subheader("Drug-Food Interaction Checker")
 
-            df_data = interactions[
-                interactions["Interaction_Type"].astype(str).str.strip()
-                == "Drug-Food"
-            ]
-
-            if df_data.empty:
-
-                st.warning("No Drug-Food records available.")
-
-            else:
-
-                medicine_options = sorted(
-                    df_data["Item_A"].astype(str).str.strip().unique()
-                )
-
-                food_options = sorted(
-                    df_data["Item_B"].astype(str).str.strip().unique()
-                )
-
-                medicine = st.selectbox(
-                    "Search Medicine",
-                    medicine_options,
-                    index=None,
-                    placeholder="Type or select medicine",
-                    key="food_medicine"
-                )
-
-                food = st.selectbox(
-                    "Search Food / Beverage",
-                    food_options,
-                    index=None,
-                    placeholder="Type or select food or beverage",
-                    key="food_item"
-                )
-key="food_medicine"
-                )
-
-                food = st.selectbox(
-                    "Search Food / Beverage",
-                    food_options,
-                    index=None,
-                    placeholder="Type or select food or beverage",
-                    key="food_item"
-                )
-
-                if st.button(
-                    "Check Drug-Food Interaction",
-                    key="check_df"
-                ):
-
-if not medicine or not food:
-
-    st.warning(
-        "Please select both medicine and food."
-    )
-
-else:
-
-    matches = df_data[
-        (df_data["Item_A"].astype(str).str.strip() == medicine)
-        & (df_data["Item_B"].astype(str).str.strip() == food)
+    df_data = interactions[
+        interactions["Interaction_Type"].astype(str).str.strip()
+        == "Drug-Food"
     ]
 
-    if not matches.empty:
+    if df_data.empty:
 
-        for _, record in matches.iterrows():
-
-            st.warning(
-                "Documented Drug-Food Interaction Found"
-            )
-
-            st.write(
-                "**Interaction Level:**",
-                record["Interaction_Level"]
-            )
-
-            st.write(
-                "**Mechanism:**",
-                record["Mechanism"]
-            )
-
-            st.write(
-                "**Potential Effect:**",
-                record["Potential_Effect"]
-            )
+        st.warning("No Drug-Food records available.")
 
     else:
 
-        st.info(
-            "No matching Drug-Food interaction record found."
-        )    "in the current database. This does not "
-             "rule out a possible interaction."
-                            )
+        medicine_options = sorted(
+            df_data["Item_A"].dropna().astype(str).str.strip().unique()
+        )
+
+        food_options = sorted(
+            df_data["Item_B"].dropna().astype(str).str.strip().unique()
+        )
+
+        medicine = st.selectbox(
+            "Search Medicine",
+            medicine_options,
+            index=None,
+            placeholder="Type or select medicine",
+            key="food_medicine"
+        )
+
+        food = st.selectbox(
+            "Search Food / Beverage",
+            food_options,
+            index=None,
+            placeholder="Type or select food or beverage",
+            key="food_item"
+        )
+
+        if st.button(
+            "Check Drug-Food Interaction",
+            key="check_df"
+        ):
+
+            if not medicine or not food:
+
+                st.warning(
+                    "Please select both medicine and food."
+                )
+
+            else:
+
+                matches = df_data[
+                    (df_data["Item_A"].astype(str).str.strip() == medicine)
+                    & (df_data["Item_B"].astype(str).str.strip() == food)
+                ]
+
+                if not matches.empty:
+
+                    for _, record in matches.iterrows():
+
+                        severity = str(
+                            record["Interaction_Level"]
+                        ).strip().lower()
+
+                        if severity == "major":
+                            st.error("MAJOR DRUG-FOOD INTERACTION")
+                        elif severity == "moderate":
+                            st.warning("MODERATE DRUG-FOOD INTERACTION")
+                        elif severity == "minor":
+                            st.info("MINOR DRUG-FOOD INTERACTION")
+                        else:
+                            st.info("DRUG-FOOD INTERACTION")
+
+                        st.write(
+                            "**Interaction Level:**",
+                            record["Interaction_Level"]
+                        )
+
+                        st.write(
+                            "**Mechanism:**",
+                            record["Mechanism"]
+                        )
+
+                        st.write(
+                            "**Potential Effect:**",
+                            record["Potential_Effect"]
+                        )
+
+                        st.write(
+                            "**Management:**",
+                            record["Management"]
+                        )
+
+                        st.write(
+                            "**Source:**",
+                            record["Source"]
+                        )
+
+                        st.write(
+                            "**Verification Status:**",
+                            record["Verification_Status"]
+                        )
+
+                else:
+
+                    st.info(
+                        "No matching Drug-Food interaction record found "
+                        "in the current database. This does not rule out "
+                        "a possible interaction."
+                    )
+
     st.divider()
 
     st.caption(
