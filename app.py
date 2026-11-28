@@ -2031,12 +2031,29 @@ elif page == "About":
 
     st.subheader("👨‍⚕️ About the Author")
 
-    st.write("Dr. Praveen R Biradar")
+    author_col1, author_col2 = st.columns([1, 2])
 
-    st.write(
-        "Pharm.D | Assistant Professor | Pharmacy Educator | "
-        "Pharmacovigilance and Medication Safety Researcher"
-    )
+    with author_col1:
+        st.image(
+            "author_photo.jpg",
+            width=220
+        )
+
+    with author_col2:
+        st.markdown("### Dr. Praveen R Biradar")
+
+        st.markdown(
+            "**Pharm.D | Assistant Professor | Pharmacy Educator**"
+        )
+
+        st.write(
+            "Pharmacovigilance and Medication Safety Researcher"
+        )
+
+        st.write(
+            "Advancing pharmacy education through intelligent "
+            "drug information, safety screening and digital healthcare."
+        )
 
     st.write("Institutional Affiliation")
 
