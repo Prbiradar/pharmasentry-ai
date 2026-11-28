@@ -67,9 +67,8 @@ st.markdown("""
 }
 
 /* Main headings */
-.stApp h1, .stApp h2, .stApp h3, .stApp p,
-.stApp label, .stApp .stMarkdown {
-    color: var(--text-color) !important;
+.stApp h1, .stApp h2, .stApp h3, .stApp p, .stApp label, .stApp .stMarkdown {
+    color: #FFFFFF !important;
 }
 
 /* Login title */
