@@ -895,22 +895,77 @@ elif page == "Drug Interaction Checker":
                             severity = str(
                                 record["Interaction_Level"]
                             ).strip().lower()
-
                             if severity == "major":
 
-                                st.error("MAJOR DRUG-FOOD INTERACTION")
+                                st.markdown(
+                                    """
+                                    <div style="
+                                        background-color:#B71C1C;
+                                        color:white;
+                                        padding:14px;
+                                        border-radius:8px;
+                                        font-weight:bold;
+                                        font-size:18px;
+                                        text-align:center;">
+                                        🔴 MAJOR DRUG-FOOD INTERACTION
+                                    </div>
+                                    """,
+                                    unsafe_allow_html=True
+                                )
 
                             elif severity == "moderate":
 
-                                st.warning("MODERATE DRUG-FOOD INTERACTION")
+                                st.markdown(
+                                    """
+                                    <div style="
+                                        background-color:#E65100;
+                                        color:white;
+                                        padding:14px;
+                                        border-radius:8px;
+                                        font-weight:bold;
+                                        font-size:18px;
+                                        text-align:center;">
+                                        🟠 MODERATE DRUG-FOOD INTERACTION
+                                    </div>
+                                    """,
+                                    unsafe_allow_html=True
+                                )
 
                             elif severity == "minor":
 
-                                st.info("MINOR DRUG-FOOD INTERACTION")
+                                st.markdown(
+                                    """
+                                    <div style="
+                                        background-color:#1B5E20;
+                                        color:white;
+                                        padding:14px;
+                                        border-radius:8px;
+                                        font-weight:bold;
+                                        font-size:18px;
+                                        text-align:center;">
+                                        🟢 MINOR DRUG-FOOD INTERACTION
+                                    </div>
+                                    """,
+                                    unsafe_allow_html=True
+                                )
 
                             else:
 
-                                st.info("DRUG-FOOD INTERACTION")
+                                st.markdown(
+                                    """
+                                    <div style="
+                                        background-color:#455A64;
+                                        color:white;
+                                        padding:14px;
+                                        border-radius:8px;
+                                        font-weight:bold;
+                                        font-size:18px;
+                                        text-align:center;">
+                                        ⚪ DRUG-FOOD INTERACTION
+                                    </div>
+                                    """,
+                                    unsafe_allow_html=True
+                                )
 
                             st.write("**Interaction Level:**", record["Interaction_Level"])
                             st.write("**Mechanism:**", record["Mechanism"])
