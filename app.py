@@ -536,43 +536,28 @@ if page == "Home":
             "Software-based interventions designed to support "
             "healthcare and treatment."
         )
-
-    st.markdown("---")
      
     st.markdown("---")
 
     st.header("🧠 Pharmacy Learning Spotlight")
 
-    st.markdown(
-        """
-        <div style="
-            background-color: #17324D;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #48C6CF;
-        ">
-            <h3 style="color: #FFD166;">
-                📘 Today's Learning Question
-            </h3>
-            <p style="color: white; font-size: 17px;">
-                Why is pharmacovigilance important even after a
-                medicine receives regulatory approval?
-            </p>
-            <hr>
-            <h3 style="color: #7DD3FC;">
-                💡 Remember
-            </h3>
-            <p style="color: white; font-size: 16px;">
-                Continuous monitoring helps identify previously
-                unrecognized adverse drug reactions, evaluate
-                medicine safety and improve patient protection.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
+    st.subheader("📘 Today's Learning Question")
+
+    st.info(
+        "Why is pharmacovigilance important even after a "
+        "medicine receives regulatory approval?"
+    )
+
+    st.subheader("💡 Remember")
+
+    st.success(
+        "Continuous monitoring helps identify previously "
+        "unrecognized adverse drug reactions, evaluate "
+        "medicine safety and improve patient protection."
     )
 
     st.markdown("---")
+
 
     st.markdown(
         """
