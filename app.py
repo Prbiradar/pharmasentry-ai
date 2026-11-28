@@ -581,7 +581,9 @@ if page == "Home":
     )
 
     st.warning(
-       "Empowering pharmacy education through intelligent drug information, safety screening and pharmacovigilance innovation."
+      <p style="color:#7DD3FC !important; font-size:14px; font-weight:600;">
+    Empowering pharmacy education through intelligent drug information, safety screening and pharmacovigilance innovation.
+</p>
     )
 
 elif page == "Drug Safety Assistant":
