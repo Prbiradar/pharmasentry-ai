@@ -708,7 +708,7 @@ elif page == "Drug Interaction Checker":
 
                 st.warning("No Drug-Drug records available.")
 
-            else:
+else:
     drug_options = sorted(
         set(dd_data["Item_A"].astype(str).str.strip())
         | set(dd_data["Item_B"].astype(str).str.strip())
